@@ -11,3 +11,7 @@
 *.lai
 *.la
 *.a
+
+# Install files
+RL-GLUE/c-codec-2.0/*
+RL-GLUE/rlglue-3.04/*
