@@ -18,8 +18,8 @@
 #include <stdio.h> /*printf*/
 #include <stdlib.h>
 
-#include <rlglue/Environment_common.h>/* env_ function prototypes and RL-Glue types */
-#include <rlglue/utils/C/RLStruct_util.h> /* helpful functions for allocating structs and cleaning them up */
+#include "rlglue/Environment_common.h"
+#include "rlglue/utils/C/RLStruct_util.h" /* helpful functions for allocating structs and cleaning them up */
 
 /* This is a very simple environment with discrete observations corresponding to states labeled {0,1,...,19,20}
  The starting state is 10.
@@ -40,7 +40,6 @@ int current_board[3][3] =
 	{0,0,0}
 };
 int multiplier[9]={1, 3, 9, 27, 81, 243, 729, 2187, 6561};
-
 
 const char* env_init()
 {
@@ -64,13 +63,6 @@ const char* env_init()
     return task_spec;
 }
 
-int check_illega_move(int row, int col){
-	if (current_board[row][col] != 0){
-		return 1;
-	}
-	return 0;
-}
-
 int check_win(int row, int col){
 	int winwin = 0;
     int win=1;
@@ -79,7 +71,7 @@ int check_win(int row, int col){
             win = 0;
         }
     }
-    if(win==1){winwin=1};
+    if(win==1){winwin=1;}
     
     win=1;
     for (int i = 0; i<3 ; i++){
@@ -87,7 +79,7 @@ int check_win(int row, int col){
             win = 0;
         }
     }
-    if(win==1){winwin=1};
+    if(win==1){winwin=1;}
     
     win=1;
     for (int i = 0; i<3 ; i++){
@@ -95,7 +87,7 @@ int check_win(int row, int col){
             win = 0;
         }
     }
-    if(win==1){winwin=1};
+    if(win==1){winwin=1;}
     
     win=1;
     for (int i = 0; i<3 ; i++){
@@ -103,16 +95,68 @@ int check_win(int row, int col){
             win = 0;
         }
     }
-    if(win==1){winwin=1};
+    if(win==1){winwin=1;}
     
 	return winwin;
 }
 
+bool check_illegal_move(int row, int col){
+	if (current_board[row][col] != 0){
+		return 1;
+	}
+	return 0;
+}
+
+int flatten_state(){
+    current_state = 0;
+    int counter = 0;
+    for(int i = 0; i<3;i++){
+        for(int j = 0; j<3;j++){
+            current_state+=multiplier[counter]*current_board[i][j];
+            counter++;
+        }
+    }
+    return current_state;
+}
+
+bool ai_random_move(){
+	int row=rand()%3;
+	int col=rand()%3;
+    
+	while(check_illegal_move(row,col)){
+		row=rand()%3;
+		col=rand()%3;
+	}
+    
+    current_board[row][col] = 2;
+    if(check_win(row,col)){
+        return true;
+    }
+    return false;
+}
+
+
 const observation_t *env_start()
 {
+    for (int i = 0; i<3; i++) {
+        for (int j=0; j<3; j++) {
+            current_board[i][j] = 0;
+        }
+    }
 	current_state=0;
 	this_observation.intArray[0]=current_state;
   	return &this_observation;
+}
+
+bool any_legal_moves_left(){
+    for(int j = 0;j<3;j++){
+        for(int i= 0; i<3; i++){
+            if(!check_illegal_move(i,j)){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 const reward_observation_terminal_t *env_step(const action_t *this_action)
@@ -123,29 +167,26 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
     int episode_over = 0;
     double the_reward=0;
     
-    if(check_illega_move(row,col)){
-        current_state=0;
+    if(check_illegal_move(row,col)){
 		episode_over=1;
 		the_reward=-1;
     }else{
-        current_state += multiplier[this_action->intArray[0]];
-        current_board[col][row] = 1;
         
-        if(check_win(row,col)){
-            current_state=0;
+        current_board[row][col] = 1;
+        
+        if(check_win(row,col) || !any_legal_moves_left()){
             episode_over=1;
             the_reward=1;
         }else{
-        
-        
-        
-        
-        
-        
+            if(ai_random_move()){
+                current_state=0;
+                episode_over=1;
+                the_reward=-1;
+            }
         }
     }
-    
-    
+        
+    flatten_state();
     
 	this_reward_observation.observation->intArray[0] = current_state;
 	this_reward_observation.reward = the_reward;
@@ -166,38 +207,17 @@ const char* env_message(const char* inMessage) {
 	return "I don't know how to respond to your message";
 }
 
-/*FIX THIS*/
-void print_state(){
+/*void print_state(){
 	int row,col;
-    char line[1024];
-	sprintf(line, "Agent is at: %d,%d",the_board.agentRow,the_board.agentCol);
-    cout << line << endl;
-	cout << "Columns:0-10                10-17" << endl;
-	cout << "Col    ";
-	for(col=0;col<18;col++){
-		cout << (col%10) << " ";
-	}
     
-	for(row=0;row<6;row++){
-		cout << endl << "Row: " << row << " ";
-		
-		for(col=0;col<18;col++){
-			if(the_board.agentRow==row && the_board.agentCol==col)
-				cout << "A ";
-			else{
-				if(world_map[row][col]==WORLD_GOAL)
-					cout << "G ";
-				if(world_map[row][col]==WORLD_MINE)
-					cout << "M ";
-				if(world_map[row][col]==WORLD_OBSTACLE)
-					cout << "* ";
-				if(world_map[row][col]==WORLD_FREE)
-					cout << "  ";
-			}
+	for(row=0;row<3;row++){
+        cout <<"\n";
+        for(col=0;col<3;col++){
+            cout <<current_board[row][col]<<" ";
 		}
 	}
-	cout << endl;
-}
+	cout << "\n";
+}*/
 
 
 

@@ -151,9 +151,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Users/lindgreo/Desktop/PhD/DecisionMakingUnderUncertainty/projekt/rlglue-3.04/src/",
+					"/Users/lindgreo/Desktop/PhD/DecisionMakingUnderUncertainty/projekt/rlglue-3.04/src/rlglue/",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/Users/lindgreo/Desktop/PhD/DecisionMakingUnderUncertainty/projekt/rlglue-3.04/src/";
 			};
 			name = Debug;
 		};
@@ -178,14 +183,32 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Users/lindgreo/Desktop/PhD/DecisionMakingUnderUncertainty/projekt/rlglue-3.04/src/",
+					"/Users/lindgreo/Desktop/PhD/DecisionMakingUnderUncertainty/projekt/rlglue-3.04/src/rlglue/",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/Users/lindgreo/Desktop/PhD/DecisionMakingUnderUncertainty/projekt/rlglue-3.04/src/";
 			};
 			name = Release;
 		};
 		8C17EC65184E9FA300118E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/Users/lindgreo/Desktop/PhD/Decision,
+					making,
+					under,
+					"uncertainty/projekt/rlglue-3.04/src/",
+				);
+				OTHER_CFLAGS = (
+					"-lm",
+					"-lrlutils",
+					"-lrlexperiment",
+					"-lrlgluenetdev",
+					"-o",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -193,6 +216,19 @@
 		8C17EC66184E9FA300118E9C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/Users/lindgreo/Desktop/PhD/Decision,
+					making,
+					under,
+					"uncertainty/projekt/rlglue-3.04/src/",
+				);
+				OTHER_CFLAGS = (
+					"-lm",
+					"-lrlutils",
+					"-lrlexperiment",
+					"-lrlgluenetdev",
+					"-o",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -216,6 +252,7 @@
 				8C17EC66184E9FA300118E9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
