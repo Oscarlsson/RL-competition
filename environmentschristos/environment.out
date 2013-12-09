@@ -1,0 +1,13 @@
+RL-Glue C Environment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Environment Codec :: Connected
+# Creating Bernoulli bandits with 2 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 70 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 126 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 37 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 36 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 107 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 31 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 74 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 87 arms, 0.99 discounting.
+# Creating Bernoulli bandits with 20 arms, 0.99 discounting.
