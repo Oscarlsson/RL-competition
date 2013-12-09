@@ -100,7 +100,7 @@ int check_win(int row, int col){
 	return winwin;
 }
 
-bool check_illegal_move(int row, int col){
+int check_illegal_move(int row, int col){
 	if (current_board[row][col] != 0){
 		return 1;
 	}
@@ -119,7 +119,7 @@ int flatten_state(){
     return current_state;
 }
 
-bool ai_random_move(){
+int ai_random_move(){
 	int row=rand()%3;
 	int col=rand()%3;
     
@@ -130,9 +130,9 @@ bool ai_random_move(){
     
     current_board[row][col] = 2;
     if(check_win(row,col)){
-        return true;
+        return 1;
     }
-    return false;
+    return 0;
 }
 
 
@@ -148,15 +148,15 @@ const observation_t *env_start()
   	return &this_observation;
 }
 
-bool any_legal_moves_left(){
+int is_legal_moves_left(){
     for(int j = 0;j<3;j++){
         for(int i= 0; i<3; i++){
             if(!check_illegal_move(i,j)){
-                return true;
+                return 1;
             }
         }
     }
-    return false;
+    return 0;
 }
 
 const reward_observation_terminal_t *env_step(const action_t *this_action)
