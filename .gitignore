@@ -18,3 +18,6 @@ RL-GLUE/rlglue-3.04/*
 
 # ctags
 tags
+
+# vim
+*.swp
