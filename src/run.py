@@ -1,16 +1,30 @@
 #!/usr/bin/env python
 import os
+import subprocess
+
 def MakeAll():
-    print "hej"
+    print "---------- Running Makefile ----------"
     os.system("make")
+    print "----------                  ----------"
+
+def run_all():
+    print "----------     Starting run -----------"
+    print "----------  RL-glue started ----------"
+    rlglue = subprocess.Popen(['rl_glue'])
+    print "----------  Agent   started ----------"
+    agent  = subprocess.Popen(['./MyAgent'])
+    
+    
+    print "----------  Experiment   started ----------"
+    with open('outputfile','w') as output:
+        experiment = subprocess.Popen(['./MyExperiment'], stdout=output)
+        experiment.communicate()
+    #TODO: Open all environments
+    # os.listdir
+
 
 MakeAll()
-# Compile #
-
-# Compile Agent
-# Compile Experiment
-# Compile all Environments
-#  with makefiles??
+run_all()
 
 # Run #
 # One environment-test
