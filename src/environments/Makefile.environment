@@ -1,16 +1,31 @@
 LDFLAGS := $(LDFLAGS) -lm -lrlutils -lrlenvironment -lrlgluenetdev
-CFLAGS := $(CFLAGS)  -Wall -pedantic
+CFLAGS := $(CFLAGS) -Wall -pedantic -g  #?
+CC := $(CXX)
 
-all: SampleMinesEnvironment
+all: ticktacktoe bandits mines
 
-SampleMinesEnvironment: SampleMinesEnvironment.o 
-	$(CXX)   SampleMinesEnvironment.o $(LDFLAGS) -o SampleMinesEnvironment      
+## bandits
+bandits:     environments/bandits/BanditEnvironment.o 
+	$(CC)    environments/bandits/BanditEnvironment.o $(LDFLAGS) -o environments/bandits/BanditEnvironment  
+environments/bandits/BanditEnvironment.o:   environments/bandits/BanditEnvironment.cc
+	$(CC)    $(CFLAGS) -c environments/bandits/BanditEnvironment.cc -o environments/bandits/BanditEnvironment.o
 
-SampleMinesEnvironment.o: SampleMinesEnvironment.cpp
-	$(CXX)  $(CFLAGS) -c SampleMinesEnvironment.cpp -o SampleMinesEnvironment.o 
+## mines
+mines:     environments/mines/MinesEnvironment.o 
+	$(CC)    environments/mines/MinesEnvironment.o $(LDFLAGS) -o environments/mines/MinesEnvironment  
+environments/mines/MinesEnvironment.o:   environments/mines/MinesEnvironment.cc
+	$(CC)    $(CFLAGS) -c environments/mines/MinesEnvironment.cc -o environments/mines/MinesEnvironment.o
+
+## Ticktacktoe
+ticktacktoe: environments/ticktacktoe/MyEnvironment.o 
+	$(CC)    environments/ticktacktoe/MyEnvironment.o $(LDFLAGS) -o environments/ticktacktoe/MyEnvironment  
+
+ticktacktoe.o: environments/ticktacktoe/MyEnvironment.cpp
+	$(CC)    $(CFLAGS) -c environments/ticktacktoe/MyEnvironment.cpp -o environments/ticktacktoe/MyEnvironment.o
 
 clean:
-	rm -rf SampleMinesEnvironment SampleMinesEnvironment.exe *.o
+	rm -rf environments/bandits/BanditEnvironment environments/bandits/BanditEnvironment.exe environments/bandits/*.o
+	rm -rf environments/ticktacktoe/MyEnvironment environments/ticktacktoe/MyEnvironment.exe environments/ticktacktoe/*.o
 
 
 

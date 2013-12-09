@@ -1,13 +1,11 @@
 
-#If RL-Glue Core or the C/C++ Codecs are not installed to default locations
-#You may need to use set the CFLAGS and LDFLAGS. 
-
-#Current values of these two vars is supposed to be illustrative, not correct for you.
-#This is what you would use if you installed the C/C++ Codec with:
-# ./configure --prefix=/Users/btanner/rl-glue
- LDFLAGS := $(LDFLAGS) -L/Users/btanner/rl-glue/lib
- CFLAGS := $(CFLAGS) -I/Users/btanner/rl-glue/include/rlglue
-
+# This makefile is responsible for calling the makefiles for
+# 		Agent
+# 		Environments
+# 		Experiments
+ 
+ LDFLAGS := $(LDFLAGS) -lm -lrlutils -lrlgluenetdev
+ CFLAGS := $(CFLAGS) -std=c++11 -Wall -pedantic -g -O3
 
 
 all: 	

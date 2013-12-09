@@ -1,5 +1,10 @@
+#!/usr/bin/env python
+import os
+def MakeAll():
+    print "hej"
+    os.system("make")
 
-
+MakeAll()
 # Compile #
 
 # Compile Agent
