@@ -55,8 +55,8 @@ void prototypes_shuffle();
 // print the prototypes
 void prototypes_print();
 
-#define NM_PRODUCT 10000 	// maximum (#prototypes describing space value)*(dimensionality of space)
-#define N_ACTIONS 10		// number of actions considered by policy
+#define NM_PRODUCT 196830 	// maximum (#prototypes describing space value)*(dimensionality of space)
+#define N_ACTIONS 9  		// number of actions considered by policy
 #define EPSILON_ZERO 0.1	// greedy action part initial (exploitation-exploration trade-off)
 #define EPSILON_DECAY 1		// greedy action part decay (exploitation-exploration trade-off)
 #define ALPHA 0.2			// gradient descent step for function approximation
