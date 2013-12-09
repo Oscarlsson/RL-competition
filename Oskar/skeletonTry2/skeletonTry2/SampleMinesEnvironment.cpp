@@ -206,7 +206,7 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
         
         if(is_win(row,col) || !is_legal_moves_left()){
             episode_over=1;
-            the_reward=1;
+            the_reward=500;
         }else{
             if(ai_random_move_is_win()){
                 current_state=0;
@@ -305,9 +305,10 @@ int is_win(int row, int col){
 
 int is_illegal_move(int row, int col){
 	if (current_board[row][col] != 0){
-		return 1;
+        
         print_state();
         cout<<"Attempted move: row: "<<row<<", col: "<<col<<"\n";
+        return 1;
         
 	}
 	return 0;
