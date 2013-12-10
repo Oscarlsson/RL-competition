@@ -27,6 +27,7 @@
 #include <iostream>   // for cout
 #include <fstream>   
 #include <string>
+#include <string.h>
 
 #include <rlglue/RL_glue.h> /* RL_ function prototypes and RL-Glue types */
 
@@ -59,11 +60,20 @@ void print_score(int afterEpisodes, evaluation_point_t *the_score);
 void save_results_csv(evaluation_point_t *the_score[], char *fileName);
 void offline_demo();
 
-
+string file_name;
 
 int main(int argc, char *argv[]) {
-
-	cout << "Starting offline demo" << endl
+    if (argc > 1){
+        cout << argv[1] << endl;
+        file_name = argv[1];
+    }else{
+        cout << "result" << endl;    
+        file_name = "result";
+    }
+    string resultfilename = file_name + ".dat";
+    const char *agent_msg_load = ("load_policy " + file_name + ".dat").c_str();
+    const char *agent_msg_save = ("save_policy " + resultfilename).c_str();
+    cout << "Starting offline demo" << endl
        << "----------------------------" << endl
        << "Will alternate learning for 25 episodes,"
        << "then freeze policy and evaluate for 10 episodes." 
@@ -81,7 +91,7 @@ int main(int argc, char *argv[]) {
 	cout << endl << 
        "Now we will save the agent's learned value function to a file...." << endl;
 
-	RL_agent_message("save_policy results.dat");
+	RL_agent_message(agent_msg_save);
 
 	cout << endl << 
        "Calling RL_cleanup and RL_init to clear the agent's memory..." << endl; 
@@ -96,7 +106,7 @@ int main(int argc, char *argv[]) {
 	single_evaluation();
 	
 	cout << endl << "Loading up the value function we saved earlier." << endl;
-	RL_agent_message("load_policy results.dat");
+	RL_agent_message(agent_msg_load);
 
 	cout << "Evaluating the agent after loading the value function:" << endl
        << "\t\tMean Return\tStandardDeviation" << endl
@@ -176,7 +186,7 @@ void offline_demo(){
 		statistics[i+1]=this_score;
 	}
 	
-	save_result_csv(statistics,"results.csv");
+    save_result_csv(statistics, file_name);
 	
 	for(i=0;i<21;i++){
 		free(statistics[i]);

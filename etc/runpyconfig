@@ -1,0 +1,5 @@
+[runpy]
+agent = MyAgent
+experiment = MyExperiment
+outputdirectory=../outputs/
+logfile = runpy.log
