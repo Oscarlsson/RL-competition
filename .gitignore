@@ -21,6 +21,7 @@ tags
 
 # vim
 *.swp
+*.swo
 
 *.xcode*
 
