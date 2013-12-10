@@ -68,7 +68,10 @@ const action_t *agent_start(const observation_t *this_observation)
 
 const action_t *agent_step(double reward, const observation_t *this_observation)
 {
-    return tempAct(this_observation);
+    this_action.intArray[0] =
+        agent->step(reward, this_observation->intArray[0]);
+
+    return &this_action;
 }
 
 const action_t *tempAct(const observation_t *this_observation)

@@ -11,6 +11,5 @@ class Agent
         const double lambda; // May not be const?
 
         Agent(int nStates, int nActions, double gamma, double lambda);
-
-        void step();
+        int step(double reward, int newState);
 };
