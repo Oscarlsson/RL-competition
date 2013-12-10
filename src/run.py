@@ -4,6 +4,7 @@ import shlex
 import subprocess
 import logging as lg
 import ConfigParser
+import stat
 
 def MakeAll():
     lg.info("Running Makefile")
@@ -12,7 +13,7 @@ def MakeAll():
 
 def run_all():
     lg.info("Starting to run all enviroments")
-    environments = get_environments()
+    environments = get_environments().split()
     lg.info("Environments found:" + str(environments))
     for environment in environments:
         lg.info("Running: " + environment)
@@ -37,10 +38,11 @@ def run(environment):
         experiment.communicate()
 
 def get_environments():
-    arg = ['find environments -executable -type f']
-    executablefiles = subprocess.Popen(arg, shell=True, stdout=subprocess.PIPE)
-    return executablefiles.stdout
-
+    return read_config('environments')
+#    arg = ['find environments -executable -type f']
+#    executablefiles = subprocess.Popen(arg, shell=True, stdout=subprocess.PIPE)
+#    return executablefiles.stdout
+    pass
 def get_agent():
     return read_config('agent')
 
