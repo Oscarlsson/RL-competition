@@ -1,13 +1,18 @@
 LDFLAGS := $(LDFLAGS) -lm -lrlutils -lrlagent -lrlgluenetdev
 CFLAGS := $(CFLAGS) -Wall -pedantic
 
+OBJS = agent/LibRLAgent.o agent/Agent.o
+
 all: LibRLAgent
 
-LibRLAgent: agent/LibRLAgent.o 
-	$(CXX)   agent/LibRLAgent.o $(LDFLAGS) -o agent/LibRLAgent
+LibRLAgent: $(OBJS)
+	$(CXX)   $(OBJS) $(LDFLAGS) -o agent/LibRLAgent
 
 LibRLAgent.o: agent/LibRLAgent.cpp
 	$(CXX)  $(CFLAGS) -c agent/LibRLAgent.cpp -o agent/LibRLAgent.o 
+
+Agent.o: agent/Agent.cpp agent/Agent.hpp
+	$(CXX)  $(CFLAGS) -c agent/Agent.cpp -o agent/Agent.o 
 
 clean:
 	rm -rf agent/LibRLAgent agent/LibRLAgent.exe *.o

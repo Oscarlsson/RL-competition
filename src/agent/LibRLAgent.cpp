@@ -1,4 +1,4 @@
-#include <stdio.h>  /* for printf */
+#include <iostream>
 #include <string.h> /* for strcmp */
 #include <time.h> /*for time()*/
 #include <rlglue/Agent_common.h> /* agent_ function prototypes and RL-Glue types */
@@ -6,14 +6,14 @@
 #include <rlglue/utils/C/TaskSpec_Parser.h>
 #include "Agent.hpp"
 
+using namespace std;
+
 action_t this_action;
 action_t last_action;
 
 Agent *agent;
 
 observation_t *last_observation=0;
-
-static int temp_n_actions = 0;
 
 int randInRange(int max){
 	double r, x;
@@ -24,6 +24,32 @@ int randInRange(int max){
 
 void agent_init(const char* task_spec)
 {
+	// Parse task specifications
+	taskspec_t* ts = (taskspec_t*)malloc(sizeof(taskspec_t));
+	int decode_result = decode_taskspec( ts, task_spec );
+	if (decode_result!=0)
+    {
+        cout << "Could not decode task spec, code: "
+             << decode_result << "for task spec: " << task_spec << endl;
+		exit(1);
+	}
+
+    if (ts->num_int_observations != 1)
+    {
+        cout << "Agent only works with 1 observation." << endl;
+		exit(1);
+    }
+
+    int nStates = ts->int_actions[0].max - ts->int_actions[0].min + 1;
+    agent = new Agent(
+                nStates,
+                ts->num_int_actions,
+                ts->discount_factor,
+                0.9 // Lambda
+            );
+    // DEBUG:
+    // cerr << "Agent n states: " << agent->nStates << endl;
+
 	srand(time(0));
     /* Here is where you might allocate storage for parameters (value function or
      * policy, last action, last observation, etc) */
@@ -40,20 +66,11 @@ void agent_init(const char* task_spec)
 			 this_action.numChars    = 0;
 			 this_action.charArray   = 0;
 	*/
-
-	// Parse task specifications
-	taskspec_t* ts = (taskspec_t*)malloc(sizeof(taskspec_t));
-	int decode_result = decode_taskspec( ts, task_spec );
-	if(decode_result!=0){
-		printf("Could not decode task spec, code: %d for task spec: %s\n",decode_result,task_spec);
-		exit(1);
-	}
-    temp_n_actions = ts->num_int_actions;
 }
 
 const action_t *tempAct(const observation_t *this_observation)
 {
-	this_action.intArray[0] = randInRange(temp_n_actions);
+	this_action.intArray[0] = randInRange(agent->nStates);
     // Store last observations
 	replaceRLStruct(&this_action, &last_action);
 	replaceRLStruct(this_observation, last_observation);
