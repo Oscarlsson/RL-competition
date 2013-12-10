@@ -3,9 +3,12 @@
 #include <time.h> /*for time()*/
 #include <rlglue/Agent_common.h> /* agent_ function prototypes and RL-Glue types */
 #include <rlglue/utils/C/RLStruct_util.h> /* helpful functions for allocating structs and cleaning them up */
+#include <rlglue/utils/C/TaskSpec_Parser.h>
 
 action_t this_action;
 action_t last_action;
+
+Agent agent;
 
 observation_t *last_observation=0;
 
@@ -13,7 +16,7 @@ void agent_init(const char* task_spec)
 {
     /* Here is where you might allocate storage for parameters (value function or
      * policy, last action, last observation, etc) */
-	/*Here you would parse the task spec if you felt like it */
+	/* Here you would parse the task spec if you felt like it */
     /* Allocate memory for a one-dimensional integer action using utility
      * functions from RLStruct_util */
 	allocateRLStruct(&this_action,1,0,0);
@@ -26,6 +29,14 @@ void agent_init(const char* task_spec)
 			 this_action.numChars    = 0;
 			 this_action.charArray   = 0;
 	*/
+
+	// Parse task specifications
+	taskspec_t* ts = (taskspec_t*)malloc(sizeof(taskspec_t));
+	int decode_result = decode_taskspec( ts, task_spec );
+	if(decode_result!=0){
+		printf("Could not decode task spec, code: %d for task spec: %s\n",decode_result,task_spec);
+		exit(1);
+	}
 }
 
 const action_t *tempAct(const observation_t *this_observation)
