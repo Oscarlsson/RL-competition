@@ -4,16 +4,27 @@
 #include <rlglue/Agent_common.h> /* agent_ function prototypes and RL-Glue types */
 #include <rlglue/utils/C/RLStruct_util.h> /* helpful functions for allocating structs and cleaning them up */
 #include <rlglue/utils/C/TaskSpec_Parser.h>
+#include "Agent.hpp"
 
 action_t this_action;
 action_t last_action;
 
-Agent agent;
+Agent *agent;
 
 observation_t *last_observation=0;
 
+static int temp_n_actions = 0;
+
+int randInRange(int max){
+	double r, x;
+	r = ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
+   	x = (r * (max+1));
+	return (int)x;
+}
+
 void agent_init(const char* task_spec)
 {
+	srand(time(0));
     /* Here is where you might allocate storage for parameters (value function or
      * policy, last action, last observation, etc) */
 	/* Here you would parse the task spec if you felt like it */
@@ -37,11 +48,12 @@ void agent_init(const char* task_spec)
 		printf("Could not decode task spec, code: %d for task spec: %s\n",decode_result,task_spec);
 		exit(1);
 	}
+    temp_n_actions = ts->num_int_actions;
 }
 
 const action_t *tempAct(const observation_t *this_observation)
 {
-	this_action.intArray[0] = 1; // Always action 1
+	this_action.intArray[0] = randInRange(temp_n_actions);
     // Store last observations
 	replaceRLStruct(&this_action, &last_action);
 	replaceRLStruct(this_observation, last_observation);

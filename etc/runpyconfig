@@ -1,5 +1,5 @@
 [runpy]
-agent = MyAgent
+agent = agent/LibRLAgent
 experiment = MyExperiment
 outputdirectory=../outputs/
 logfile = runpy.log

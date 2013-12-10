@@ -1,8 +1,8 @@
 class Agent
 {
     protected:
-        double** qTable; // Q(s,a) = value of action a in state s
-        double** traces; // Z(s,a) = eligibility trace for (s,a)
+        double **qTable; // Q(s,a) = value of action a in state s
+        double **traces; // Z(s,a) = eligibility trace for (s,a)
 
     public:
         const int nStates;
