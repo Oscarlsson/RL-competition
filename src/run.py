@@ -5,6 +5,7 @@ import subprocess
 import logging as lg
 import ConfigParser
 import stat
+import time
 
 def MakeAll():
     lg.info("Running Makefile")
@@ -15,11 +16,12 @@ def run_all():
     lg.info("Starting to run all enviroments")
     environments = get_environments().split()
     lg.info("Environments found:" + str(environments))
+    timestr = time.strftime("%y%m%d-%H-%M-%S-")
     for environment in environments:
         lg.info("Running: " + environment)
-        run(environment)
+        run(environment, timestr)
 
-def run(environment):
+def run(environment, timestr):
     agentname = './'+get_agent()
     experimentname = './'+get_experiment()
     lg.info("* starting rl_glue")
@@ -31,8 +33,9 @@ def run(environment):
     subprocess.Popen([cmdenv], shell=True)
 
     envname = environment.split("/")[2].rstrip()
-    resultfilename = get_outputdir() + 'result' + envname 
-    outputfilename = get_outputdir() + 'output' + envname
+
+    resultfilename = get_outputdir() + timestr + 'result' + envname 
+    outputfilename = get_outputdir() + timestr + 'output' + envname
     with open(outputfilename,'w') as output:
         experiment = subprocess.Popen([experimentname, resultfilename], stdout=output)
         experiment.communicate()
