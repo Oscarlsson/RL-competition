@@ -70,7 +70,7 @@ void agent_init(const char* task_spec)
 
 const action_t *tempAct(const observation_t *this_observation)
 {
-	this_action.intArray[0] = randInRange(agent->nStates);
+	this_action.intArray[0] = randInRange(agent->nStates - 1);
     // Store last observations
 	replaceRLStruct(&this_action, &last_action);
 	replaceRLStruct(this_observation, last_observation);
