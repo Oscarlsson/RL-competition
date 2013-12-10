@@ -15,12 +15,8 @@ Agent *agent;
 
 observation_t *last_observation=0;
 
-int randInRange(int max){
-	double r, x;
-	r = ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
-   	x = (r * (max+1));
-	return (int)x;
-}
+int randInRange(int);
+const action_t *tempAct(const observation_t*);
 
 void agent_init(const char* task_spec)
 {
@@ -33,7 +29,6 @@ void agent_init(const char* task_spec)
              << decode_result << "for task spec: " << task_spec << endl;
 		exit(1);
 	}
-
     if (ts->num_int_observations != 1)
     {
         cout << "Agent only works with 1 observation." << endl;
@@ -54,11 +49,6 @@ void agent_init(const char* task_spec)
     // cerr << "Agent n states: " << agent->nStates << endl;
 
 	srand(time(0));
-    /* Here is where you might allocate storage for parameters (value function or
-     * policy, last action, last observation, etc) */
-	/* Here you would parse the task spec if you felt like it */
-    /* Allocate memory for a one-dimensional integer action using utility
-     * functions from RLStruct_util */
 	allocateRLStruct(&this_action,1,0,0);
 	last_observation=allocateRLStructPointer(0,0,0);
 	/* That is equivalent to:
@@ -71,16 +61,6 @@ void agent_init(const char* task_spec)
 	*/
 }
 
-const action_t *tempAct(const observation_t *this_observation)
-{
-	this_action.intArray[0] = randInRange(agent->nActions - 1);
-    // Store last observations
-	replaceRLStruct(&this_action, &last_action);
-	replaceRLStruct(this_observation, last_observation);
-	
-	return &this_action;
-}
-
 const action_t *agent_start(const observation_t *this_observation)
 {
     return tempAct(this_observation);
@@ -89,6 +69,16 @@ const action_t *agent_start(const observation_t *this_observation)
 const action_t *agent_step(double reward, const observation_t *this_observation)
 {
     return tempAct(this_observation);
+}
+
+const action_t *tempAct(const observation_t *this_observation)
+{
+	this_action.intArray[0] = randInRange(agent->nActions - 1);
+    // Store last observations
+	replaceRLStruct(&this_action, &last_action);
+	replaceRLStruct(this_observation, last_observation);
+	
+	return &this_action;
 }
 
 void agent_end(double reward)
@@ -109,4 +99,11 @@ const char* agent_message(const char* inMessage)
 	if(strcmp(inMessage,"what is your name?")==0)
 		return "my name is skeleton_agent!";
 	return "I don't know how to respond to your message";
+}
+
+int randInRange(int max){
+	double r, x;
+	r = ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
+   	x = (r * (max+1));
+	return (int)x;
 }
