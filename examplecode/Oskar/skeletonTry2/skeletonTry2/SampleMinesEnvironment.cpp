@@ -1,28 +1,3 @@
-/* 
-	Copyright (C) 2008, Brian Tanner
-
-	Licensed under the Apache License, Version 2.0 (the "License");
-	you may not use this file except in compliance with the License.
-	You may obtain a copy of the License at
-
-	    http://www.apache.org/licenses/LICENSE-2.0
-
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
-
-	This code is adapted from the Mines.cpp code written by Adam White
-	for earlier versions of RL-Glue.
-	
-	*  $Revision: 996 $
-	*  $Date: 2009-02-08 20:48:32 -0500 (Sun, 08 Feb 2009) $
-	*  $Author: brian@tannerpages.com $
-	*  $HeadURL: https://rl-library.googlecode.com/svn/trunk/projects/packages/examples/mines-sarsa-c/SampleMinesEnvironment.c $
-	
-*/
-
 #include <stdio.h>   /*sprintf*/
 
 #include <cassert>
@@ -38,20 +13,13 @@
 
 using namespace std; 
 
-/* 	
-	This is a very simple discrete-state, episodic grid world that has 
-	exploding mines in it.  If the agent steps on a mine, the episode
-	ends with a large negative reward.
-	
-	The reward per step is -1, with +10 for exiting the game successfully
-	and -100 for stepping on a mine.
-*/
-
 /*
-	world_description_t is a structure that holds all of the information
-	about the world, including the placement of the mines and the position
-	of the agent, etc.
-*/
+ Tic tac toe, agent vs an ai that plays random legal moves. If the player
+ plays an illegal (occupied) move, the agent gets a penalty of -10 and is
+ allowed to continue. If the ai wins, the agent gets a penalty of -1, if
+ the agent wins, it gets a reward of 1. If someone wins, the game(episode)
+ is over.
+ */
 
 // HELPER FUNCTIONS.  PROTOTYPES HERE, CODE AT THE BOTTOM OF FILE */
 
@@ -67,19 +35,8 @@ int is_legal_moves_left();
 
 void print_state();
 
-/*
-	world_map is an array that describes the world.
+void print_cause(int cause, int row, int col);
 
-	To read this: the world is a 6 by 18 grid in any position the number 
-	corresponds to one of {START, GOAL, FREE, OBSTACLE, MINE}
-
-	For example in env_init the start position is labelled by a 0
-	so we can see the initial start position in this particular map is at
-	position [12][1]
-	
-*/
-
-/* GLOBAL VARIABLES FOR RL-GLUE methods (global for convenience) */  
 static observation_t this_observation;
 static reward_observation_terminal_t this_reward_observation;
 
@@ -98,8 +55,8 @@ int current_board[3][3] =
 static string task_spec_string =  
 "VERSION RL-Glue-3.0 PROBLEMTYPE episodic \
 DISCOUNTFACTOR 1 OBSERVATIONS INTS (0 19682) \
-ACTIONS INTS (0 8)  REWARDS (-1. 1.0) \
-EXTRA tictactoe_environment(C/C++) by Oskar Lindgren.";
+ACTIONS INTS (0 8)  REWARDS (-10. 1.) \
+EXTRA tictactoe_environment(C/C++) by Oskar Lindgren, Oscar Carlsson, John Karlsson";
 
 /*****************************
 
@@ -154,6 +111,7 @@ int flatten_state(){
     }
     return current_state;
 }
+
 /*
 	Standard RL-Glue method. Sets an initial state and returns
 	the corresponding observation.
@@ -179,8 +137,7 @@ int is_legal_moves_left(){
             }
         }
     }
-    print_state();
-    cout<<"No legal moves left"<<"\n";
+
     return 0;
 }
 
@@ -197,25 +154,32 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
     int episode_over = 0;
     double the_reward=0;
     
+    int eventCode = 0;
+    
     if(is_illegal_move(row,col)){
-		episode_over=1;
-		the_reward=-1;
+		episode_over=0;
+        eventCode = 1;//agent lost by illegal move
+		the_reward=-1.;
     }else{
         
         current_board[row][col] = 1;
         
         if(is_win(row,col) || !is_legal_moves_left()){
             episode_over=1;
-            the_reward=500;
+            eventCode = 2;//agent won by 3 in row or by filling board
+            the_reward=1;
         }else{
             if(ai_random_move_is_win()){
                 current_state=0;
                 episode_over=1;
+                eventCode = 3;//ai won by 3 in row
                 the_reward=-1;
             }
         }
     }
-    //if(episode_over){cout<<"oneMoreFail\n";}
+    if(eventCode>0){
+        print_cause(eventCode, row, col);
+    }
   
 	this_reward_observation.observation->intArray[0] = flatten_state();
 	this_reward_observation.reward = the_reward;
@@ -294,26 +258,37 @@ int is_win(int row, int col){
         }
     }
     if(win==1){winwin=1;}
-    
-    if(winwin){
-        print_state();
-        cout<<"Last move: row: "<<row<<", col: "<<col<<"\n"; 
-    }
 
 	return winwin;
 }
 
 int is_illegal_move(int row, int col){
 	if (current_board[row][col] != 0){
-        
-        print_state();
-        cout<<"Attempted move: row: "<<row<<", col: "<<col<<"\n";
+
         return 1;
         
 	}
 	return 0;
 }
-
+void print_cause(int cause, int row, int col){
+    if(cause == 1){
+        print_state();
+        cout<<"Agent attempted illegal move: row:"<<row+1<<", col:"<<col+1<<"\n";
+    }
+    if(cause == 2){
+        if(is_legal_moves_left()){
+            print_state();
+            cout<<"Agent won by 3 in a row, last move: row:"<<row+1<<", col:"<<col+1<<"\n";
+        }else{
+            print_state();
+            cout<<"Agent won by filling board, no legal moves left,\n last move: row:"<<row+1<<", col:"<<col+1<<"\n";
+        }
+    }
+    if(cause == 3){
+        print_state();
+        cout<<"Agent lost by 3 in a row by ai\n";
+    }
+}
 void print_state(){
     int row,col;
  
