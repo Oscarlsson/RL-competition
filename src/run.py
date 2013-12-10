@@ -6,6 +6,7 @@ import logging as lg
 import ConfigParser
 import stat
 import time
+import sys
 
 def MakeAll():
     lg.info("Running Makefile")
@@ -28,7 +29,11 @@ def run_all():
 def run(environment, outputdir):
 
 
-    agentname = './'+get_agent()
+    if (len(sys.argv) > 1):
+        agentname = str(sys.argv[1])
+        print("Using agent " + agentname)
+    else:
+        agentname = './'+get_agent()
     experimentname = './'+get_experiment()
     lg.info("* starting rl_glue")
     rlglue = subprocess.Popen(['rl_glue'])
