@@ -39,12 +39,7 @@
 using namespace std; 
 
 /* 	
-	This is a very simple discrete-state, episodic grid world that has 
-	exploding mines in it.  If the agent steps on a mine, the episode
-	ends with a large negative reward.
-	
-	The reward per step is -1, with +10 for exiting the game successfully
-	and -100 for stepping on a mine.
+	Tic tac toe. Agent starts, if the agent tries an illegal move, it is assigned a penalty of -1. If the 
 */
 
 /*
@@ -67,17 +62,7 @@ int is_legal_moves_left();
 
 void print_state();
 
-/*
-	world_map is an array that describes the world.
-
-	To read this: the world is a 6 by 18 grid in any position the number 
-	corresponds to one of {START, GOAL, FREE, OBSTACLE, MINE}
-
-	For example in env_init the start position is labelled by a 0
-	so we can see the initial start position in this particular map is at
-	position [12][1]
-	
-*/
+void print_terminate_cause(int cause, int row, int col);
 
 /* GLOBAL VARIABLES FOR RL-GLUE methods (global for convenience) */  
 static observation_t this_observation;
@@ -98,8 +83,8 @@ int current_board[3][3] =
 static string task_spec_string =  
 "VERSION RL-Glue-3.0 PROBLEMTYPE episodic \
 DISCOUNTFACTOR 1 OBSERVATIONS INTS (0 19682) \
-ACTIONS INTS (0 8)  REWARDS (-1. 1.0) \
-EXTRA tictactoe_environment(C/C++) by Oskar Lindgren.";
+ACTIONS INTS (0 8)  REWARDS (-1. 1.) \
+EXTRA tictactoe_environment(C/C++) by Oskar Lindgren, Oscar Carlsson, John Karlsson";
 
 /*****************************
 
@@ -154,6 +139,7 @@ int flatten_state(){
     }
     return current_state;
 }
+
 /*
 	Standard RL-Glue method. Sets an initial state and returns
 	the corresponding observation.
@@ -179,8 +165,7 @@ int is_legal_moves_left(){
             }
         }
     }
-    print_state();
-    cout<<"No legal moves left"<<"\n";
+
     return 0;
 }
 
@@ -197,25 +182,33 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
     int episode_over = 0;
     double the_reward=0;
     
+    int eventCode = 0;
+    
     if(is_illegal_move(row,col)){
-		episode_over=1;
-		the_reward=-1;
+		episode_over=0;
+        eventCode = 0;//agent lost by illegal move
+		the_reward=-1.;
     }else{
         
         current_board[row][col] = 1;
         
         if(is_win(row,col) || !is_legal_moves_left()){
             episode_over=1;
-            the_reward=500;
+            eventCode = 1;//agent won by 3 in row or by filling board
+            the_reward=1;
         }else{
             if(ai_random_move_is_win()){
                 current_state=0;
                 episode_over=1;
+                eventCode = 2;//ai won by 3 in row
                 the_reward=-1;
             }
         }
     }
-    //if(episode_over){cout<<"oneMoreFail\n";}
+    if(eventCode>0){
+        print_state();
+        print_terminate_cause(terminateCause, row, col);
+    }
   
 	this_reward_observation.observation->intArray[0] = flatten_state();
 	this_reward_observation.reward = the_reward;
@@ -294,26 +287,29 @@ int is_win(int row, int col){
         }
     }
     if(win==1){winwin=1;}
-    
-    if(winwin){
-        print_state();
-        cout<<"Last move: row: "<<row<<", col: "<<col<<"\n"; 
-    }
 
 	return winwin;
 }
 
 int is_illegal_move(int row, int col){
 	if (current_board[row][col] != 0){
-        
-        print_state();
-        cout<<"Attempted move: row: "<<row<<", col: "<<col<<"\n";
+
         return 1;
         
 	}
 	return 0;
 }
-
+void print_terminate_cause(int cause, int row, int col){
+    if(cause == 0){
+        cout<<"Agent lost by illegal move: row:"<<row+1<<", col:"<<col+1<<"\n";
+    }
+    if(cause == 1){
+        cout<<"Agent won by 3 in a row (or filling board), last move: row:"<<row+1<<", col:"<<col+1<<"\n";
+    }
+    if(cause == 2){
+        cout<<"Agent lost by 3 in a row by ai\n";
+    }
+}
 void print_state(){
     int row,col;
  
