@@ -16,12 +16,18 @@ def run_all():
     lg.info("Starting to run all enviroments")
     environments = get_environments().split()
     lg.info("Environments found:" + str(environments))
-    timestr = time.strftime("%y%m%d-%H-%M-%S-")
+
+    timestr = time.strftime("%y%m%d-%H-%M-%S")
+    outputdir = get_outputdir() + timestr
+    os.makedirs(outputdir)
+
     for environment in environments:
         lg.info("Running: " + environment)
-        run(environment, timestr)
+        run(environment, outputdir)
 
-def run(environment, timestr):
+def run(environment, outputdir):
+
+
     agentname = './'+get_agent()
     experimentname = './'+get_experiment()
     lg.info("* starting rl_glue")
@@ -34,8 +40,9 @@ def run(environment, timestr):
 
     envname = environment.split("/")[2].rstrip()
 
-    resultfilename = get_outputdir() + timestr + 'result' + envname 
-    outputfilename = get_outputdir() + timestr + 'output' + envname
+    resultfilename = outputdir + "/" + 'result' + envname 
+    outputfilename = outputdir + "/" + 'output' + envname
+
     with open(outputfilename,'w') as output:
         experiment = subprocess.Popen([experimentname, resultfilename], stdout=output)
         experiment.communicate()
