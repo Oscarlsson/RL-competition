@@ -42,8 +42,10 @@ void agent_init(const char* task_spec)
     agent = new Agent(
                 ts->int_observations[0].max - ts->int_observations[0].min + 1,
                 nActions,
-                ts->discount_factor,
-                0.9 // Lambda
+                ts->discount_factor, // Gamma
+                0.60,                // Lambda
+                0.20,                // Step size
+                0.10                 // Epsilon
             );
     // DEBUG:
     // cerr << "Agent n states: " << agent->nStates << endl;
@@ -63,35 +65,59 @@ void agent_init(const char* task_spec)
 
 const action_t *agent_start(const observation_t *this_observation)
 {
-    return tempAct(this_observation);
+    agent->start();
+
+    this_action.intArray[0] =
+        agent->step(0,                              // Last state
+                    0,                              // Last action
+                    0,                              // Reward
+                    this_observation->intArray[0]); // This state
+
+	replaceRLStruct(&this_action, &last_action);
+	replaceRLStruct(this_observation, last_observation);
+
+    // return tempAct(this_observation);
+    return &this_action;
 }
 
 const action_t *agent_step(double reward, const observation_t *this_observation)
 {
     this_action.intArray[0] =
-        agent->step(reward, this_observation->intArray[0]);
+        agent->step(last_observation->intArray[0],  // Last state
+                    last_action.intArray[0],       // Last action
+                    reward,                         // Reward
+                    this_observation->intArray[0]); // This state
 
+	replaceRLStruct(&this_action, &last_action);
+	replaceRLStruct(this_observation, last_observation);
+
+    // return tempAct(this_observation);
     return &this_action;
 }
 
-const action_t *tempAct(const observation_t *this_observation)
-{
-	this_action.intArray[0] = randInRange(agent->nActions - 1);
-    // Store last observations
-	replaceRLStruct(&this_action, &last_action);
-	replaceRLStruct(this_observation, last_observation);
-	
-	return &this_action;
-}
+// const action_t *tempAct(const observation_t *this_observation)
+// {
+// 	this_action.intArray[0] = randInRange(agent->nActions - 1);
+//     // Store last observations
+// 	replaceRLStruct(&this_action, &last_action);
+// 	replaceRLStruct(this_observation, last_observation);
+// 	
+// 	return &this_action;
+// }
 
 void agent_end(double reward)
 {
+    agent->step(last_observation->intArray[0],  // Last state
+                last_action.intArray[0],        // Last action
+                reward,                         // Reward
+                last_observation->intArray[0]); // ...
 	clearRLStruct(&last_action);
 	clearRLStruct(last_observation);
 }
 
 void agent_cleanup()
 {
+    cout << "agent_cleanup() called" << endl;
 	clearRLStruct(&this_action);
 	clearRLStruct(&last_action);
 	freeRLStructPointer(last_observation);
