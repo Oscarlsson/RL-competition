@@ -55,7 +55,7 @@ int current_board[3][3] =
 static string task_spec_string =  
 "VERSION RL-Glue-3.0 PROBLEMTYPE episodic \
 DISCOUNTFACTOR 1 OBSERVATIONS INTS (0 19682) \
-ACTIONS INTS (0 8)  REWARDS (-10. 1.) \
+ACTIONS INTS (0 8)  REWARDS (-10. 10.) \
 EXTRA tictactoe_environment(C/C++) by Oskar Lindgren, Oscar Carlsson, John Karlsson";
 
 /*****************************
@@ -159,7 +159,7 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
     if(is_illegal_move(row,col)){
 		episode_over=0;
         eventCode = 1;//agent lost by illegal move
-		the_reward=-1.;
+		the_reward=-10.;
     }else{
         
         current_board[row][col] = 1;
@@ -168,6 +168,8 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
             episode_over=1;
             eventCode = 2;//agent won by 3 in row or by filling board
             the_reward=1;
+            if (is_win(row,col))
+                the_reward = 10;
         }else{
             if(ai_random_move_is_win()){
                 current_state=0;
