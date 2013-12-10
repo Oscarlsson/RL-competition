@@ -40,10 +40,13 @@ void agent_init(const char* task_spec)
 		exit(1);
     }
 
-    int nStates = ts->int_actions[0].max - ts->int_actions[0].min + 1;
+    // Assumes that all actions and states are numbered 0,1,2,3,...
+    // I.e. agent breaks if negative indices exist or if indexing skips some int
+    int nActions = ts->int_actions[0].max - ts->int_actions[0].min + 1;
+    int nStates = ts->int_observations[0].max - ts->int_observations[0].min + 1;
     agent = new Agent(
-                nStates,
-                ts->num_int_actions,
+                ts->int_observations[0].max - ts->int_observations[0].min + 1,
+                nActions,
                 ts->discount_factor,
                 0.9 // Lambda
             );
@@ -70,7 +73,7 @@ void agent_init(const char* task_spec)
 
 const action_t *tempAct(const observation_t *this_observation)
 {
-	this_action.intArray[0] = randInRange(agent->nStates - 1);
+	this_action.intArray[0] = randInRange(agent->nActions - 1);
     // Store last observations
 	replaceRLStruct(&this_action, &last_action);
 	replaceRLStruct(this_observation, last_observation);
