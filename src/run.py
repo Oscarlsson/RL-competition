@@ -4,6 +4,8 @@ import shlex
 import subprocess
 import logging as lg
 import ConfigParser
+import stat
+import time
 
 def MakeAll():
     lg.info("Running Makefile")
@@ -12,13 +14,20 @@ def MakeAll():
 
 def run_all():
     lg.info("Starting to run all enviroments")
-    environments = get_environments()
+    environments = get_environments().split()
     lg.info("Environments found:" + str(environments))
+
+    timestr = time.strftime("%y%m%d-%H-%M-%S")
+    outputdir = get_outputdir() + timestr
+    os.makedirs(outputdir)
+
     for environment in environments:
         lg.info("Running: " + environment)
-        run(environment)
+        run(environment, outputdir)
 
-def run(environment):
+def run(environment, outputdir):
+
+
     agentname = './'+get_agent()
     experimentname = './'+get_experiment()
     lg.info("* starting rl_glue")
@@ -30,17 +39,20 @@ def run(environment):
     subprocess.Popen([cmdenv], shell=True)
 
     envname = environment.split("/")[2].rstrip()
-    resultfilename = get_outputdir() + 'result' + envname 
-    outputfilename = get_outputdir() + 'output' + envname
+
+    resultfilename = outputdir + "/" + 'result' + envname 
+    outputfilename = outputdir + "/" + 'output' + envname
+
     with open(outputfilename,'w') as output:
         experiment = subprocess.Popen([experimentname, resultfilename], stdout=output)
         experiment.communicate()
 
 def get_environments():
-    arg = ['find environments -executable -type f']
-    executablefiles = subprocess.Popen(arg, shell=True, stdout=subprocess.PIPE)
-    return executablefiles.stdout
-
+    return read_config('environments')
+#    arg = ['find environments -executable -type f']
+#    executablefiles = subprocess.Popen(arg, shell=True, stdout=subprocess.PIPE)
+#    return executablefiles.stdout
+    pass
 def get_agent():
     return read_config('agent')
 
