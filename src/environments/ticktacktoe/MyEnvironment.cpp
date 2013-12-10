@@ -41,7 +41,7 @@ static observation_t this_observation;
 static reward_observation_terminal_t this_reward_observation;
 
 int current_state=0;
-int fixed_start_state = 1;
+int print_after_each_reward = 0;
 int multiplier[9] = {1,3, 9, 27, 81, 243, 729, 2187, 6561};
 int current_board[3][3] =
 {
@@ -177,7 +177,7 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
             }
         }
     }
-    if(eventCode>0){
+    if(eventCode>0 && print_after_each_reward){
         print_cause(eventCode, row, col);
     }
   
@@ -202,10 +202,18 @@ const char* env_message(const char* _inMessage) {
   string inMessage = _inMessage;
 
 	if(inMessage == "set-random-start-state") {
-        fixed_start_state=0;
-        return "Message understood.  Using random start state.";
+        return "Message understood.  Start state is an empty board though.";
     }
 	
+    if(inMessage == "print-after-each-reward") {
+        print_after_each_reward = 1;
+        return "Message understood.  Printing after reward.";
+    }
+    
+    if(inMessage == "dont-print-after-each-reward") {
+        print_after_each_reward = 0;
+        return "Message understood.  No more printing after reward.";
+    }
 	/*	Message Description
  	 * 'print-state'
 	 * Action: Print the map and the current agent location
@@ -215,7 +223,7 @@ const char* env_message(const char* _inMessage) {
 		return "Message understood.  Printed the state.";
   }
 
-	return "SamplesMinesEnvironment(C++) does not respond to that message.";
+	return "TicTacToe (C++) does not respond to that message.";
 }
 
 
