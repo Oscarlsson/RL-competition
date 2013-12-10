@@ -6,7 +6,6 @@
 #include <cassert>
 #include <string>
 #include <vector>
-#include <random>
 #include <iostream>
 #include <sstream>      
 
@@ -15,33 +14,32 @@
 
 // helpful functions for allocating structs and cleaning them up 
 #include <rlglue/utils/C/RLStruct_util.h> 
-
-static std::default_random_engine generator;
-
-
+double runif()
+{
+    return ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
+}
 class BernoulliBandits
 {
 public:
 	std::vector<double> means;
 	//std::default_random_engine generator;
-	std::uniform_real_distribution<double> uniform_distribution;
 	observation_t observation;
 	reward_observation_terminal_t reward_observation;
 	int n_bandits;
 	double discount;
 	BernoulliBandits(int n, double discount_)
 		: means(n),
-		  uniform_distribution(0.0, 1.0),
 		  n_bandits(n),
 		  discount(discount_)
 	{
+        srand(time(0));
 		std::cout << "# Creating Bernoulli bandits with "
 				  << n << " arms, "
 				  << discount << " discounting."
 				  << std::endl;
 
 		for (int i=0; i<n; ++i) {
-			means[i] = uniform_distribution(generator);
+			means[i] = runif();
 		}
 		allocateRLStruct(&observation, 1, 0, 0);
 		reward_observation.observation = &observation;
@@ -74,7 +72,7 @@ public:
 		double reward = GenerateReward(action_value);
 		reward_observation.observation->intArray[0] = 0;
 		reward_observation.reward = reward;
-		if (uniform_distribution(generator) >= discount) {
+		if (runif() >= discount) {
 			reward_observation.terminal = true;
 		} else {
 			reward_observation.terminal = false;
@@ -92,8 +90,7 @@ public:
 
 	double GenerateReward(int a)
 	{
-		std::bernoulli_distribution distribution(means[a]);
-		return distribution(generator);
+        return (runif() <= means[a]);
 	}
 };
 
@@ -107,8 +104,8 @@ static BernoulliBandits* environment;
 /** Initialise environment at the beginning of a run.
 */
 const char* env_init(){    
-	std::uniform_int_distribution<int> arms_distribution(2,128);
-	int n_arms = arms_distribution(generator);
+    
+    int n_arms = (int)(runif()*126+2);
 	double discount = 0.99;
 	environment = new BernoulliBandits(n_arms, discount);
 	return environment->task_spec_string().c_str(); 
