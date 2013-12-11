@@ -86,6 +86,7 @@ int main(int argc, char *argv[]) {
 
 	RL_init();
 	offline_demo();
+    return 0;
 	
 	
 	cout << endl << 
