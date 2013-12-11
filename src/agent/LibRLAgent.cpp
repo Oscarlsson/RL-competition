@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <string.h> /* for strcmp */
 #include <time.h> /*for time()*/
 #include <rlglue/Agent_common.h> /* agent_ function prototypes and RL-Glue types */
@@ -35,6 +36,14 @@ void agent_init(const char* task_spec)
 		exit(1);
     }
 
+    char* env_lambda = getenv("LIBRLAGENT_LAMBDA");
+    char* env_stepsize = getenv("LIBRLAGENT_STEPSIZE");
+    char* env_epsilon = getenv("LIBRLAGENT_EPSILON");
+
+    double lambda = env_lambda == NULL ?     0.60 : atof(env_lambda);
+    double stepsize = env_stepsize == NULL ? 0.20 : atof(env_stepsize);
+    double epsilon = env_epsilon == NULL ?   0.10 : atof(env_epsilon);
+
     // Assumes that all actions and states are numbered 0,1,2,3,...
     // I.e. agent breaks if negative indices exist or if indexing skips some int
     int nActions = ts->int_actions[0].max - ts->int_actions[0].min + 1;
@@ -43,9 +52,9 @@ void agent_init(const char* task_spec)
                 ts->int_observations[0].max - ts->int_observations[0].min + 1,
                 nActions,
                 ts->discount_factor, // Gamma
-                0.60,                // Lambda
-                0.20,                // Step size
-                0.10                 // Epsilon
+                lambda,
+                stepsize,
+                epsilon 
             );
     // DEBUG:
     // cerr << "Agent n states: " << agent->nStates << endl;
@@ -76,7 +85,6 @@ const action_t *agent_start(const observation_t *this_observation)
 	replaceRLStruct(&this_action, &last_action);
 	replaceRLStruct(this_observation, last_observation);
 
-    // return tempAct(this_observation);
     return &this_action;
 }
 
@@ -91,19 +99,8 @@ const action_t *agent_step(double reward, const observation_t *this_observation)
 	replaceRLStruct(&this_action, &last_action);
 	replaceRLStruct(this_observation, last_observation);
 
-    // return tempAct(this_observation);
     return &this_action;
 }
-
-// const action_t *tempAct(const observation_t *this_observation)
-// {
-// 	this_action.intArray[0] = randInRange(agent->nActions - 1);
-//     // Store last observations
-// 	replaceRLStruct(&this_action, &last_action);
-// 	replaceRLStruct(this_observation, last_observation);
-// 	
-// 	return &this_action;
-// }
 
 void agent_end(double reward)
 {
