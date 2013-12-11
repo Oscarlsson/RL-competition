@@ -29,4 +29,5 @@ print results
 for result in results:
     plot(args.D+"/"+result)
 plt.legend(results)
+plt.savefig(args.D+"/plot.png")
 plt.show()
