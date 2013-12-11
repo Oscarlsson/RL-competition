@@ -22,7 +22,7 @@ double runif()
 Agent::Agent(int nStates, int nActions, double gamma, double lambda,
              double stepSize, double epsilon)
 : nStates(nStates), nActions(nActions), gamma(gamma), lambda(lambda),
-  stepSize(stepSize), t(0), policy(epsilon) /* EpsilonGreedyPolicy(epsilon) */
+  stepSize(stepSize), t(0), e(0), policy(epsilon) /* EpsilonGreedyPolicy(epsilon) */
 {
     srand(time(0));
     qTable = new double*[nStates];
@@ -86,13 +86,14 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
 void Agent::start()
 {
     t = 0;
+    ++e;
+    cout << "\t" << e << "\r";
+    cout.flush();
     for (int s = 0; s < nStates; ++s)
         for (int a = 0; a < nActions; ++a)
         {
             traces[s][a] = 0;
         }
-    cout << ".";
-    cout.flush();
 }
 
 EpsilonGreedyPolicy::EpsilonGreedyPolicy(double epsilon)

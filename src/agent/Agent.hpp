@@ -20,7 +20,8 @@ class Agent
         double **qTable; // Q(s,a) = value of action a in state s
         double **traces; // Z(s,a) = eligibility trace for (s,a)
 
-        int t;
+        int t; // Time step
+        int e; // Episode
 
         EpsilonGreedyPolicy policy; // Would be nicer as an abstract class
 
