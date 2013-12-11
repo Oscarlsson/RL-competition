@@ -145,19 +145,24 @@ void save_result_csv(evaluation_point_t *the_score[], const string & fileName) {
 	int i=0;
   char value[1024]; 
 
-	output << "#Results from SampleExperiment.cpp.  First line is means,"
-         << "second line is standard deviations." << endl; 
-	
-	for(i=0;i<21;i++){
+	sprintf(value, "mean,");
+    output << value;
+	for(i=0;i<20;i++){
 		sprintf(value, "%.2f,", the_score[i]->mean);
     output << value; 
 	}
+	sprintf(value, "%.2f", the_score[21]->mean);
+    output << value; 
 	output << endl; 
 	
-	for(i=0;i<21;i++){
+	sprintf(value, "std,");
+    output << value;
+	for(i=0;i<20;i++){
 		sprintf(value, "%.2f,", the_score[i]->standard_dev);
     output << value; 
 	}
+	    sprintf(value, "%.2f", the_score[21]->standard_dev);
+    output << value; 
 	output << endl; 
 
 	output.close(); 
