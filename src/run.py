@@ -32,18 +32,20 @@ def run_all():
 
     for environment in environments:
         lg.info("Running: " + environment)
+        print("\n*** Running: " + environment)
         run(environment, outputdir, agentname)
 
 def run(environment, outputdir, agentname):
 
     experimentname = './'+get_experiment()
     lg.info("* starting rl_glue")
-    rlglue = subprocess.Popen(['rl_glue'])
+    devnull = open('/dev/null', 'w')
+    rlglue = subprocess.Popen(['rl_glue'],stdout=devnull)
     lg.info("* starting agent " + agentname)
     agent  = subprocess.Popen([agentname])
     cmdenv = './'+str(environment)
     lg.info("* starting env with " + cmdenv)
-    subprocess.Popen([cmdenv], shell=True)
+    subprocess.Popen([cmdenv], shell=True, stdout=devnull)
 
     envname = environment.split("/")[2].rstrip()
 
