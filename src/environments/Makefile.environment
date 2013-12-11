@@ -1,8 +1,8 @@
 LDFLAGS := $(LDFLAGS) -lm -lrlutils -lrlenvironment -lrlgluenetdev
-CFLAGS := $(CFLAGS) -Wall -pedantic -g  #?
+CFLAGS := $(CFLAGS) -std=c++11 -Wall -pedantic -g  #?
 CC := $(CXX)
 
-all: tictactoe bandits mines
+all: tictactoe bandits mines chain contextbandit loop
 
 ## bandits
 bandits:     environments/bandits/BanditEnvironment.o 
@@ -11,22 +11,42 @@ environments/bandits/BanditEnvironment.o:   environments/bandits/BanditEnvironme
 	$(CC)    $(CFLAGS) -c environments/bandits/BanditEnvironment.cc -o environments/bandits/BanditEnvironment.o
 
 ## mines
-mines:     environments/mines/MinesEnvironment.o 
+mines:       environments/mines/MinesEnvironment.o 
 	$(CC)    environments/mines/MinesEnvironment.o $(LDFLAGS) -o environments/mines/MinesEnvironment  
-environments/mines/MinesEnvironment.o:   environments/mines/MinesEnvironment.cc
+environments/mines/MinesEnvironment.o:      environments/mines/MinesEnvironment.cc
 	$(CC)    $(CFLAGS) -c environments/mines/MinesEnvironment.cc -o environments/mines/MinesEnvironment.o
 
 ## tictactoe
 tictactoe: environments/tictactoe/MyEnvironment.o 
 	$(CC)    environments/tictactoe/MyEnvironment.o $(LDFLAGS) -o environments/tictactoe/MyEnvironment  
-
-tictactoe.o: environments/tictactoe/MyEnvironment.cpp
+environments/tictactoe/MyEnvironment.o: environments/tictactoe/MyEnvironment.cpp
 	$(CC)    $(CFLAGS) -c environments/tictactoe/MyEnvironment.cpp -o environments/tictactoe/MyEnvironment.o
+
+## chain
+chain:       environments/chain/ChainEnvironment.o
+	$(CC)    environments/chain/ChainEnvironment.o $(LDFLAGS) -o environments/chain/ChainEnvironment
+environments/chain/ChainEnvironment.o: environments/chain/ChainEnvironment.cc
+	$(CC)    $(CFLAGS) -c environments/chain/ChainEnvironment.cc -o environments/chain/ChainEnvironment.o
+
+## contextbandit
+contextbandit: environments/contextbandit/ContextBanditEnvironment.o
+	$(CC)    environments/contextbandit/ContextBanditEnvironment.o $(LDFLAGS) -o environments/contextbandit/ContextBanditEnvironment
+environments/contextbandit/ContextBanditEnvironment.o: environments/contextbandit/ContextBanditEnvironment.cc
+	$(CC)    $(CFLAGS) -c environments/contextbandit/ContextBanditEnvironment.cc -o environments/contextbandit/ContextBanditEnvironment.o
+
+## loop
+loop: environments/loop/LoopEnvironment.o
+	$(CC)    environments/loop/LoopEnvironment.o $(LDFLAGS) -o environments/loop/LoopEnvironment
+environments/loop/LoopEnvironment.o: environments/loop/LoopEnvironment.cc
+	$(CC)    $(CFLAGS) -c environments/loop/LoopEnvironment.cc -o environments/loop/LoopEnvironment.o
 
 clean:
 	rm -rf environments/bandits/BanditEnvironment environments/bandits/BanditEnvironment.exe environments/bandits/*.o
+	rm -rf environments/mines/MinesEnvironment environments/mines/MinesEnvironment.exe environments/mines/*.o
 	rm -rf environments/tictactoe/MyEnvironment environments/tictactoe/MyEnvironment.exe environments/tictactoe/*.o
-
+	rm -rf environments/chain/ChainEnvironment environments/chain/ChainEnvironment.exe environments/chain/*.o
+	rm -rf environments/contextbandit/ContextBanditEnvironment environments/contextbandit/ContextBanditEnvironment.exe environments/contextbandit/*.o
+	rm -rf environments/loop/LoopEnvironment environments/loop/LoopEnvironment.exe environments/loops/*.o
 
 
 

@@ -1,5 +1,8 @@
 environments/bandits/BanditEnvironment
 environments/mines/MinesEnvironment
 environments/tictactoe/MyEnvironment
+environments/chain/ChainEnvironment
+environments/contextbandit/ContextBanditEnvironment
+environments/loop/LoopEnvironment
 agent/LibRLAgent
 MyExperiment
