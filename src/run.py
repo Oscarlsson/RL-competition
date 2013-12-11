@@ -18,22 +18,24 @@ def run_all():
     environments = get_environments().split()
     lg.info("Environments found:" + str(environments))
 
-    timestr = time.strftime("%y%m%d-%H-%M-%S")
-    outputdir = get_outputdir() + timestr
-    os.makedirs(outputdir)
-
-    for environment in environments:
-        lg.info("Running: " + environment)
-        run(environment, outputdir)
-
-def run(environment, outputdir):
-
 
     if (len(sys.argv) > 1):
         agentname = str(sys.argv[1])
         print("Using agent " + agentname)
     else:
-        agentname = './'+get_agent()
+        agentname = "./" + get_agent()
+
+    timestr = time.strftime("%y%m%d-%H-%M-%S")
+    printableagentname = agentname.split("/")[-1]
+    outputdir = get_outputdir() + timestr + "-" + printableagentname
+    os.makedirs(outputdir)
+
+    for environment in environments:
+        lg.info("Running: " + environment)
+        run(environment, outputdir, agentname)
+
+def run(environment, outputdir, agentname):
+
     experimentname = './'+get_experiment()
     lg.info("* starting rl_glue")
     rlglue = subprocess.Popen(['rl_glue'])
@@ -57,7 +59,7 @@ def get_environments():
 #    arg = ['find environments -executable -type f']
 #    executablefiles = subprocess.Popen(arg, shell=True, stdout=subprocess.PIPE)
 #    return executablefiles.stdout
-    pass
+
 def get_agent():
     return read_config('agent')
 
