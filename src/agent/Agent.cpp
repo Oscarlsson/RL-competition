@@ -55,9 +55,10 @@ Agent::~Agent()
  */
 int Agent::step(int lastState, int lastAction, double reward, int thisState)
 {
-    // cout << "Observed reward " << reward << " in state " << newState << endl;
-
-    ++t;
+    const int history_size = 5000;
+    const int history_incr = 1000;
+    static vector<int> history_S(history_size);
+    static vector<int> history_A(history_size);
 
     // Take action A, observe R, S'
     // ... is given already as:
@@ -65,21 +66,29 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     int A = lastAction;
     int S2= thisState;  // S'
 
+    if (t == history_S.capacity())
+        history_S.resize(t + history_incr);
+    if (t == history_A.capacity())
+        history_A.resize(t + history_incr);
+
+    history_S[t] = S;
+    history_A[t] = A;
+
     // Choose A2 from S2 using policy derived from Q (e.g. epsilon-greedy)
     int A2 = policy.sample_action(S2, t, qTable, nActions);
 
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
-    traces[S][A] += 1; // TODO: (speedup) Store index tuple (S,A) in std::vector
+    traces[S][A] += 1;
 
-    // TODO: (speedup) Only loop over nonzero indices s,a in traces[s][a] 
-    for (int s = 0; s < nStates; ++s)
-        for (int a = 0; a < nActions; ++a)
-        {
-            qTable[s][a] += stepSize * delta * traces[s][a];
-            traces[s][a] = gamma * lambda * traces[s][a];
-        }
+    for (int ti = 0; ti <= t; ++ti)
+    {
+        int s = history_S[ti];
+        int a = history_A[ti];
+        qTable[s][a] += stepSize * delta * traces[s][a];
+        traces[s][a] = gamma * lambda * traces[s][a];
+    }
 
-    // return randInRange(nActions - 1);
+    ++t;
     return A2;
 }
 
