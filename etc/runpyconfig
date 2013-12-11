@@ -1,6 +1,6 @@
 [runpy]
 agent = agent/LibRLAgent
 experiment = MyExperiment
-environments = environments/mines/MinesEnvironment environments/ticktacktoe/MyEnvironment environments/bandits/BanditEnvironment
+environments = environments/mines/MinesEnvironment environments/tictactoe/MyEnvironment environments/bandits/BanditEnvironment
 outputdirectory=../outputs/
 logfile = runpy.log

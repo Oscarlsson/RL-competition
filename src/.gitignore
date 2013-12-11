@@ -1,5 +1,5 @@
 environments/bandits/BanditEnvironment
 environments/mines/MinesEnvironment
-environments/ticktacktoe/MyEnvironment
+environments/tictactoe/MyEnvironment
 agent/LibRLAgent
 MyExperiment

@@ -2,7 +2,7 @@ LDFLAGS := $(LDFLAGS) -lm -lrlutils -lrlenvironment -lrlgluenetdev
 CFLAGS := $(CFLAGS) -Wall -pedantic -g  #?
 CC := $(CXX)
 
-all: ticktacktoe bandits mines
+all: tictactoe bandits mines
 
 ## bandits
 bandits:     environments/bandits/BanditEnvironment.o 
@@ -16,16 +16,16 @@ mines:     environments/mines/MinesEnvironment.o
 environments/mines/MinesEnvironment.o:   environments/mines/MinesEnvironment.cc
 	$(CC)    $(CFLAGS) -c environments/mines/MinesEnvironment.cc -o environments/mines/MinesEnvironment.o
 
-## Ticktacktoe
-ticktacktoe: environments/ticktacktoe/MyEnvironment.o 
-	$(CC)    environments/ticktacktoe/MyEnvironment.o $(LDFLAGS) -o environments/ticktacktoe/MyEnvironment  
+## tictactoe
+tictactoe: environments/tictactoe/MyEnvironment.o 
+	$(CC)    environments/tictactoe/MyEnvironment.o $(LDFLAGS) -o environments/tictactoe/MyEnvironment  
 
-ticktacktoe.o: environments/ticktacktoe/MyEnvironment.cpp
-	$(CC)    $(CFLAGS) -c environments/ticktacktoe/MyEnvironment.cpp -o environments/ticktacktoe/MyEnvironment.o
+tictactoe.o: environments/tictactoe/MyEnvironment.cpp
+	$(CC)    $(CFLAGS) -c environments/tictactoe/MyEnvironment.cpp -o environments/tictactoe/MyEnvironment.o
 
 clean:
 	rm -rf environments/bandits/BanditEnvironment environments/bandits/BanditEnvironment.exe environments/bandits/*.o
-	rm -rf environments/ticktacktoe/MyEnvironment environments/ticktacktoe/MyEnvironment.exe environments/ticktacktoe/*.o
+	rm -rf environments/tictactoe/MyEnvironment environments/tictactoe/MyEnvironment.exe environments/tictactoe/*.o
 
 
 
