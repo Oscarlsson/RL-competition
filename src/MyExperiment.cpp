@@ -151,7 +151,7 @@ void save_result_csv(evaluation_point_t *the_score[], const string & fileName) {
 		sprintf(value, "%.2f,", the_score[i]->mean);
     output << value; 
 	}
-	sprintf(value, "%.2f", the_score[21]->mean);
+	sprintf(value, "%.2f", the_score[20]->mean);
     output << value; 
 	output << endl; 
 	
@@ -161,7 +161,7 @@ void save_result_csv(evaluation_point_t *the_score[], const string & fileName) {
 		sprintf(value, "%.2f,", the_score[i]->standard_dev);
     output << value; 
 	}
-	    sprintf(value, "%.2f", the_score[21]->standard_dev);
+	    sprintf(value, "%.2f", the_score[20]->standard_dev);
     output << value; 
 	output << endl; 
 
