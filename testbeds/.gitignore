@@ -10,5 +10,5 @@ agent.out
 environment.out
 environments.tar.bz2
 experiment.out
-loop-sarsa.reward
+*.reward
 rl_glue.out
