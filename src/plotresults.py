@@ -18,10 +18,10 @@ parser.add_argument('-D', metavar='dir', required=True,
 args = parser.parse_args()
 
 results = [filename for filename in os.listdir(args.D) if filename.startswith('result')]
+plt.figure()
 plt.ylabel('#Episodes')
 plt.xlabel('Average reward')
 plt.title('Environment z with x runs using agent y')
-plt.figure()
 print results
 for result in results:
     plot(args.D+"/"+result)
