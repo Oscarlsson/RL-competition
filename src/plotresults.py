@@ -7,9 +7,13 @@ import os
 def plot(csvfile):
     csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525,25))
     meandata = csvdata.loc['mean']
-    if meandata.ndim == 1:
+    dim = meandata.ndim
+    agent = csvfile.split("/")[-2]
+    if dim == 1:
+        plt.title('With ' + str(dim) + ' runs using ' + agent)
         meandata.plot()
     else:
+        plt.title('With ' + str(len(meandata)) + ' runs using ' + agent)
         meandata.mean().plot()
 
 parser = argparse.ArgumentParser(description='Plotting the average mean of a result-output. Argument is the directory')
@@ -19,9 +23,8 @@ args = parser.parse_args()
 
 results = [filename for filename in os.listdir(args.D) if filename.startswith('result')]
 plt.figure()
-plt.ylabel('#Episodes')
-plt.xlabel('Average reward')
-plt.title('Environment z with x runs using agent y')
+plt.xlabel('#Episodes')
+plt.ylabel('Average reward')
 print results
 for result in results:
     plot(args.D+"/"+result)
