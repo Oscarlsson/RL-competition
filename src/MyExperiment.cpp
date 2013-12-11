@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
 
 void save_result_csv(evaluation_point_t *the_score[], const string & fileName) {
 
-	ofstream output(fileName.c_str()); 
+	ofstream output(fileName.c_str(), ios::app); 
   if (!output.is_open())
     cerr << "Error opening file for reading: " << fileName << endl; 
 
