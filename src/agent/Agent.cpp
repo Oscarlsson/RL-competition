@@ -101,11 +101,11 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
         cerr.flush();
     }
 
-    updateCorrelationMatrices(reward, 0.99, history_A);
+    // updateCorrelationMatrices(reward, 0.99, history_A);
 
     // Choose A2 from S2 using policy derived from Q (e.g. epsilon-greedy)
-    // int A2 = policy.sample_action(S2, t, qTable, nActions);
-    int A2 = sample_action(S2, t, qTable, nActions, 0.99, history_A);
+    int A2 = policy.sample_action(S2, t, qTable, nActions);
+    // int A2 = sample_action(S2, t, qTable, nActions, 0.99, history_A);
 
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
     traces[S][A] += 1;
