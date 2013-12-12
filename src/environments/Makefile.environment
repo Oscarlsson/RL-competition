@@ -22,6 +22,12 @@ tictactoe: environments/tictactoe/MyEnvironment.o
 environments/tictactoe/MyEnvironment.o: environments/tictactoe/MyEnvironment.cpp
 	$(CC)    $(CFLAGS) -c environments/tictactoe/MyEnvironment.cpp -o environments/tictactoe/MyEnvironment.o
 
+## connectfour
+connectfour: environments/connectfour/MyEnvironment.o 
+	$(CC)    environments/connectfour/MyEnvironment.o $(LDFLAGS) -o environments/connectfour/MyEnvironment  
+environments/connectfour/MyEnvironment.o: environments/connectfour/MyEnvironment.cpp
+	$(CC)    $(CFLAGS) -c environments/connectfour/MyEnvironment.cpp -o environments/connectfour/MyEnvironment.o
+
 ## chain
 chain:       environments/chain/ChainEnvironment.o
 	$(CC)    environments/chain/ChainEnvironment.o $(LDFLAGS) -o environments/chain/ChainEnvironment
@@ -47,9 +53,7 @@ clean:
 	rm -rf environments/chain/ChainEnvironment environments/chain/ChainEnvironment.exe environments/chain/*.o
 	rm -rf environments/contextbandit/ContextBanditEnvironment environments/contextbandit/ContextBanditEnvironment.exe environments/contextbandit/*.o
 	rm -rf environments/loop/LoopEnvironment environments/loop/LoopEnvironment.exe environments/loops/*.o
-
-
-
+	rm -rf environments/connectfour/MyEnvironment environments/connectfour/MyEnvironment.exe environments/connectfour/*.o
 
 
 
