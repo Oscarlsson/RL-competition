@@ -89,7 +89,7 @@ parser = argparse.ArgumentParser(description='This file will run an Agent on sev
 parser.add_argument('-A', metavar='agent',
                    help="Path to an executable agent. ",default=None, required=False)
 parser.add_argument('-N', metavar='n', type=int,
-                   help='Number of runs for EACH environment', default=1, required=False)
+                   help='Number of runs for EACH environment or with environment given by -E', default=1, required=False)
 parser.add_argument('-E', metavar='env',
                    help='Path to an executable environment.', default=None, required=False)
 args = parser.parse_args()
