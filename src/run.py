@@ -58,9 +58,9 @@ def run(environment, outputdir, agentname, output):
     lg.info("* starting env with " + envcmd)
     subprocess.Popen([envcmd], shell=True, stdout=devnull)
 
-    with open(outputfilename,'w') as output:
+    with open(outputfilename,'w') as outputfile:
         experimentname = './'+get_experiment()
-        experiment = subprocess.Popen([experimentname, resultfilename], stdout=output)
+        experiment = subprocess.Popen([experimentname, resultfilename], stdout=outputfile)
         experiment.communicate()
 
     if output:
