@@ -4,5 +4,6 @@ environments/tictactoe/MyEnvironment
 environments/chain/ChainEnvironment
 environments/contextbandit/ContextBanditEnvironment
 environments/loop/LoopEnvironment
+environments/connectfour/ConnectfourEnvironment
 agent/LibRLAgent
 MyExperiment
