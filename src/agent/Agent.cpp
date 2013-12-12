@@ -20,9 +20,10 @@ double runif()
 }
 
 Agent::Agent(int nStates, int nActions, double gamma, double lambda,
-             double stepSize, double epsilon)
+             double stepSize, double epsilon, double minReward)
 : nStates(nStates), nActions(nActions), gamma(gamma), lambda(lambda),
-  stepSize(stepSize), t(0), e(0), policy(epsilon) /* EpsilonGreedyPolicy(epsilon) */
+  stepSize(stepSize), t(0), e(0), policy(epsilon), /* EpsilonGreedyPolicy(epsilon) */
+  minReward(minReward)
 {
     srand(time(0));
     qTable = new double*[nStates];
@@ -31,6 +32,13 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
     {
         qTable[s] = new double[nActions];
         traces[s] = new double[nActions];
+    }
+    rTable = new double*[nActions]; //Reward table
+    cTable = new double*[nActions]; //Tally table
+    for (int a = 0; a<nActions; ++a)
+    {
+        rTable[a] = new double[nActions];
+        cTable[a] = new double[nActions];
     }
     cout << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << nStates  << endl
@@ -47,6 +55,11 @@ Agent::~Agent()
     {
         delete [] qTable[i];
         delete [] traces[i];
+    }
+    for (int a = 0; a<nActions; ++a)
+    {
+        delete [] rTable[a];
+        delete [] cTable[a];
     }
 }
 
@@ -74,8 +87,11 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     history_S[t] = S;
     history_A[t] = A;
 
+    updateCorrelationMatrices(reward, 0.99, history_A);
+
     // Choose A2 from S2 using policy derived from Q (e.g. epsilon-greedy)
-    int A2 = policy.sample_action(S2, t, qTable, nActions);
+    // int A2 = policy.sample_action(S2, t, qTable, nActions);
+    int A2 = sample_action(S2, t, qTable, nActions, 0.99, history_A);
 
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
     traces[S][A] += 1;
@@ -96,8 +112,8 @@ void Agent::start()
 {
     t = 0;
     ++e;
-    cout << "\t" << e << "\r";
-    cout.flush();
+    cerr << "\t" << e << "\r";
+    cerr.flush();
     for (int s = 0; s < nStates; ++s)
         for (int a = 0; a < nActions; ++a)
         {
@@ -130,3 +146,87 @@ int EpsilonGreedyPolicy::sample_action(int S, int t, double **qTable,
     return aMax;
 }
 
+bool Agent::visited(int s)
+{
+    for (int a = 0; a < nActions; ++a)
+        if (qTable[s][a] != 0)
+            return true;
+    return false;
+}
+
+// double* Agent::expectationFromCorrelations(double * actionProb, double beta, vector<int> &history_A)
+// int Agent::sample_action(double beta, vector<int> &history_A)
+int Agent::sample_action(int S, int t, double **qTable, int nActions, double beta, vector<int> &history_A)
+// sort it into Agent:: or policy?
+{
+  //if (visited(S))
+  //    return policy.sample_action(S, t, qTable, nActions);
+
+    double *actionProb = new double[nActions];
+
+    double total = 0;
+    
+    for (int a = 0; a < nActions; ++a)
+    {
+        actionProb[a] = 0;
+        double pow = 1;
+        for (int hi = t; hi >= 0; --hi)
+        {
+            int ai = history_A[hi];
+            actionProb[a] += pow * (rTable[a][ai] / cTable[a][ai] - minReward);
+            pow *= beta;
+        }
+        total += actionProb[a];
+    }
+
+    double pSum = 0;
+    int aOut = 0;
+    for (int a = 0; a < nActions; ++a)
+    {
+        actionProb[a] /= total;
+        pSum += actionProb[a];
+
+        if (runif() < pSum)
+            aOut = a;
+    }
+
+    delete[] actionProb;
+    return aOut;
+}
+
+void Agent::updateCorrelationMatrices(double lastReward, double beta,
+                                      vector<int> history_A)
+    //gamma as a pointer, so it updates as well...
+{
+//    cerr << t << endl;
+    for (int hi = t; hi > 0; --hi)
+    {
+        double b = beta;
+        for (int hj = hi - 1; hj >= 0; --hj)
+        {
+            double discountFactor = pow(beta, t - hj - 1);
+            double reward = lastReward * discountFactor;
+            int ai = history_A[hi];
+            int aj = history_A[hj];
+            rTable[ai][aj] += reward;
+            rTable[aj][ai] += reward;
+            cTable[ai][aj] += discountFactor;
+            cTable[aj][ai] += discountFactor;
+        }
+    }
+
+    // FIX GAMMA UPDATER WHEN REST WORKS
+   /* double exp0[nActions];
+    double exp1[nActions];
+    
+    exp0 = expectationFromCorrelations(* exp0, **rTable,
+                                **cTable, gamma,
+                                nActions, history_A,
+                                               t-1);
+    exp1 = expectationFromCorrelations(* exp1, **rTable,
+                                               **cTable, gamma+0.001,
+                                               nActions, history_A,
+                                               t-1);
+    gamma += (lastReward-exp0)/(exp1-exp0)*/ 
+    
+}

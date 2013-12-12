@@ -1,0 +1,32 @@
+../outputs/131212-00-50-11-LibRLAgent/resultChainEnvironment
+Starting offline demo
+----------------------------
+Will alternate learning for 25 episodes,then freeze policy and evaluate for 10 episodes.
+
+After Episode
+Mean Return	Standard Deviation
+-------------------------------------------------------------------------
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+0		19.34		22.03
+25		15.92		14.23
+50		15.52		16.55
+75		22.88		16.79
+100		24.08		25.85
+125		25.00		17.37
+150		14.66		12.61
+175		34.14		31.60
+200		20.22		20.59
+225		21.18		15.09
+250		55.42		33.61
+275		25.40		16.94
+300		60.34		47.34
+325		44.78		32.02
+350		48.26		35.79
+375		22.32		11.73
+400		56.02		50.23
+425		64.76		66.10
+450		37.16		44.39
+475		66.28		71.34
+500		26.90		39.63

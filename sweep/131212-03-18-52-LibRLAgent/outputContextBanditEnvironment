@@ -1,0 +1,32 @@
+../outputs/131212-03-18-52-LibRLAgent/resultContextBanditEnvironment
+Starting offline demo
+----------------------------
+Will alternate learning for 25 episodes,then freeze policy and evaluate for 10 episodes.
+
+After Episode
+Mean Return	Standard Deviation
+-------------------------------------------------------------------------
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+0		54.10		78.13
+25		38.60		44.85
+50		80.10		61.31
+75		48.20		42.42
+100		72.00		99.05
+125		63.60		47.77
+150		60.70		80.97
+175		69.80		46.96
+200		47.00		38.51
+225		87.20		121.57
+250		47.90		52.14
+275		49.80		67.85
+300		32.50		42.95
+325		53.30		82.22
+350		31.70		22.00
+375		53.50		51.31
+400		132.40		165.39
+425		52.70		67.79
+450		65.50		68.67
+475		42.50		33.46
+500		37.30		30.96

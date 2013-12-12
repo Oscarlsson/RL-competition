@@ -54,8 +54,10 @@ void agent_init(const char* task_spec)
                 ts->discount_factor, // Gamma
                 lambda,
                 stepsize,
-                epsilon 
+                epsilon,
+                ts->reward.min
             );
+    
     // DEBUG:
     // cerr << "Agent n states: " << agent->nStates << endl;
 

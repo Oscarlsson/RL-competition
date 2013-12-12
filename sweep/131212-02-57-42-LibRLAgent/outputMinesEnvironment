@@ -1,0 +1,32 @@
+../outputs/131212-02-57-42-LibRLAgent/resultMinesEnvironment
+Starting offline demo
+----------------------------
+Will alternate learning for 25 episodes,then freeze policy and evaluate for 10 episodes.
+
+After Episode
+Mean Return	Standard Deviation
+-------------------------------------------------------------------------
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+0		-92.30		65.91
+25		-19.00		45.62
+50		1.60		4.45
+75		2.20		3.91
+100		1.70		8.17
+125		-25.80		43.30
+150		-35.40		52.49
+175		-16.80		34.05
+200		-46.60		60.71
+225		-27.90		47.41
+250		-17.90		36.38
+275		-14.60		34.11
+300		-14.20		33.09
+325		-38.00		54.30
+350		-47.40		54.34
+375		-13.40		34.57
+400		-14.70		35.86
+425		2.70		6.55
+450		-50.60		90.73
+475		-12.30		33.70
+500		-71.60		98.96

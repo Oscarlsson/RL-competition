@@ -32,13 +32,6 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
         qTable[s] = new double[nActions];
         traces[s] = new double[nActions];
     }
-    rTable = new double*[nActions]; //Reward table
-    cTable = new double*[nActions]; //Tally table
-    for (int a = 0; a<nActions; ++a)
-    {
-        reward_correlation_table[a] = new double[nActions];
-        tally_correlation_table = new double[nActions];
-    }
     cout << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << nStates  << endl
               << "\tnActions : " << nActions << endl
@@ -54,11 +47,6 @@ Agent::~Agent()
     {
         delete [] qTable[i];
         delete [] traces[i];
-    }
-    for (int a = 0; a<nActions; ++a)
-    {
-        delete [] rTable[a];
-        delete [] cTable[a];
     }
 }
 
@@ -115,68 +103,6 @@ void Agent::start()
         {
             traces[s][a] = 0;
         }
-}
-
-double * expectationFromCorrelations(double * actionExpt, double ** rTable,
-                                     double **cTable, double gamma,
-                                     int nActions, static vector<int> history_A,
-                                     int t)
-// sort it into Agent:: or policy?
-{
-    double total = 0;
-    for (int a = 0; a<nActions; ++a)
-    {
-        actionExpt[a] = 0;
-        double pow = 1;
-        for (int h = t-1; h>=0; --h)
-        {
-            actionExpt[a] += pow * rTable[a][history_A[h]]/cTable[a][history_A[h]];
-            pow *= gamma;
-        }
-        total+= actionExpt[a];
-    }
-
-    for (int a = 0; a<nActions; ++a)
-    {
-        actionExpt[a]/=total;
-    }
-    
-    return actionExpt;
-    
-}
-
-void updateCorrelationMatrices(double lastReward, double ** rTable,
-                               double **cTable, double gamma,
-                               int nActions, static vector<int> history_A,
-                               int t)
-    //gamma as a pointer, so it updates as well...
-{
-    double pow = 1;
-    for (int h = t-2; h>0; h--)
-    {
-        double powpow = pow;
-        for (int hh = h-1; hh >= 0; hh--) 
-        {
-            rTable[a][history_A[h]] += powpow*pow*lastReward; //discount: gamma^(most distant action)
-            cTable[a][history_A[h]] += powpow*pow;
-            powpow*= gamma;
-        }
-    }
-    
-    // FIX GAMMA UPDATER WHEN REST WORKS
-   /* double exp0[nActions];
-    double exp1[nActions];
-    
-    exp0 = expectationFromCorrelations(* exp0, **rTable,
-                                **cTable, gamma,
-                                nActions, history_A,
-                                               t-1);
-    exp1 = expectationFromCorrelations(* exp1, **rTable,
-                                               **cTable, gamma+0.001,
-                                               nActions, history_A,
-                                               t-1);
-    gamma += (lastReward-exp0)/(exp1-exp0)*/ 
-    
 }
 
 EpsilonGreedyPolicy::EpsilonGreedyPolicy(double epsilon)
