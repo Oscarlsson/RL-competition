@@ -114,8 +114,8 @@ int flatten_state(){
     current_state = 0;
     for(int i = 0; i<nCols;i++){
         for(int j = 0; j<nRows;j++){
-            if (current_board[i][j] != 0){
-                current_state+=multiplier[nCols]*current_board[i][j];
+            if (current_board[j][i] != 0){
+                current_state+=multiplier[i]*current_board[j][i];
                 break;
             }
         }

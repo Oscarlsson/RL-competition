@@ -2,7 +2,7 @@ LDFLAGS := $(LDFLAGS) -lm -lrlutils -lrlenvironment -lrlgluenetdev
 CFLAGS := $(CFLAGS) -std=c++11 -Wall -pedantic -g  #?
 CC := $(CXX)
 
-all: tictactoe bandits mines chain contextbandit loop
+all: tictactoe bandits mines chain contextbandit loop connectfour
 
 ## bandits
 bandits:     environments/bandits/BanditEnvironment.o 
@@ -17,16 +17,16 @@ environments/mines/MinesEnvironment.o:      environments/mines/MinesEnvironment.
 	$(CC)    $(CFLAGS) -c environments/mines/MinesEnvironment.cc -o environments/mines/MinesEnvironment.o
 
 ## tictactoe
-tictactoe: environments/tictactoe/MyEnvironment.o 
-	$(CC)    environments/tictactoe/MyEnvironment.o $(LDFLAGS) -o environments/tictactoe/MyEnvironment  
-environments/tictactoe/MyEnvironment.o: environments/tictactoe/MyEnvironment.cpp
-	$(CC)    $(CFLAGS) -c environments/tictactoe/MyEnvironment.cpp -o environments/tictactoe/MyEnvironment.o
+tictactoe: environments/tictactoe/TictactoeEnvironment.o 
+	$(CC)    environments/tictactoe/TictactoeEnvironment.o $(LDFLAGS) -o environments/tictactoe/TictactoeEnvironment  
+environments/tictactoe/TictactoeEnvironment.o: environments/tictactoe/TictactoeEnvironment.cpp
+	$(CC)    $(CFLAGS) -c environments/tictactoe/TictactoeEnvironment.cpp -o environments/tictactoe/TictactoeEnvironment.o
 
 ## connectfour
-connectfour: environments/connectfour/MyEnvironment.o 
-	$(CC)    environments/connectfour/MyEnvironment.o $(LDFLAGS) -o environments/connectfour/MyEnvironment  
-environments/connectfour/MyEnvironment.o: environments/connectfour/MyEnvironment.cpp
-	$(CC)    $(CFLAGS) -c environments/connectfour/MyEnvironment.cpp -o environments/connectfour/MyEnvironment.o
+connectfour: environments/connectfour/ConnectfourEnvironment.o 
+	$(CC)    environments/connectfour/ConnectfourEnvironment.o $(LDFLAGS) -o environments/connectfour/ConnectfourEnvironment  
+environments/connectfour/ConnectfourEnvironment.o: environments/connectfour/ConnectfourEnvironment.cpp
+	$(CC)    $(CFLAGS) -c environments/connectfour/ConnectfourEnvironment.cpp -o environments/connectfour/ConnectfourEnvironment.o
 
 ## chain
 chain:       environments/chain/ChainEnvironment.o
@@ -49,11 +49,11 @@ environments/loop/LoopEnvironment.o: environments/loop/LoopEnvironment.cc
 clean:
 	rm -rf environments/bandits/BanditEnvironment environments/bandits/BanditEnvironment.exe environments/bandits/*.o
 	rm -rf environments/mines/MinesEnvironment environments/mines/MinesEnvironment.exe environments/mines/*.o
-	rm -rf environments/tictactoe/MyEnvironment environments/tictactoe/MyEnvironment.exe environments/tictactoe/*.o
+	rm -rf environments/tictactoe/TictactoeEnvironment environments/tictactoe/TictactoeEnvironment.exe environments/tictactoe/*.o
 	rm -rf environments/chain/ChainEnvironment environments/chain/ChainEnvironment.exe environments/chain/*.o
 	rm -rf environments/contextbandit/ContextBanditEnvironment environments/contextbandit/ContextBanditEnvironment.exe environments/contextbandit/*.o
 	rm -rf environments/loop/LoopEnvironment environments/loop/LoopEnvironment.exe environments/loops/*.o
-	rm -rf environments/connectfour/MyEnvironment environments/connectfour/MyEnvironment.exe environments/connectfour/*.o
+	rm -rf environments/connectfour/ConnectfourEnvironment environments/connectfour/ConnectfourEnvironment.exe environments/connectfour/*.o
 
 
 
