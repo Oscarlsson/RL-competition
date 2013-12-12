@@ -38,16 +38,16 @@ def run_all(args):
         for i in range(args.N):
             lg.info("Running: " + environment + " for the " + str(i) +"th time")
             print("Running: " + environment + " for the " + str(i) +"th time")
-            run(environment, outputdir, agentname)
+            run(environment, outputdir, agentname, args.output)
     print "Output is found in " + outputdir
 
-def run(environment, outputdir, agentname):
+def run(environment, outputdir, agentname, output):
 
     envname = environment.split("/")[-1].rstrip()
     resultfilename = outputdir + "/" + 'result' + envname 
     outputfilename = outputdir + "/" + 'output' + envname
-
     devnull = open('/dev/null', 'w')
+
     lg.info("* starting rl_glue")
     rlglue = subprocess.Popen(['rl_glue'], stdout=devnull)
 
@@ -58,10 +58,14 @@ def run(environment, outputdir, agentname):
     lg.info("* starting env with " + envcmd)
     subprocess.Popen([envcmd], shell=True, stdout=devnull)
 
-    with open(outputfilename,'w') as output:
+    with open(outputfilename,'w') as outputfile:
         experimentname = './'+get_experiment()
-        experiment = subprocess.Popen([experimentname, resultfilename], stdout=output)
+        experiment = subprocess.Popen([experimentname, resultfilename], stdout=outputfile)
         experiment.communicate()
+
+    if output:
+        with open(outputfilename, 'r') as fin:
+                print fin.read()
     devnull.close()
 
 def get_environments():
@@ -92,8 +96,9 @@ parser.add_argument('-N', metavar='n', type=int,
                    help='Number of runs for EACH environment or with environment given by -E', default=1, required=False)
 parser.add_argument('-E', metavar='env',
                    help='Path to an executable environment.', default=None, required=False)
-args = parser.parse_args()
+parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
+args = parser.parse_args()
 log = get_outputdir() + get_logfile()
 lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 MakeAll()
