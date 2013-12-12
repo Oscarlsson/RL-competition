@@ -39,6 +39,11 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
     {
         rTable[a] = new double[nActions];
         cTable[a] = new double[nActions];
+        for (int a2 = 0; a2 < nActions; ++a2)
+        {
+            rTable[a][a2] = 0;
+            cTable[a][a2] = 1;
+        }
     }
     cout << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << nStates  << endl
@@ -86,6 +91,15 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
 
     history_S[t] = S;
     history_A[t] = A;
+
+    if (t < 0)
+    {
+        cerr << "r:" << reward << " t: " << t << ":: ";
+        for (int ti = 0; ti < t; ++ti)
+            cerr << history_A[ti] << " ";
+        cerr << "\n";
+        cerr.flush();
+    }
 
     updateCorrelationMatrices(reward, 0.99, history_A);
 
@@ -146,21 +160,19 @@ int EpsilonGreedyPolicy::sample_action(int S, int t, double **qTable,
     return aMax;
 }
 
+/* Just some random definition, not working very well */
 bool Agent::visited(int s)
 {
     for (int a = 0; a < nActions; ++a)
-        if (qTable[s][a] != 0)
-            return true;
-    return false;
+        if (qTable[s][a] == 0)
+            return false;
+    return true;
 }
 
-// double* Agent::expectationFromCorrelations(double * actionProb, double beta, vector<int> &history_A)
-// int Agent::sample_action(double beta, vector<int> &history_A)
 int Agent::sample_action(int S, int t, double **qTable, int nActions, double beta, vector<int> &history_A)
-// sort it into Agent:: or policy?
 {
-  //if (visited(S))
-  //    return policy.sample_action(S, t, qTable, nActions);
+    if (visited(S))
+        return policy.sample_action(S, t, qTable, nActions);
 
     double *actionProb = new double[nActions];
 
@@ -179,29 +191,37 @@ int Agent::sample_action(int S, int t, double **qTable, int nActions, double bet
         total += actionProb[a];
     }
 
+    /* DEBUG */
+    if (t < 0)
+    {
+        for (int a = 0; a < nActions; ++a)
+        {
+            cerr << actionProb[a] / total << "\t";
+        }
+        cerr << "\n";
+        cerr.flush();
+    }
+
     double pSum = 0;
-    int aOut = 0;
     for (int a = 0; a < nActions; ++a)
     {
         actionProb[a] /= total;
         pSum += actionProb[a];
 
-        if (runif() < pSum)
-            aOut = a;
+        if (runif() <= pSum)
+        {
+            delete[] actionProb;
+            return a;
+        }
     }
-
-    delete[] actionProb;
-    return aOut;
 }
 
 void Agent::updateCorrelationMatrices(double lastReward, double beta,
                                       vector<int> history_A)
     //gamma as a pointer, so it updates as well...
 {
-//    cerr << t << endl;
     for (int hi = t; hi > 0; --hi)
     {
-        double b = beta;
         for (int hj = hi - 1; hj >= 0; --hj)
         {
             double discountFactor = pow(beta, t - hj - 1);
@@ -213,6 +233,19 @@ void Agent::updateCorrelationMatrices(double lastReward, double beta,
             cTable[ai][aj] += discountFactor;
             cTable[aj][ai] += discountFactor;
         }
+    }
+
+    static int foo = 1;
+    
+    if (++foo < 0)
+    {
+        for (int a1 = 0; a1 < nActions; ++a1)
+        {
+            for (int a2 = 0; a2 < nActions; ++a2)
+                cerr << rTable[a1][a2] << "/" << cTable[a1][a2] << "\t";
+            cerr << endl;
+        }
+        cerr << endl;
     }
 
     // FIX GAMMA UPDATER WHEN REST WORKS
