@@ -103,11 +103,16 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
 {
 	/* Make sure the action is valid */
     if(this_action->numInts != 1){
-        cout << this_action->numInts << endl;
-        cout << "Printing this_action" << endl;
-        cout << "current state" << endl;
-        cout << current_state << endl;
+        cerr << "-------------" << endl;
+        cerr << "Printing this_action \n" << endl;
+        cerr << this_action->numInts << endl;
+        cerr << "current state \n" << endl;
+        cerr << current_state << endl;
+        cerr << "printing final state: \n" << endl;
         print_state();
+        cerr << "Printing array \n" << endl;
+        cerr << this_action->intArray << endl;
+        cerr << "-------------" << endl;
     }
 	assert(this_action->numInts==1);
 	assert(this_action->intArray[0]>=0);
