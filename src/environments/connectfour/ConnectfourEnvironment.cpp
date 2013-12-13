@@ -36,6 +36,9 @@ int is_legal_moves_left();
 void print_state();
 
 void set_boardzero();
+
+int agent_apply(int action);
+
 void print_cause(int cause, int row, int col);
 
 static observation_t this_observation;
@@ -61,7 +64,7 @@ int current_board[nRows][nCols] =
 static string task_spec_string =  
 "VERSION RL-Glue-3.0 PROBLEMTYPE episodic \
 DISCOUNTFACTOR 1 OBSERVATIONS INTS (0 2186) \
-ACTIONS INTS (0 6)  REWARDS (0. 1.) \
+ACTIONS INTS (0 6)  REWARDS (-1. 1.) \
 EXTRA tictactoe_environment(C/C++) by Oskar Lindgren, Oscar Carlsson, John Karlsson";
 
 /*****************************
@@ -93,13 +96,19 @@ const observation_t *env_start()
     }
 
 	this_observation.intArray[0]=current_state;
-    cout << &this_observation << endl;
   	return &this_observation;
 }
 
 const reward_observation_terminal_t *env_step(const action_t *this_action)
 {
 	/* Make sure the action is valid */
+    if(this_action->numInts != 1){
+        cout << this_action->numInts << endl;
+        cout << "Printing this_action" << endl;
+        cout << "current state" << endl;
+        cout << current_state << endl;
+        print_state();
+    }
 	assert(this_action->numInts==1);
 	assert(this_action->intArray[0]>=0);
 	assert(this_action->intArray[0]<nCols);
@@ -115,41 +124,35 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
     if(is_illegal_move(a)){
 		episode_over=0;
         eventCode = 1;
-		the_reward=0.;
-        row = 0;
-        // BUG: It might happen that
-        // the board is full
+		the_reward=-1.;
+        row = -1; //TODO
         if(!is_legal_moves_left()){
+            eventCode = 2;
             episode_over=1;
-            eventCode = 2; //TODO: Dunno
-            // Who wins if board full?
-            the_reward = 0;
         }
     }else{
-        // Make action 
-        for (int i = nRows-1; i >= 0; i--) {
-           if (current_board[i][a] == 0 ) {
-               row = i;
-               col = a;
-               current_board[i][a] = 1;
-               break;
-           }
-        }
-        if(is_win(row,col) || !is_legal_moves_left()){
+        row = agent_apply(a);
+
+        if(is_win(row, col)){
             episode_over=1;
-            eventCode = 2;//agent won by 3 in row or by filling board
-            the_reward=0;
-            if (is_win(row,col))
-                the_reward = 1;
+            eventCode = 3;//agent won by 4 in row
+            the_reward = 1;
         }else{
-            if(ai_random_move_is_win()){
-                current_state=0;
+            if(!is_legal_moves_left()){
                 episode_over=1;
-                eventCode = 3;//ai won by 3 in row
+                eventCode = 3; //Agent didnt win and now the bord is full
                 the_reward=0;
+            }else{
+                if(ai_random_move_is_win()){
+                    current_state=0;
+                    episode_over=1;
+                    eventCode = 4;//ai won by 3 in row
+                    the_reward=0;
+                }
             }
         }
     }
+
     if(eventCode>0 && print_after_each_reward){
         print_cause(eventCode, row, col);
     }
@@ -160,14 +163,13 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
 
 	return &this_reward_observation;
 }
-
 void env_cleanup()
 {
 	clearRLStruct(&this_observation);
 }
 
 const char* env_message(const char* _inMessage) {
-	return "TicTacToe (C++) does not respond to that message.";
+    return "TicTacToe (C++) does not respond to that message.";
 }
 
 
@@ -175,7 +177,18 @@ const char* env_message(const char* _inMessage) {
 
 	Helper Methods 
 	
-*******************************/
+ *******************************/
+int agent_apply(int action){
+    int row;
+    for (int i = nRows-1; i >= 0; i--) {
+        if (current_board[i][action] == 0 ) {
+            current_board[i][action] = 1;
+            row = i;
+            break;
+        }
+    }
+    return row;
+}
 int is_legal_moves_left(){
     for(int i= 0; i<nCols; i++){
         if (current_board[0][i] == 0){
@@ -192,7 +205,7 @@ void set_boardzero(){
     }
 }
 int ai_random_move_is_win(){
-	int a=rand()%nCols;
+    int a=rand()%nCols;
     int row = 0;
 
 	while(is_illegal_move(a)){
@@ -312,31 +325,26 @@ int is_illegal_move(int a){
 	return 0;
 }
 void print_cause(int cause, int row, int col){
+    print_state();
     if(cause == 1){
-        print_state();
-        cout<<"Agent attempted illegal move: row:"<<row+1<<", col:"<<col+1<<"\n";
-    }
-    if(cause == 2){
-        if(is_legal_moves_left()){
-            print_state();
-            cout<<"Agent won by 4 in a row, last move: row:"<<row+1<<", col:"<<col+1<<"\n";
-        }else{
-            print_state();
-            cout<<"Agent won by filling board, no legal moves left,\n last move: row:"<<row+1<<", col:"<<col+1<<"\n";
-        }
-    }
-    if(cause == 3){
-        print_state();
-        cout<<"Agent lost by 4 in a row by ai\n";
+        cerr<<"Agent attempted illegal move: action:"<<col<<"\n";
+    }else if(cause == 2){
+        cerr<<"Agent attempted illegal move: action:"<<col<<" and now the board is full! \n";
+    }else if(cause == 3){
+        cerr<<"Agent wins with action:"<<col<<" Horray! \n";
+    }else if(cause == 4){
+        cerr<<"Agent legal move action:"<<col<<" But now the board is full! \n";
+    }else if(cause == 5){
+        cerr<<"Ai wins with action :"<<col<<" Buuuuh! \n";
     }
 }
 void print_state(){
     int row,col;
     for(row=0;row<nRows;row++){
-        cout <<"\n";
+        cerr <<"\n";
         for(col=0;col<nCols;col++){
-            cout <<current_board[row][col]<<" ";
+            cerr <<current_board[row][col]<<" ";
         }
     }
-    cout << "\n";
+    cerr << "\n";
 }
