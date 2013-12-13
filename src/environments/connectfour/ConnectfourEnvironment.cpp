@@ -13,14 +13,12 @@
 
 using namespace std; 
 
-/*
- Tic tac toe, agent vs an ai that plays random legal moves. If the player
- plays an illegal (occupied) move, the agent gets a penalty of -10 and is
- allowed to continue. If the ai wins, the agent gets a penalty of -1, if
- the agent wins, it gets a reward of 1. If someone wins, the game(episode)
- is over.
- */
-
+// TODO: Describe the game!
+//  Partially hidden: Only observe from above
+//  Drop down 4 in a row
+//  Reward: -1 illegal , 0 , 1 if win
+//  Goal is to win and not do illegal moves
+//
 // HELPER FUNCTIONS.  PROTOTYPES HERE, CODE AT THE BOTTOM OF FILE */
 
 int is_win(int row, int col);
@@ -45,8 +43,8 @@ static observation_t this_observation;
 static reward_observation_terminal_t this_reward_observation;
 
 int current_state=0;
-int print_after_each_reward = 1;
-int multiplier[7] = {1,3, 9, 27, 81, 244, 729};
+int print_after_each_reward = 0;
+int multiplier[7] = {1 ,3, 9, 27, 81, 243, 729};
 const int nRows = 6;
 const int nCols = 7;
 int current_board[nRows][nCols] =
@@ -63,7 +61,7 @@ int current_board[nRows][nCols] =
 
 static string task_spec_string =  
 "VERSION RL-Glue-3.0 PROBLEMTYPE episodic \
-DISCOUNTFACTOR 1 OBSERVATIONS INTS (0 2186) \
+DISCOUNTFACTOR 1 OBSERVATIONS INTS (0 2187) \
 ACTIONS INTS (0 6)  REWARDS (-1. 1.) \
 EXTRA tictactoe_environment(C/C++) by Oskar Lindgren, Oscar Carlsson, John Karlsson";
 
@@ -102,18 +100,6 @@ const observation_t *env_start()
 const reward_observation_terminal_t *env_step(const action_t *this_action)
 {
 	/* Make sure the action is valid */
-    if(this_action->numInts != 1){
-        cerr << "-------------" << endl;
-        cerr << "Printing this_action \n" << endl;
-        cerr << this_action->numInts << endl;
-        cerr << "current state \n" << endl;
-        cerr << current_state << endl;
-        cerr << "printing final state: \n" << endl;
-        print_state();
-        cerr << "Printing array \n" << endl;
-        cerr << this_action->intArray << endl;
-        cerr << "-------------" << endl;
-    }
 	assert(this_action->numInts==1);
 	assert(this_action->intArray[0]>=0);
 	assert(this_action->intArray[0]<nCols);
