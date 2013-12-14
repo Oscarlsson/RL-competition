@@ -17,7 +17,7 @@
 
 #include <rlglue/RL_glue.h> /* RL_ function prototypes and RL-Glue types */
 
-//using namespace std; 
+using namespace std; 
 
 /*
 * Experiment program that does some of the things that might be important when
@@ -95,13 +95,75 @@ public:
 				  << " # average total reward over runs"
 				  << std::endl;
 	}
+
+    void save_result_csv(const string & fileName) {
+
+        ofstream output(fileName.c_str(), ios::app); 
+        if (!output.is_open())
+            cerr << "Error opening file for reading: " << fileName << endl; 
+
+		int max_episodes = 0;
+		for (int i=0; i<n_runs; ++i) {
+			if (max_episodes < (int) runs[i].episode_reward.size()) {
+				max_episodes = runs[i].episode_reward.size();
+			}
+		}
+
+		std::vector<double> episode_reward(max_episodes);
+		for (int i=0; i<max_episodes; ++i) {
+			int active_runs = 0;
+			episode_reward[i] = 0;
+			for (int j=0; j<n_runs; ++j) {
+				if (j < ((int) runs[j].episode_reward.size()))
+					active_runs++;
+				episode_reward[i] += runs[j].episode_reward[i];
+			}
+            output << episode_reward[i] / (double) active_runs;
+            if(i != max_episodes-1){
+                output << ",";
+            }
+        }
+        output << endl;
+		//std::cout << total_reward / (double) n_runs
+		//		  << " # average total reward over runs"
+		//		  << std::endl;
+        //sprintf(value, "mean,");
+        //output << value;
+        //for(i=0;i<20;i++){
+//      //      sprintf(value, "%.2f,", the_score[i]->mean);
+        //    output << value; 
+        //}
+  //    //  sprintf(value, "%.2f", the_score[20]->mean);
+        //output << value; 
+        //output << endl; 
+
+        //sprintf(value, "std,");
+        //output << value;
+        //for(i=0;i<20;i++){
+//      //      sprintf(value, "%.2f,", the_score[i]->standard_dev);
+        //    output << value; 
+        //}
+  //    //  sprintf(value, "%.2f", the_score[20]->standard_dev);
+        //output << value; 
+        //output << endl; 
+
+        output.close(); 
+    }
 };
 
 
 EpisodeStatistics online_evaluation(int n_episodes);
 
 
+string file_name;
 int main(int argc, char *argv[]) {
+    if (argc > 1){
+        std::cout << argv[1] << std::endl;
+        file_name = argv[1];
+    }else{
+        std::cout << "result" << std::endl;    
+        file_name = "result";
+    }
 
 	std::cout << "Starting online demo" << std::endl
 			  << "----------------------------" << std::endl
@@ -118,6 +180,7 @@ int main(int argc, char *argv[]) {
 		RL_cleanup();
 	}
 	run_statistics.PrintStatistics();
+    run_statistics.save_result_csv(file_name);
 	std::cout << "\nProgram Complete.\n";
 
 	return 0;
