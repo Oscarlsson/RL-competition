@@ -25,9 +25,15 @@ def run_all(args):
 
     if args.A:
         agentname = args.A
-        print("Using agent " + agentname)
     else:
         agentname = "./" + get_agent()
+    print("Using agent " + agentname)
+
+    if args.X:
+        experimentname = './'+args.X
+    else:
+        experimentname = './'+get_experiment()
+    print("Using experiment " + experimentname)
 
     timestr = time.strftime("%y%m%d-%H-%M-%S")
     printableagentname = agentname.split("/")[-1]
@@ -38,10 +44,10 @@ def run_all(args):
         for i in range(args.N):
             lg.info("Running: " + environment + " for the " + str(i) +"th time")
             print("Running: " + environment + " for the " + str(i) +"th time")
-            run(environment, outputdir, agentname, args.output)
+            run(environment, outputdir, agentname, args.output, experimentname)
     print "Output is found in " + outputdir
 
-def run(environment, outputdir, agentname, output):
+def run(environment, outputdir, agentname, output, experimentname):
 
     envname = environment.split("/")[-1].rstrip()
     resultfilename = outputdir + "/" + 'result' + envname 
@@ -59,7 +65,6 @@ def run(environment, outputdir, agentname, output):
     subprocess.Popen([envcmd], shell=True, stdout=devnull)
 
     with open(outputfilename,'w') as outputfile:
-        experimentname = './'+get_experiment()
         experiment = subprocess.Popen([experimentname, resultfilename], stdout=outputfile)
         experiment.communicate()
 
@@ -96,6 +101,8 @@ parser.add_argument('-N', metavar='n', type=int,
                    help='Number of runs for EACH environment or with environment given by -E', default=1, required=False)
 parser.add_argument('-E', metavar='env',
                    help='Path to an executable environment.', default=None, required=False)
+parser.add_argument('-X', metavar='exp',
+                   help='Path to an executable experiment.', default=None, required=False)
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
