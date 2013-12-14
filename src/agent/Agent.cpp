@@ -1,6 +1,7 @@
 #include "Agent.hpp"
 
-#include <math.h>
+// #include <math.h>
+#include <cmath>
 #include <cstdlib>
 #include <cstdio>
 #include <cassert>
@@ -45,7 +46,7 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
             cTable[a][a2] = 1;
         }
     }
-    cout << "Initializing agent with parameters:" << endl
+    cerr << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << nStates  << endl
               << "\tnActions : " << nActions << endl
               << "\tgamma : "    << gamma    << endl
@@ -110,13 +111,35 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
     traces[S][A] += 1;
 
-    for (int ti = 0; ti <= t; ++ti)
+//  for (int ti = 0; ti <= t; ++ti)
+//  {
+//      int s = history_S[ti];
+//      int a = history_A[ti];
+//      qTable[s][a] += stepSize * delta * traces[s][a];
+//      traces[s][a] = gamma * lambda * traces[s][a];
+//  }
+
+//  for (int s = 0; s < nStates; ++s)
+//  {
+//      cerr << endl;
+//      for (int a = 0; a < nActions; ++a)
+//      {
+//          cerr << traces[s][a] << "\t";
+//      }
+//  }
+//  cerr << endl;
+
+    for (int s = 0; s < nStates; ++s)
     {
-        int s = history_S[ti];
-        int a = history_A[ti];
-        qTable[s][a] += stepSize * delta * traces[s][a];
-        traces[s][a] = gamma * lambda * traces[s][a];
+        for (int a = 0; a < nActions; ++a)
+        {
+            qTable[s][a] += stepSize * delta * traces[s][a];
+            traces[s][a] = gamma * lambda * traces[s][a];
+            if (abs(traces[s][a]) < 0.0001)
+                traces[s][a] = 0;
+        }
     }
+
 
     ++t;
     return A2;
