@@ -16,7 +16,7 @@
 // helpful functions for allocating structs and cleaning them up 
 #include <rlglue/utils/C/RLStruct_util.h> 
 
-static std::default_random_engine generator;
+static std::default_random_engine generator((unsigned int)time(0));
 
 
 class ChainEnvironment
