@@ -4,11 +4,17 @@ import matplotlib.pyplot as plt
 import argparse
 import os
 
+def plot_100(csvfile):
+    csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525, 25))
+    csvdata.loc['mean'][range(0,125,25)].plot()
+
+
 def plot(csvfile):
     csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525,25))
     meandata = csvdata.loc['mean']
     dim = meandata.ndim
     agent = csvfile.split("/")[-2]
+    print csvfile
     if dim == 1:
         plt.title('With ' + str(dim) + ' runs using ' + agent)
         meandata.plot()
@@ -26,8 +32,10 @@ plt.figure()
 plt.xlabel('#Episodes')
 plt.ylabel('Average reward')
 print results
+if args.D.endswith("/"):
+    args.D = args.D[0:-1]
 for result in results:
     plot(args.D+"/"+result)
-plt.legend(results)
+plt.legend(results, loc=4)
 plt.savefig(args.D+"/plot.png")
 plt.show()
