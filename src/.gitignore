@@ -8,3 +8,4 @@ environments/connectfour/ConnectfourEnvironment
 environments/tictactoe/TictactoeEnvironment
 agent/LibRLAgent
 MyExperiment
+ChristosExperiment
