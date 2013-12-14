@@ -55,7 +55,7 @@ void agent_init(const char* task_spec)
                 lambda,
                 stepsize,
                 epsilon,
-                ts->reward.min
+                ts->reward.min, ts->reward.max
             );
     
     // DEBUG:

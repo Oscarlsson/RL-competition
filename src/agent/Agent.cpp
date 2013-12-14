@@ -21,19 +21,34 @@ double runif()
 }
 
 Agent::Agent(int nStates, int nActions, double gamma, double lambda,
-             double stepSize, double epsilon, double minReward)
+             double stepSize, double epsilon, double minReward,
+             double maxReward)
 : nStates(nStates), nActions(nActions), gamma(gamma), lambda(lambda),
   stepSize(stepSize), t(0), e(0), policy(epsilon), /* EpsilonGreedyPolicy(epsilon) */
-  minReward(minReward)
+  minReward(minReward), maxReward(maxReward)
 {
     srand(time(0));
     qTable = new double*[nStates];
     traces = new double*[nStates];
+    counts = new double*[nStates];
     for (int s = 0; s < nStates; ++s)
     {
         qTable[s] = new double[nActions];
         traces[s] = new double[nActions];
+        counts[s] = new double[nActions];
     }
+
+
+    for (int s = 0; s < nStates; ++s)
+        for (int a = 0; a<nActions; ++a)
+        {
+            qTable[s][a] = maxReward;
+            counts[s][a] = 1;
+        }
+
+    /*
+     * "Tiebreaker"
+     */
     rTable = new double*[nActions]; //Reward table
     cTable = new double*[nActions]; //Tally table
     for (int a = 0; a<nActions; ++a)
@@ -46,12 +61,14 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
             cTable[a][a2] = 1;
         }
     }
+
     cerr << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << nStates  << endl
               << "\tnActions : " << nActions << endl
               << "\tgamma : "    << gamma    << endl
               << "\tlambda : "   << lambda   << endl
-              << "\tepsilon : "   << epsilon   << endl;
+              << "\tstepsize : " << stepSize << endl
+              << "\tepsilon : "  << epsilon  << endl;
 }
 
 Agent::~Agent()
@@ -61,6 +78,7 @@ Agent::~Agent()
     {
         delete [] qTable[i];
         delete [] traces[i];
+        delete [] counts[i];
     }
     for (int a = 0; a<nActions; ++a)
     {
@@ -105,41 +123,26 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     // updateCorrelationMatrices(reward, 0.99, history_A);
 
     // Choose A2 from S2 using policy derived from Q (e.g. epsilon-greedy)
-    int A2 = policy.sample_action(S2, t, qTable, nActions);
+    // UCB1
+    int A2 = policy2.sample_action(S2, t, qTable, counts, nActions);
+    // cerr << "\tA':" << A2 << endl;
+    // eGreedy
+    // int A2 = policy.sample_action(S2, t, qTable, nActions);
+    // "Tiebreaker"
     // int A2 = sample_action(S2, t, qTable, nActions, 0.99, history_A);
 
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
     traces[S][A] += 1;
-
-//  for (int ti = 0; ti <= t; ++ti)
-//  {
-//      int s = history_S[ti];
-//      int a = history_A[ti];
-//      qTable[s][a] += stepSize * delta * traces[s][a];
-//      traces[s][a] = gamma * lambda * traces[s][a];
-//  }
-
-//  for (int s = 0; s < nStates; ++s)
-//  {
-//      cerr << endl;
-//      for (int a = 0; a < nActions; ++a)
-//      {
-//          cerr << traces[s][a] << "\t";
-//      }
-//  }
-//  cerr << endl;
 
     for (int s = 0; s < nStates; ++s)
     {
         for (int a = 0; a < nActions; ++a)
         {
             qTable[s][a] += stepSize * delta * traces[s][a];
-            traces[s][a] = gamma * lambda * traces[s][a];
-            if (abs(traces[s][a]) < 0.0001)
-                traces[s][a] = 0;
+            traces[s][a]  = gamma * lambda * traces[s][a];
+            counts[s][a] += traces[s][a]; 
         }
     }
-
 
     ++t;
     return A2;
@@ -157,6 +160,46 @@ void Agent::start()
             traces[s][a] = 0;
         }
 }
+
+int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
+                              int nActions)
+{
+    int aMax;
+    double uMax = -DBL_MAX;
+    bool found = false;
+    for (int a = 0; a < nActions; ++a)
+    {
+        double u = qTable[S][a] + sqrt(2 * log(t+1) / counts[S][a]);
+        if (u > uMax)
+        {
+            uMax = u;
+            aMax = a;
+            found = true;
+        }
+    }
+    if (!found)
+    {
+        cerr << "counts: ";
+        for (int a = 0; a < nActions; ++a)
+            cerr << counts[S][a] << "\t";
+        cerr << endl << "qTable: ";
+        for (int a = 0; a < nActions; ++a)
+            cerr << qTable[S][a] << "\t";
+        cerr << endl << "u:      ";
+        for (int a = 0; a < nActions; ++a)
+        {
+            double u = qTable[S][a] + sqrt(2 * log((t+1) / counts[S][a]));
+            cerr << qTable[S][a] << " + " << "sqrt(2 * log " << (t+1)
+                << " / " << counts[S][a] << ") = ";
+            cerr << u << "\t";
+        }
+        cerr << endl;
+        cerr << "Action: " << aMax << endl;
+    }
+
+    return aMax;
+}
+
 
 EpsilonGreedyPolicy::EpsilonGreedyPolicy(double epsilon)
     : epsilon(epsilon)
