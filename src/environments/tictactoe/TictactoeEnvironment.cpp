@@ -118,7 +118,7 @@ int flatten_state(){
 */
 const observation_t *env_start()
 {
-    
+    srand(time(0));
     for (int i = 0; i<3; i++) {
         for (int j=0; j<3; j++) {
             current_board[i][j] = 0;

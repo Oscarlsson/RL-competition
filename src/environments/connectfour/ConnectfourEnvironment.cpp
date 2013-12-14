@@ -85,7 +85,7 @@ const char* env_init(){
 const observation_t *env_start()
 {
     set_boardzero();
-
+    srand(time(0));
     if(rand()%1){
         ai_random_move_is_win();
         current_state=flatten_state();
