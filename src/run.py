@@ -72,7 +72,6 @@ def run(environment, outputdir, agentname, output, experimentname):
 
     envcmd = './'+str(environment)
     lg.info("* starting env with " + envcmd)
-    print("* starting env with " + envcmd)
     subprocess.Popen([envcmd], shell=True, stdout=devnull)
 
     with open(outputfilename,'w') as outputfile:
@@ -124,8 +123,11 @@ parser.add_argument('-D', metavar='dir',
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
-args.lambdavalue
-args.stepsize
+
+// LIBRLAGENT environment
+os.environ['LIBRLAGENT_LAMBDA'] = str(args.lambdavalue)
+os.environ['LIBRLAGENT_STEPSIZE'] = str(args.stepsize)
+
 log = get_outputdir() + get_logfile()
 lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 MakeAll()
