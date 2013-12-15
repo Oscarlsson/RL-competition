@@ -75,6 +75,7 @@ void load_value_function(const char *fileName);
 /** Called at the beginning of an experiment */
 void agent_init(const char* task_spec)
 {
+    srand(time(0));
 	/*Struct to hold the parsed task spec*/
 	taskspec_t *ts= new taskspec_t; 
 	int decode_result = decode_taskspec( ts, task_spec );
