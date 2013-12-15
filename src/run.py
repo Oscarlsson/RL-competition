@@ -34,12 +34,20 @@ def run_all(args):
     else:
         experimentname = './'+get_experiment()
     print("Using experiment " + experimentname)
-
+    
     timestr = time.strftime("%y%m%d-%H-%M-%S")
     printableagentname = agentname.split("/")[-1]
     printableexpname = experimentname.split("/")[-1]
-    outputdir = get_outputdir() + timestr + "-" + printableagentname + "-" + printableexpname
-    os.makedirs(outputdir)
+
+    if args.D:
+        outputdir = args.D
+    else:
+        outputdir = get_outputdir() + timestr + "-" + printableagentname + "-" + printableexpname
+    print "Output directory is " + outputdir
+
+    if not os.path.isdir(outputdir):
+        print("Creating directory..")
+        os.makedirs(outputdir)
 
     for environment in environments:
         for i in range(args.N):
@@ -104,6 +112,9 @@ parser.add_argument('-E', metavar='env',
                    help='Path to an executable environment.', default=None, required=False)
 parser.add_argument('-X', metavar='exp',
                    help='Path to an executable experiment.', default=None, required=False)
+parser.add_argument('-D', metavar='exp',
+                   help='Path to an output directory. Prefereably ../outputs/', default=None, required=False)
+
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
