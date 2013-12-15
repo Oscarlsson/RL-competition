@@ -1,8 +1,8 @@
 #include "Agent.hpp"
 #include "UCB1Policy.hpp"
 
-// #include <math.h>
 #include <cmath>
+#include <cstring>
 #include <cstdlib>
 #include <cstdio>
 #include <cassert>
@@ -34,15 +34,9 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
         qTable[s] = new double[nActions];
         traces[s] = new double[nActions];
         counts[s] = new double[nActions];
+        memset(qTable[s], maxReward, sizeof(double));
+        memset(counts[s], 1,         sizeof(double));
     }
-
-
-    for (int s = 0; s < nStates; ++s)
-        for (int a = 0; a<nActions; ++a)
-        {
-            qTable[s][a] = maxReward;
-            counts[s][a] = 1;
-        }
 
     cerr << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << this->nStates  << endl
@@ -105,10 +99,6 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
         }
     }
 
-// Test this?
-//  A2 = policy.sample_action(S2, t, qTable, counts, nActions, history_S,
-//                                 lambda);
-
     ++t;
     return A2;
 }
@@ -117,7 +107,7 @@ void Agent::start()
 {
     t = 0;
     ++e;
-    cerr << "\t" << e << "\r";
+    cerr << "  Ep #:\t" << e << "\r";
     cerr.flush();
     for (int s = 0; s < nStates; ++s)
         for (int a = 0; a < nActions; ++a)
