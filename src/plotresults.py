@@ -5,12 +5,21 @@ import argparse
 import os
 
 def plot_christos(csvfile):
-    pass
-    #    csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525, 25))
-#    csvdata.loc['mean'][range(0,125,25)].plot()
+    csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,101))
+    meandata = csvdata.loc['mean'].cumsum()
+    dim = meandata.ndim
+    agent = csvfile.split("/")[-2]
+    print csvfile
+
+    if dim == 1:
+        plt.title('With ' + str(dim) + ' runs using ' + agent)
+        meandata.plot()
+    else:
+        plt.title('With ' + str(len(meandata)) + ' runs using ' + agent)
+        meandata.mean().plot()
 
 
-def plot_myexp(csvfile):
+def plot_exp(csvfile):
     csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525,25))
     meandata = csvdata.loc['mean']
     dim = meandata.ndim
@@ -42,11 +51,11 @@ experiment = args.D.split("/")[-1].split("-")[-1]
 if experiment == 'ChristosExperiment':
     plotf = plot_christos
 else:
-    plotf = plot_myexp
+    plotf = plot_exp
 
 for result in results:
     plotf(args.D+"/"+result)
 
-plt.legend(results, loc=4)
+plt.legend(results, loc='best')
 plt.savefig(args.D+"/plot.png")
 plt.show()

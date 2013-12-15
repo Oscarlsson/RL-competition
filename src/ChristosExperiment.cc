@@ -108,7 +108,7 @@ public:
 				max_episodes = runs[i].episode_reward.size();
 			}
 		}
-
+        output << "mean,";
 		std::vector<double> episode_reward(max_episodes);
 		for (int i=0; i<max_episodes; ++i) {
 			int active_runs = 0;
