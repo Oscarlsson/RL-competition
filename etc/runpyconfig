@@ -1,6 +1,6 @@
 [runpy]
 agent = agent/LibRLAgent
-experiment = ChristosExperiment
+experiment = experiments/ChristosExperiment
 environments = environments/mines/MinesEnvironment environments/tictactoe/TictactoeEnvironment environments/bandits/BanditEnvironment environments/chain/ChainEnvironment environments/loop/LoopEnvironment environments/contextbandit/ContextBanditEnvironment environments/connectfour/ConnectfourEnvironment
 environments2 = environments/tictactoe/MyEnvironment
 outputdirectory=../outputs/
