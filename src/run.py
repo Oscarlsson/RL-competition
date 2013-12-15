@@ -21,6 +21,7 @@ def run_all(args):
         environments = [args.E]
     else:
         environments = get_environments().split()
+    print "Environments found:" + str(environments)
     lg.info("Environments found:" + str(environments))
 
     if args.A:
@@ -104,20 +105,29 @@ def read_config(option):
 
 
 parser = argparse.ArgumentParser(description='This file will run an Agent on several environments and report the results to the directory ../outputs. Configuration is stored in ../etc/runpyconfig. ')
+parser.add_argument('lambdavalue', metavar='lambda',type=int,
+                   help="Lambda value to the LibRLAgent",default=None)
+parser.add_argument('stepsize', metavar='stepsize', type=int,
+                   help="Step size to the LibRLAgent",default=None)
 parser.add_argument('-A', metavar='agent',
                    help="Path to an executable agent. ",default=None, required=False)
 parser.add_argument('-N', metavar='n', type=int,
                    help='Number of runs for EACH environment or with environment given by -E', default=1, required=False)
-parser.add_argument('-E', metavar='env',
+parser.add_argument('-E', metavar='environment',
                    help='Path to an executable environment.', default=None, required=False)
-parser.add_argument('-X', metavar='exp',
+parser.add_argument('-X', metavar='experiment',
                    help='Path to an executable experiment.', default=None, required=False)
-parser.add_argument('-D', metavar='exp',
+parser.add_argument('-D', metavar='dir',
                    help='Path to an output directory. Prefereably ../outputs/', default=None, required=False)
 
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
+
+// LIBRLAGENT environment
+os.environ['LIBRLAGENT_LAMBDA'] = str(args.lambdavalue)
+os.environ['LIBRLAGENT_STEPSIZE'] = str(args.stepsize)
+
 log = get_outputdir() + get_logfile()
 lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 MakeAll()
