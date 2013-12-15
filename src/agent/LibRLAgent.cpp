@@ -42,7 +42,6 @@ void agent_init(const char* task_spec)
 
     double lambda = env_lambda == NULL ?     0.60 : atof(env_lambda);
     double stepsize = env_stepsize == NULL ? 0.20 : atof(env_stepsize);
-    double epsilon = env_epsilon == NULL ?   0.10 : atof(env_epsilon);
 
     // Assumes that all actions and states are numbered 0,1,2,3,...
     // I.e. agent breaks if negative indices exist or if indexing skips some int
@@ -54,7 +53,6 @@ void agent_init(const char* task_spec)
                 ts->discount_factor, // Gamma
                 lambda,
                 stepsize,
-                epsilon,
                 ts->reward.min, ts->reward.max
             );
     

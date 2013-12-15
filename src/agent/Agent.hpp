@@ -1,25 +1,12 @@
 #include <vector>
-/*
- * This may change ALOT, in the following ways:
- *  separate class,
- *  some abstract interface,
- *  new methods/structure if needed.
- *
- */
-struct EpsilonGreedyPolicy
-{
-    double epsilon;
-
-    EpsilonGreedyPolicy(double epsilon);
-
-    int sample_action(int S, int t, double **qTable, int nActions);
-};
 
 struct UCB1Policy
 {
     int sample_action(int S, int t, double **qTable, double **counts,
-                      int nActions);
-    double tieBreakerScore(int a, int S, int t, double **qTable, double **counts, int nActions, double lambda, std::vector<int> &history_S);
+                      int nActions, std::vector<int> &history_S, double lambda);
+    double tieBreakerScore(int a, int S, int t, double **qTable,
+                           double **counts, int nActions,
+                           std::vector<int> &history_S, double lambda);
 };
 
 class Agent
@@ -32,16 +19,7 @@ class Agent
         int t; // Time step
         int e; // Episode
         
-        EpsilonGreedyPolicy policy; // Would be nicer as an abstract class
-        UCB1Policy policy2;
-
-        int sample_action(int S, int t, double **qTable, double **counts, int nActions,
-                          double lambda, double gamma, std::vector<int> &history_S);
-        //double* expectationFromCorrelations(double * actionExpt, double beta,
-        //                                   std::vector<int> &history_A);
-        //double updateCorrelationMatrices(double lastReward, double beta,
-        //                                   std::vector<int> &history_A);
-        bool visited(int s);
+        UCB1Policy policy;
 
     public:
         const int nStates;
@@ -52,8 +30,7 @@ class Agent
         const double stepSize; // May not be const?
 
         Agent(int nStates, int nActions, double gamma, double lambda,
-              double stepSize, double epsilon, double minReward,
-              double maxReward);
+              double stepSize, double minReward, double maxReward);
         ~Agent();
         int step(int lastState, int lastAction, double reward, int thisState);
         void start();
