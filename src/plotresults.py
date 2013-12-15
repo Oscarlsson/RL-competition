@@ -6,17 +6,17 @@ import os
 
 def plot_christos(csvfile):
     csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,101))
-    meandata = csvdata.loc['mean'].cumsum()
+    meandata = csvdata.loc['mean']
     dim = meandata.ndim
     agent = csvfile.split("/")[-2]
     print csvfile
 
     if dim == 1:
         plt.title('With ' + str(dim) + ' runs using ' + agent)
-        meandata.plot()
+        meandata.cumsum().plot()
     else:
         plt.title('With ' + str(len(meandata)) + ' runs using ' + agent)
-        meandata.mean().plot()
+        printdata = meandata.mean().cumsum().plot()
 
 
 def plot_exp(csvfile):
