@@ -13,7 +13,6 @@
 
 using namespace std; 
 
-// TODO: Describe the game!
 //  Partially hidden: Only observe from above
 //  Drop down 4 in a row
 //  Reward: -1 illegal , 0 , 1 if win
