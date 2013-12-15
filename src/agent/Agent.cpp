@@ -237,6 +237,7 @@ bool Agent::visited(int s)
 
 int Agent::sample_action(int S, int t, double **qTable, int nActions, double beta, vector<int> &history_A)
 {
+    //int action;
     if (visited(S))
         return policy.sample_action(S, t, qTable, nActions);
 
@@ -283,7 +284,7 @@ int Agent::sample_action(int S, int t, double **qTable, int nActions, double bet
 }
 
 void Agent::updateCorrelationMatrices(double lastReward, double beta,
-                                      vector<int> history_A)
+                                      vector<int> history_A) //lastQentry
     //gamma as a pointer, so it updates as well...
 {
     for (int hi = t; hi > 0; --hi)
