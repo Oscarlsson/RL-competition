@@ -124,7 +124,7 @@ parser.add_argument('--output', help='Path to an executable environment.', actio
 
 args = parser.parse_args()
 
-// LIBRLAGENT environment
+# LIBRLAGENT environment
 os.environ['LIBRLAGENT_LAMBDA'] = str(args.lambdavalue)
 os.environ['LIBRLAGENT_STEPSIZE'] = str(args.stepsize)
 
