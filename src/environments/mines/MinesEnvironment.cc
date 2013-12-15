@@ -186,6 +186,7 @@ void set_random_state(){
 */
 const observation_t *env_start()
 { 
+    srand(time(0));
 	if(fixed_start_state){
         int state_valid=set_agent_state(start_row,start_col);
         if(!state_valid){
