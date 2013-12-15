@@ -34,7 +34,7 @@ class Agent
         EpsilonGreedyPolicy policy; // Would be nicer as an abstract class
         UCB1Policy policy2;
 
-        int sample_action(int S, int t, double **qTable, int nActions,
+        int sample_action(int S, int t, double **qTable, double **counts, int nActions,
                           double lambda, double gamma, std::vector<int> &history_S);
         //double* expectationFromCorrelations(double * actionExpt, double beta,
         //                                   std::vector<int> &history_A);

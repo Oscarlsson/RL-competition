@@ -101,12 +101,12 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     
     // Choose A2 from S2 using policy derived from Q (e.g. epsilon-greedy)
     // UCB1
-    //int A2 = policy2.sample_action(S2, t, qTable, counts, nActions);
+    int A2 = policy2.sample_action(S2, t, qTable, counts, nActions);
     // cerr << "\tA':" << A2 << endl;
     // eGreedy
-     int A2 = policy.sample_action(S2, t, qTable, nActions);
+    // int A2 = policy.sample_action(S2, t, qTable, nActions);
     // "Tiebreaker"
-    // int A2 = sample_action(S2, t, qTable, nActions, 0.99, history_S);
+    // int A2 = sample_action(S2, t, qTable, counts, nActions, lambda, gamma, history_S);
 
     //beta = updateCorrelationMatrices(reward, beta, history_A);
     
@@ -214,27 +214,26 @@ bool Agent::visited(int s)
     return true;
 }
 
-int Agent::sample_action(int S, int t, double **qTable, int nActions, double lambda,double gamma, vector<int> &history_S)
+int Agent::sample_action(int S, int t, double **qTable, double **counts, int nActions, double lambda,double gamma, vector<int> &history_S)
 {
     if (visited(S))
-        return policy2.sample_action(S, t, qTable, nActions);
+        return policy2.sample_action(S, t, qTable, counts, nActions);
 
     double *actionProb = new double[nActions];
 
-    for{int a= 0; a<nActions;++a}
+    for(int a= 0; a<nActions;++a)
         actionProb[a] = 0;
     
     double total = 0;
     double pow = 1;
-    int ai;
+    int si;
     
     for (int hi = t; hi >= 0; --hi)
     {
         si = history_S[hi];
         for (int a = 0; a < nActions; ++a)
         {
-            counts[s][a];
-            actionProb[a] += pow * (qTable[si][a]- minReward)*counts[si][a]);
+            actionProb[a] += pow * (qTable[si][a]- minReward)*counts[si][a];
             //minReward is not sufficient now, unless we start to use cummulative
             //reward inst of qTable, totalActionProb needs to converge for it to
             //be of any use
@@ -244,7 +243,6 @@ int Agent::sample_action(int S, int t, double **qTable, int nActions, double lam
     
     for(int a=0;a<nActions;++a)
         total+=actionProb[a];
-
     /* DEBUG */
     /*if (t < 0)
     {
