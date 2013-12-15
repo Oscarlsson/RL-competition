@@ -22,25 +22,6 @@ struct UCB1Policy
     double tieBreakerScore(int a, int S, int t, double **qTable, double **counts, int nActions, double lambda, std::vector<int> &history_S);
 };
 
-double Agent::tieBreakerScore(int a, int S, int t, double **qTable, double **counts, int nActions, double lambda, vector<int> &history_S)
-{
-    double pow = 1;
-    int si;
-    double score = 0;
-    
-    double countNorm = 0;
-    for (int hi = t; hi >= 0; --hi)
-    {
-        si = history_S[hi];
-        score += pow * qTable[si][a]*sqrt(counts[si][a]);
-        countNorm += sqrt(counts[si][a]);
-    }
-    pow *= lambda; //Probably need HARDER PENALTY/state degradation, or remove cTable, between 1/9 (tree search)
-    score/=countNorm;
-    
-    return score
-}
-
 class Agent
 {
     protected:
