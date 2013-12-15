@@ -46,22 +46,6 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
             counts[s][a] = 1;
         }
 
-    /*
-     * "Tiebreaker"
-     */
-    rTable = new double*[nActions]; //Reward table
-    cTable = new double*[nActions]; //Tally table
-    for (int a = 0; a<nActions; ++a)
-    {
-        rTable[a] = new double[nActions];
-        cTable[a] = new double[nActions];
-        for (int a2 = 0; a2 < nActions; ++a2)
-        {
-            rTable[a][a2] = 0;
-            cTable[a][a2] = 1;
-        }
-    }
-
     cerr << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << nStates  << endl
               << "\tnActions : " << nActions << endl
@@ -79,11 +63,6 @@ Agent::~Agent()
         delete [] qTable[i];
         delete [] traces[i];
         delete [] counts[i];
-    }
-    for (int a = 0; a<nActions; ++a)
-    {
-        delete [] rTable[a];
-        delete [] cTable[a];
     }
 }
 
@@ -119,18 +98,18 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
         cerr << "\n";
         cerr.flush();
     }
-
-    // updateCorrelationMatrices(reward, 0.99, history_A);
-
+    
     // Choose A2 from S2 using policy derived from Q (e.g. epsilon-greedy)
     // UCB1
-    int A2 = policy2.sample_action(S2, t, qTable, counts, nActions);
+    //int A2 = policy2.sample_action(S2, t, qTable, counts, nActions);
     // cerr << "\tA':" << A2 << endl;
     // eGreedy
-    // int A2 = policy.sample_action(S2, t, qTable, nActions);
+     int A2 = policy.sample_action(S2, t, qTable, nActions);
     // "Tiebreaker"
-    // int A2 = sample_action(S2, t, qTable, nActions, 0.99, history_A);
+    // int A2 = sample_action(S2, t, qTable, nActions, 0.99, history_S);
 
+    //beta = updateCorrelationMatrices(reward, beta, history_A);
+    
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
     traces[S][A] += 1;
 
@@ -226,7 +205,7 @@ int EpsilonGreedyPolicy::sample_action(int S, int t, double **qTable,
     return aMax;
 }
 
-/* Just some random definition, not working very well */
+/* Just some random definition, not working very well, RETURNS FALSE UNTIL ALL ACTIONS TRIED ONCE, IS THIS SUPPOSED TO HAPPEN?*/
 bool Agent::visited(int s)
 {
     for (int a = 0; a < nActions; ++a)
@@ -235,31 +214,39 @@ bool Agent::visited(int s)
     return true;
 }
 
-int Agent::sample_action(int S, int t, double **qTable, int nActions, double beta, vector<int> &history_A)
+int Agent::sample_action(int S, int t, double **qTable, int nActions, double lambda,double gamma, vector<int> &history_S)
 {
-    //int action;
     if (visited(S))
-        return policy.sample_action(S, t, qTable, nActions);
+        return policy2.sample_action(S, t, qTable, nActions);
 
     double *actionProb = new double[nActions];
 
-    double total = 0;
-    
-    for (int a = 0; a < nActions; ++a)
-    {
+    for{int a= 0; a<nActions;++a}
         actionProb[a] = 0;
-        double pow = 1;
-        for (int hi = t; hi >= 0; --hi)
+    
+    double total = 0;
+    double pow = 1;
+    int ai;
+    
+    for (int hi = t; hi >= 0; --hi)
+    {
+        si = history_S[hi];
+        for (int a = 0; a < nActions; ++a)
         {
-            int ai = history_A[hi];
-            actionProb[a] += pow * (rTable[a][ai] / cTable[a][ai] - minReward);
-            pow *= beta;
+            counts[s][a];
+            actionProb[a] += pow * (qTable[si][a]- minReward)*counts[si][a]);
+            //minReward is not sufficient now, unless we start to use cummulative
+            //reward inst of qTable, totalActionProb needs to converge for it to
+            //be of any use
         }
-        total += actionProb[a];
+        pow *= lambda*gamma; //Probably need HARDER PENALTY/state degradation, or remove cTable, between 1/9 (tree search)
     }
+    
+    for(int a=0;a<nActions;++a)
+        total+=actionProb[a];
 
     /* DEBUG */
-    if (t < 0)
+    /*if (t < 0)
     {
         for (int a = 0; a < nActions; ++a)
         {
@@ -267,66 +254,19 @@ int Agent::sample_action(int S, int t, double **qTable, int nActions, double bet
         }
         cerr << "\n";
         cerr.flush();
-    }
+    }*/
 
     double pSum = 0;
+    double randomFraction = runif();
     for (int a = 0; a < nActions; ++a)
     {
         actionProb[a] /= total;
         pSum += actionProb[a];
 
-        if (runif() <= pSum)
+        if (randomFraction <= pSum)
         {
             delete[] actionProb;
             return a;
         }
     }
-}
-
-void Agent::updateCorrelationMatrices(double lastReward, double beta,
-                                      vector<int> history_A) //lastQentry
-    //gamma as a pointer, so it updates as well...
-{
-    for (int hi = t; hi > 0; --hi)
-    {
-        for (int hj = hi - 1; hj >= 0; --hj)
-        {
-            double discountFactor = pow(beta, t - hj - 1);
-            double reward = lastReward * discountFactor;
-            int ai = history_A[hi];
-            int aj = history_A[hj];
-            rTable[ai][aj] += reward;
-            rTable[aj][ai] += reward;
-            cTable[ai][aj] += discountFactor;
-            cTable[aj][ai] += discountFactor;
-        }
-    }
-
-    static int foo = 1;
-    
-    if (++foo < 0)
-    {
-        for (int a1 = 0; a1 < nActions; ++a1)
-        {
-            for (int a2 = 0; a2 < nActions; ++a2)
-                cerr << rTable[a1][a2] << "/" << cTable[a1][a2] << "\t";
-            cerr << endl;
-        }
-        cerr << endl;
-    }
-
-    // FIX GAMMA UPDATER WHEN REST WORKS
-   /* double exp0[nActions];
-    double exp1[nActions];
-    
-    exp0 = expectationFromCorrelations(* exp0, **rTable,
-                                **cTable, gamma,
-                                nActions, history_A,
-                                               t-1);
-    exp1 = expectationFromCorrelations(* exp1, **rTable,
-                                               **cTable, gamma+0.001,
-                                               nActions, history_A,
-                                               t-1);
-    gamma += (lastReward-exp0)/(exp1-exp0)*/ 
-    
 }

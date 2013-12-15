@@ -28,21 +28,18 @@ class Agent
         double **traces; // Z(s,a) = eligibility trace for (s,a)
         double **counts; // 
 
-        double **rTable; // 
-        double **cTable; // 
-
         int t; // Time step
         int e; // Episode
-
+        
         EpsilonGreedyPolicy policy; // Would be nicer as an abstract class
         UCB1Policy policy2;
 
         int sample_action(int S, int t, double **qTable, int nActions,
-                          double beta, std::vector<int> &history_A);
-      //double* expectationFromCorrelations(double * actionExpt, double beta,
-      //                                     std::vector<int> &history_A);
-        void updateCorrelationMatrices(double lastReward, double beta,
-                                       std::vector<int> history_A);
+                          double lambda, double gamma, std::vector<int> &history_S);
+        //double* expectationFromCorrelations(double * actionExpt, double beta,
+        //                                   std::vector<int> &history_A);
+        //double updateCorrelationMatrices(double lastReward, double beta,
+        //                                   std::vector<int> &history_A);
         bool visited(int s);
 
     public:
