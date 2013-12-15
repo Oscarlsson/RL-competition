@@ -1,0 +1,22 @@
+LDFLAGS := $(LDFLAGS)  -lm -lrlutils -lrlexperiment -lrlgluenetdev
+CFLAGS := $(CFLAGS) -std=c++11 -Wall -pedantic -g -O3
+CC := g++
+
+all: MyExperiment ChristosExperiment
+
+ChristosExperiment: experiments/ChristosExperiment.o
+	$(CC) experiments/ChristosExperiment.o -lrlexperiment $(LDFLAGS) -o experiments/ChristosExperiment
+
+ChristosExperiment.o: experiments/ChristosExperiment.cc
+	$(CC)  $(CFLAGS) -c experiments/ChristosExperiment.cc -o experiments/ChristosExperiment.o 
+
+MyExperiment: experiments/MyExperiment.o 
+	$(CXX)  experiments/MyExperiment.o $(LDFLAGS) -o experiments/MyExperiment
+
+MyExperiment.o: experiments/MyExperiment.cpp
+	$(CXX)  $(CFLAGS) -c experiments/MyExperiment.cpp -o experiments/MyExperiment.o 
+
+clean:
+	rm -rf experiments/MyExperiment experiments/MyExperiment.exe *.o
+	rm -rf experiments/ChristosExperiment experiments/ChristosExperiment.exe
+
