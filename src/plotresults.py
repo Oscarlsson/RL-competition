@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 import argparse
 import os
 
-def plot_100(csvfile):
-    csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525, 25))
-    csvdata.loc['mean'][range(0,125,25)].plot()
+def plot_christos(csvfile):
+    pass
+    #    csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525, 25))
+#    csvdata.loc['mean'][range(0,125,25)].plot()
 
 
-def plot(csvfile):
+def plot_myexp(csvfile):
     csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525,25))
     meandata = csvdata.loc['mean']
     dim = meandata.ndim
@@ -32,10 +33,20 @@ plt.figure()
 plt.xlabel('#Episodes')
 plt.ylabel('Average reward')
 print results
+
 if args.D.endswith("/"):
     args.D = args.D[0:-1]
+
+# Fulhack?
+experiment = args.D.split("/")[-1].split("-")[-1]
+if experiment == 'ChristosExperiment':
+    plotf = plot_christos
+else:
+    plotf = plot_myexp
+
 for result in results:
-    plot(args.D+"/"+result)
+    plotf(args.D+"/"+result)
+
 plt.legend(results, loc=4)
 plt.savefig(args.D+"/plot.png")
 plt.show()
