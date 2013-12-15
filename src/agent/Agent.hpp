@@ -1,13 +1,5 @@
 #include <vector>
-
-struct UCB1Policy
-{
-    int sample_action(int S, int t, double **qTable, double **counts,
-                      int nActions, std::vector<int> &history_S, double lambda);
-    double tieBreakerScore(int a, int S, int t, double **qTable,
-                           double **counts, int nActions,
-                           std::vector<int> &history_S, double lambda);
-};
+#include "UCB1Policy.hpp"
 
 class Agent
 {
