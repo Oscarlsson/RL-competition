@@ -47,7 +47,7 @@ if args.D.endswith("/"):
     args.D = args.D[0:-1]
 
 # Fulhack?
-experiment = args.D.split("/")[-1].split("-")[-1]
+experiment = args.D.split("/")[-1].split("-")[-1] #last elem
 if experiment == 'ChristosExperiment':
     plotf = plot_christos
 else:
