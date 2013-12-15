@@ -105,9 +105,9 @@ def read_config(option):
 
 
 parser = argparse.ArgumentParser(description='This file will run an Agent on several environments and report the results to the directory ../outputs. Configuration is stored in ../etc/runpyconfig. ')
-parser.add_argument('lambdavalue', metavar='lambda',type=int,
+parser.add_argument('lambdavalue', metavar='lambda',type=float,
                    help="Lambda value to the LibRLAgent",default=None)
-parser.add_argument('stepsize', metavar='stepsize', type=int,
+parser.add_argument('stepsize', metavar='stepsize', type=float,
                    help="Step size to the LibRLAgent",default=None)
 parser.add_argument('-A', metavar='agent',
                    help="Path to an executable agent. ",default=None, required=False)
