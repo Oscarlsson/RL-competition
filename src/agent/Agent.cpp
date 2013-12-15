@@ -43,7 +43,9 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
               << "\tnActions : " << this->nActions << endl
               << "\tgamma : "    << this->gamma    << endl
               << "\tlambda : "   << this->lambda   << endl
-              << "\tstepsize : " << this->stepSize << endl;
+              << "\tstepsize : " << this->stepSize << endl
+              << "\treward : ["  << minReward << "," << maxReward << "]"
+              << endl;
 }
 
 Agent::~Agent()
@@ -80,6 +82,9 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
 
     history_S[t] = S;
     history_A[t] = A;
+
+//  double lambda = this->lambda / sqrt(t+1);
+//  double stepSize = this->stepSize / sqrt(t+1);
 
     // Choose A2 from S2 using policy derived from Q
     // UCB1

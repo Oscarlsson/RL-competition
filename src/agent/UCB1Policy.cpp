@@ -30,11 +30,10 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
             oMax = o;
             found = true;
         }
-        else if (u == uMax && true)
+        else if (u == uMax && false)
         {
             if (o > oMax)
             {
-                // cerr << "R";
                 oMax = o;
                 aMax = a;
             }
