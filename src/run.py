@@ -37,7 +37,8 @@ def run_all(args):
 
     timestr = time.strftime("%y%m%d-%H-%M-%S")
     printableagentname = agentname.split("/")[-1]
-    outputdir = get_outputdir() + timestr + "-" + printableagentname
+    printableexpname = experimentname.split("/")[-1]
+    outputdir = get_outputdir() + timestr + "-" + printableagentname + "-" + printableexpname
     os.makedirs(outputdir)
 
     for environment in environments:
