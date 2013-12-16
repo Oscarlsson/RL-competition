@@ -34,7 +34,10 @@ def run_all(args):
                     run(environment, outputdir, agentname, args.output, experimentname, lambdas, stepsize)
 
     print "Output is found in " + outputdir
-    print_finalresult(outputdir)
+    finalresult = print_finalresult(outputdir)
+    print finalresult
+    finaloutput = open(outputdir + "/" + "finalOutput", 'w')
+    finaloutput.write(finalresult)
 
 def run(environment, outputdir, agentname, output, experimentname, lambdas, stepsize):
 
@@ -63,10 +66,10 @@ def run(environment, outputdir, agentname, output, experimentname, lambdas, step
     devnull.close()
 
 def print_finalresult(outputdir):
-    print "\n"
-    print "--------------------"
-    print "FINAL OUTPUT"
-    print "--------------------"
+    s = "\n"
+    s = s+ "-------------------- \n"
+    s = s+"FINAL OUTPUT \n"
+    s = s+"-------------------- \n"
 
     experiment = outputdir.split("/")[-1].split("-")[-1]
     # Assume Christos experiment for now
@@ -79,16 +82,18 @@ def print_finalresult(outputdir):
         meandata = csvdata.loc['mean']
 
         for env in result.split("-"):
-            print env,
-        print ":", 
+            s = s+env
+        s = s+": "
 
         if meandata.ndim == 1:
             printdata = meandata.cumsum()
         else:
             printdata = meandata.mean().cumsum()
 
-        print printdata[100] #last elem CHRISTOS
-    print "--------------------"
+        s = s+str(printdata[100]) #last elem CHRISTOS
+        s = s + '\n'
+    s = s+"--------------"
+    return s
 
 def fix_lambdas_steps(lambdavalues, stepsizevalues):
     if len(args.l) == 3:
