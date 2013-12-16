@@ -37,6 +37,8 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
         memset(qTable[s], maxReward, sizeof(double));
         memset(counts[s], 1,         sizeof(double));
     }
+    Qmin = minReward;
+    Qmax = maxReward;
 
     cerr << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << this->nStates  << endl
@@ -89,7 +91,7 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     // Choose A2 from S2 using policy derived from Q
     // UCB1
     int A2 = policy.sample_action(S2, t, qTable, counts, nActions, history_S,
-                                   lambda);
+                                   lambda, Qmin, Qmax);
     
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
     traces[S][A] += 1;
@@ -101,6 +103,11 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
             qTable[s][a] += stepSize * delta * traces[s][a];
             counts[s][a] += traces[s][a]; 
             traces[s][a]  = gamma * lambda * traces[s][a];
+            
+            if (qTable[s][a]<Qmin)
+                Qmin = qTable[s][a];
+            if (qTable[s][a]>Qmax)
+                Qmax = qTable[s][a];
         }
     }
 

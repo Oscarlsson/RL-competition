@@ -9,7 +9,7 @@ using namespace std;
 
 int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
                               int nActions, vector<int> &history_S,
-                              double lambda)
+                              double lambda, double Qmin, double Qmax)
 {
     int aMax;
     double uMax = -DBL_MAX;
@@ -22,7 +22,9 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
     {
         double o = tieBreakerScore(a, S, t, qTable, counts, nActions, history_S,
                                    lambda);
-        double u = qTable[S][a] + sqrt(2 * log(localTime+1) / counts[S][a]);
+        //double u = qTable[S][a] + sqrt(2 * log(localTime+1) / counts[S][a]);
+        double u = newtonRapson((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime, counts[S][a]);
+        
         if (u > uMax)
         {
             uMax = u;
@@ -61,6 +63,31 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
     return aMax;
 }
 
+double UCB1Policy::dfun(double p, double q)
+{
+    return p*log(p/q)+(1-p)*log((1-p)/(1-q));
+}
+double UCB1Policy::ddfun(double p, double q)
+{
+    return (1-p)/(1-q)-p/q;
+}
+
+double UCB1Policy::newtonRapson(double Q, double t,double count)
+{
+    double q = (Q+1)/2;
+    double qnew = 1;
+    while(abs(q-qnew)>0.001)
+    {
+        q = qnew;
+        qnew = -(dfun(Q,q)-log(t)/count+q*ddfun(Q,q))/(ddfun(Q,q));
+        if (q<Q)
+            q = Q+0.001;
+        if (q>1)
+            q = 0.999;
+    }
+    return q;
+}
+
 double UCB1Policy::tieBreakerScore(int a, int S, int t, double **qTable,
                                    double **counts, int nActions,
                                    vector<int> &history_S, double lambda)
@@ -75,7 +102,7 @@ double UCB1Policy::tieBreakerScore(int a, int S, int t, double **qTable,
         si = history_S[hi];
         score += pow * qTable[si][a]*sqrt(counts[si][a]);
         countNorm += sqrt(counts[si][a]);
-        pow *= lambda; //Probably need HARDER PENALTY/state degradation, or remove cTable, between 1/9 (tree search)
+        pow *= 1/nActions; //Probably need HARDER PENALTY/state degradation, or remove cTable, between 1/9 (tree search)
     }
     score/=countNorm;
     
