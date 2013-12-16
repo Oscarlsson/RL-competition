@@ -8,7 +8,10 @@
 
 using namespace std;
 
-double runif();
+double runif()
+{
+    return ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
+}
 
 int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
         int nActions, vector<int> &history_S,

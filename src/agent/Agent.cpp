@@ -15,11 +15,6 @@
 
 using namespace std;
 
-double runif()
-{
-    return ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
-}
-
 Agent::Agent(int nStates, int nActions, double gamma, double lambda,
              double stepSize, double minReward, double maxReward)
 : nStates(nStates), nActions(nActions), gamma(gamma), lambda(lambda),
