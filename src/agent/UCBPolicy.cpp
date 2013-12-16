@@ -14,8 +14,7 @@ double runif()
 }
 
 int UCBPolicy::sample_action(int S, int t, double **qTable, double **counts,
-        int nActions, vector<int> &history_S, double lambda, double Qmin,
-        double Qmax)
+        vector<int> &history_S, double lambda, double Qmin, double Qmax)
 {
     int aMax;
     double uMax = -DBL_MAX;
@@ -27,8 +26,7 @@ int UCBPolicy::sample_action(int S, int t, double **qTable, double **counts,
         localTime += counts[S][a];
     for (int a = 0; a < nActions; ++a)
     {
-        double o = tieBreakerScore(a, S, t, qTable, counts, nActions, history_S,
-                lambda);
+        double o = tieBreakerScore(a, S, t, qTable, counts, history_S, lambda);
         double u = qTable[S][a] + c * sqrt(2 * log(localTime+1) / counts[S][a]);
         // double u = kl_ucb((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime, counts[S][a]);
 
@@ -107,8 +105,8 @@ double UCBPolicy::kl_ucb(double Q, double t,double count)
 }
 
 double UCBPolicy::tieBreakerScore(int a, int S, int t, double **qTable,
-                                   double **counts, int nActions,
-                                   vector<int> &history_S, double lambda)
+                                   double **counts, vector<int> &history_S,
+                                   double lambda)
 {
     double pow = 1;
     int si;

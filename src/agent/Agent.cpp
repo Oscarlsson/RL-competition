@@ -18,7 +18,8 @@ using namespace std;
 Agent::Agent(int nStates, int nActions, double gamma, double lambda,
              double stepSize, double minReward, double maxReward)
 : nStates(nStates), nActions(nActions), gamma(gamma), lambda(lambda),
-  stepSize(stepSize), t(0), e(0), minReward(minReward), maxReward(maxReward)
+  stepSize(stepSize), t(0), e(0), minReward(minReward), maxReward(maxReward),
+    policy(nStates, nActions)
 {
     srand(time(0));
     qTable = new double*[nStates];
@@ -93,7 +94,7 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
 
     // Choose A2 from S2 using policy derived from Q
     // UCB1
-    int A2 = policy.sample_action(S2, t, qTable, counts, nActions, history_S,
+    int A2 = policy.sample_action(S2, t, qTable, counts, history_S,
                                    lambda, Qmin, Qmax);
     
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
