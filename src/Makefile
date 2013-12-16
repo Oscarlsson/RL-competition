@@ -10,10 +10,9 @@
 
 all: 	
 	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" make -f agent/Makefile.agent 
-	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" make -f environments/Makefile.environment 
 	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" make -f experiments/Makefile.experiment
-
+	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" make -f environments/Makefile.environment 
 clean:
 	make -f agent/Makefile.agent  clean
-	make -f environments/Makefile.environment clean
 	make -f experiments/Makefile.experiment clean
+	make -f environments/Makefile.environment clean
