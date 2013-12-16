@@ -51,6 +51,7 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
               << "\tgamma : "    << this->gamma    << endl
               << "\tlambda : "   << this->lambda   << endl
               << "\tstepsize : " << this->stepSize << endl
+              << "\tpolicy.c : " << policy.c       << endl
               << "\treward : ["  << minReward << "," << maxReward << "]"
               << endl;
 }

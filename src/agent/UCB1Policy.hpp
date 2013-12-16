@@ -2,12 +2,13 @@
 #define UCBPOLICY1_H
 
 #include <vector>
+#include <stdlib.h>
 
 class UCB1Policy
 {
     protected:
-        double c;
     public:
+        double c;
         double newtonRapson(double Q, double t,double count);
         double dfun(double p, double q);
         double ddfun(double p, double q);
