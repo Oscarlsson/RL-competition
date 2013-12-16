@@ -33,6 +33,8 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
         for (int a = 0; a < nActions; ++a)
         {
             qTable[s][a] = maxReward;
+            if (nStates > 50)
+                qTable[s][a] = (maxReward + minReward) / 2;
             counts[s][a] = 1;
         }
     }

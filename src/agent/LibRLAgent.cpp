@@ -36,13 +36,15 @@ void agent_init(const char* task_spec)
     char* env_lambda = getenv("LIBRLAGENT_LAMBDA");
     char* env_stepsize = getenv("LIBRLAGENT_STEPSIZE");
 
-    double lambda = env_lambda == NULL ?     0.20 : atof(env_lambda);
-    double stepsize = env_stepsize == NULL ? 1.00 : atof(env_stepsize);
 
     // Assumes that all actions and states are numbered 0,1,2,3,...
     // I.e. agent breaks if negative indices exist or if indexing skips some int
     int nActions = ts->int_actions[0].max - ts->int_actions[0].min + 1;
     int nStates = ts->int_observations[0].max - ts->int_observations[0].min + 1;
+    double lambda = env_lambda == NULL ?     0.20 : atof(env_lambda);
+    if (nStates > 5000)
+        lambda = 0;
+    double stepsize = env_stepsize == NULL ? 1.00 : atof(env_stepsize);
     agent = new Agent(
                 ts->int_observations[0].max - ts->int_observations[0].min + 1,
                 nActions,
