@@ -8,6 +8,8 @@
 
 using namespace std;
 
+double runif();
+
 int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
         int nActions, vector<int> &history_S,
         double lambda, double Qmin, double Qmax)
@@ -17,6 +19,7 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
     double oMax = -DBL_MAX;
     bool found = false;
     double localTime = 0;
+    double oCumSum = 0;
     for (int a = 0; a < nActions; ++a)
         localTime += counts[S][a];
     for (int a = 0; a < nActions; ++a)
@@ -32,10 +35,12 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
             aMax = a;
             oMax = o;
             found = true;
+            oCumSum = o;
         }
         else if (u == uMax && tiebreaker)
         {
-            if (o > oMax)
+            oCumSum += o;
+            if (o>oMax);//runif() < o/(oCumSum)) //(o>oMax); for old version
             {
                 oMax = o;
                 aMax = a;
