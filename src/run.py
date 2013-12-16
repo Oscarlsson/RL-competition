@@ -87,9 +87,9 @@ def print_finalresult(outputdir):
         else:
             printdata = meandata.mean().cumsum()
 
-        print printdata[meandata.index[-1]] #last elem
-
+        print printdata[100] #last elem CHRISTOS
     print "--------------------"
+
 def fix_lambdas_steps(lambdavalues, stepsizevalues):
     if len(args.l) == 3:
         lambdaarray = np.arange(lambdavalues[0], lambdavalues[1], lambdavalues[2])
@@ -189,7 +189,7 @@ parser.add_argument('-D', metavar='dir',
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
-#print_finalresult('../outputs/131215-22-18-42-LibRLAgent-ChristosExperiment')
+#print_finalresult('../outputs/131216-09-41-57-LibRLAgent-ChristosExperiment')
 log = get_outputdir() + get_logfile()
 lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 MakeAll()
