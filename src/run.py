@@ -10,6 +10,10 @@ import sys
 import argparse
 import numpy as np
 import pandas as pd
+from random import randrange
+
+RLGLUE_PORT=409
+ps = []
 
 def MakeAll():
     lg.info("Cleaning dir")
@@ -33,11 +37,12 @@ def run_all(args):
             set_environment(lambdas, stepsize, cvalue, tievalue)
             for environment in environments:
                 for i in range(args.N):
-                    lg.info("Running: " + environment + " for the " + str(i) +"th time")
-                    print("Running: " + environment + " for the " + str(i) +"th time with lambda " + str(lambdas) + " and stepsize " + str(stepsize))
-
-                    run(environment, outputdir, agentname, args.output, experimentname, lambdas, stepsize)
-
+                    for j in range(2):
+                        lg.info("Running: " + environment + " for the " + str(i) +"th time")
+                        print("Running: " + environment + " for the " + str(i) +"th time with lambda " + str(lambdas) + " and stepsize " + str(stepsize))
+                        run(environment, outputdir, agentname, args.output, experimentname, lambdas, stepsize)
+                    for p in ps:
+                        p.wait()
     print "Output is found in " + outputdir
     finalresult = print_finalresult(outputdir)
     print finalresult
@@ -50,24 +55,32 @@ def run(environment, outputdir, agentname, output, experimentname, lambdas, step
     resultfilename = outputdir + "/" + 'result' + envname + "-" + str(lambdas) + "-" + str(stepsize)
     outputfilename = outputdir + "/" + 'output' + envname
     devnull = open('/dev/null', 'w')
+    
+    d = dict(os.environ)   # Make a copy of the current environment
+    rlport = str(RLGLUE_PORT) + str(randrange(9))
+
+    d['RLGLUE_PORT'] = rlport 
+    print "Running on port : " + rlport
 
     lg.info("* starting rl_glue")
-    rlglue = subprocess.Popen(['rl_glue'], stdout=devnull)
+    rlglue = subprocess.Popen(['rl_glue'], stdout=devnull, env=d, close_fds=True)
+    ps.append(rlglue)
 
     lg.info("* starting agent " + agentname)
-    agent  = subprocess.Popen([agentname], stdout=devnull)
+    agent  = subprocess.Popen([agentname], stdout=devnull, env=d,close_fds=True)
+    ps.append(agent)
 
     envcmd = './'+str(environment)
     lg.info("* starting env with " + envcmd)
-    subprocess.Popen([envcmd], shell=True, stdout=devnull)
-
+    environ = subprocess.Popen([envcmd], shell=True, stdout=devnull, env=d,close_fds=True)
+    ps.append(environ)
     with open(outputfilename,'w') as outputfile:
-        experiment = subprocess.Popen([experimentname, resultfilename], stdout=outputfile)
-        experiment.communicate()
-
-    if output:
-        with open(outputfilename, 'r') as fin:
-                print fin.read()
+        experiment = subprocess.Popen([experimentname, resultfilename], stdout=outputfile, env=d, close_fds=True)
+        ps.append(experiment)
+#
+#    if output:
+#        with open(outputfilename, 'r') as fin:
+#                print fin.read()
     devnull.close()
 
 def print_finalresult(outputdir):
