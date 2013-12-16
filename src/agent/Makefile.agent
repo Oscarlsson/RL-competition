@@ -18,7 +18,7 @@ UCB1Policy.o: agent/UCB1Policy.cpp agent/UCB1Policy.hpp
 	$(CXX)  $(CFLAGS) -c agent/UCB1Policy.cpp -o agent/UCB1Policy.o 
 
 clean:
-	rm -rf agent/LibRLAgent agent/LibRLAgent.exe *.o
+	rm -rf agent/LibRLAgent agent/LibRLAgent.exe agent/*.o
 
 
 
