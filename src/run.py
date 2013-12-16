@@ -26,10 +26,11 @@ def run_all(args):
     experimentname = fix_expname(args.X)
     outputdir = fix_dirname(args.D, agentname, experimentname)
     cvalue = args.c
+    tievalue = args.t
 
     for lambdas in lambdaarray:
         for stepsize in steparray:
-            set_environment(lambdas, stepsize, cvalue)
+            set_environment(lambdas, stepsize, cvalue, tievalue)
             for environment in environments:
                 for i in range(args.N):
                     lg.info("Running: " + environment + " for the " + str(i) +"th time")
@@ -114,10 +115,11 @@ def fix_lambdas_steps(lambdavalues, stepsizevalues):
     print "found stepsizes: " + str(steparray)
     return lambdaarray, steparray
 
-def set_environment(lambdas, stepsize, cvalue):
+def set_environment(lambdas, stepsize, cvalue, tvalue):
     os.environ['LIBRLAGENT_LAMBDA'] = str(lambdas)
     os.environ['LIBRLAGENT_STEPSIZE'] = str(stepsize)
     os.environ['LIBRLAGENT_C'] = str(cvalue)
+    os.environ['LIBRLAGENT_TIEBREAKER'] = str(int(tvalue))
 
 def fix_dirname(argument, agentname, experimentname):
     timestr = time.strftime("%y%m%d-%H-%M-%S")
@@ -186,6 +188,8 @@ parser = argparse.ArgumentParser(description='This file will run an Agent on sev
 parser.add_argument('--l', metavar='n',type=float, nargs="+", help="Lambda value to the LibRLAgent. Either give one value --l 2 or three -l min max step. Default is 0", default=[0])
 parser.add_argument('--s', metavar='n', type=float, nargs="+", help="Step size to the LibRLAgent. Either give one value --s 0 or three -l min max step. Default is 1", default=[1])
 parser.add_argument('--c', metavar='n', type=float, help="Exploration factor to the LibRLAgent. c=0 gives the maximum action which is also default", default=0) 
+parser.add_argument('-t', help='Boolean value if LibRLAgent should use tiebraker or not. False default', action='store_true', default=False)
+
 parser.add_argument('-A', metavar='agent',
                    help="Path to an executable agent. ",default=None, required=False)
 parser.add_argument('-N', metavar='n', type=int,

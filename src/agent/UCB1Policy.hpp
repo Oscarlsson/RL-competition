@@ -9,6 +9,7 @@ class UCB1Policy
     protected:
     public:
         double c;
+        bool tiebreaker;
         double newtonRapson(double Q, double t,double count);
         double dfun(double p, double q);
         double ddfun(double p, double q);
@@ -22,6 +23,9 @@ class UCB1Policy
         {
             char* env_c = getenv("LIBRLAGENT_C");
             c = env_c == NULL ?     0.0 : atof(env_c);
+
+            char* env_tiebreaker = getenv("LIBRLAGENT_TIEBREAKER");
+            tiebreaker = env_tiebreaker == NULL ? false : atoi(env_tiebreaker);
         }
 };
 
