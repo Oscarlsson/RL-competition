@@ -1,0 +1,112 @@
+../outputs/131216-10-16-36-LibRLAgent-ChristosExperiment/resultConnectfourEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+0 # episode reward
+0 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+0 # episode reward
+0 # episode reward
+0 # episode reward
+0 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+0 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+0 # episode reward
+0 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+-5 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+-1 # episode reward
+1 # episode reward
+0 # episode reward
+1 # episode reward
+1 # episode reward
+64 # average total reward over runs
+
+Program Complete.
