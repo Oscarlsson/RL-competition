@@ -38,7 +38,6 @@ void agent_init(const char* task_spec)
 
     char* env_lambda = getenv("LIBRLAGENT_LAMBDA");
     char* env_stepsize = getenv("LIBRLAGENT_STEPSIZE");
-    char* env_epsilon = getenv("LIBRLAGENT_EPSILON");
 
     double lambda = env_lambda == NULL ?     0.60 : atof(env_lambda);
     double stepsize = env_stepsize == NULL ? 0.20 : atof(env_stepsize);
@@ -53,7 +52,8 @@ void agent_init(const char* task_spec)
                 ts->discount_factor, // Gamma
                 lambda,
                 stepsize,
-                ts->reward.min, ts->reward.max
+                ts->reward.min,
+                ts->reward.max
             );
     
     // DEBUG:
@@ -71,6 +71,7 @@ void agent_init(const char* task_spec)
 			 this_action.charArray   = 0;
 	*/
 }
+
 
 const action_t *agent_start(const observation_t *this_observation)
 {
