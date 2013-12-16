@@ -25,7 +25,7 @@ class UCBPolicy
             c = env_c == NULL ?     0.0 : atof(env_c);
 
             char* env_tiebreaker = getenv("LIBRLAGENT_TIEBREAKER");
-            tiebreaker = env_tiebreaker == NULL ? false : atoi(env_tiebreaker);
+            tiebreaker = env_tiebreaker == NULL ? true : atoi(env_tiebreaker);
         }
 };
 
