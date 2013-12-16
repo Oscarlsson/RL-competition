@@ -95,7 +95,6 @@ double UCB1Policy::newtonRapson(double Q, double t,double count)
         if (debug) cerr << "\tdfun(Q,q) = " << dfun(Q,q) << "\tqqfun(Q,q) = " << ddfun(Q,q) << endl;
         // assert(!isinf(dfun(Q,q));
         assert(abs(dfun(Q,q)) > 0);
-        double c = 0.0;
         q = (-dfun(Q,q)+c*log(t)/count+q*ddfun(Q,q))/(ddfun(Q,q));
         if (q<=Q)
             q = Q+0.001;

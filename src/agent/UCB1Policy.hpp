@@ -5,6 +5,8 @@
 
 class UCB1Policy
 {
+    protected:
+        double c;
     public:
         double newtonRapson(double Q, double t,double count);
         double dfun(double p, double q);
@@ -15,6 +17,11 @@ class UCB1Policy
         double tieBreakerScore(int a, int S, int t, double **qTable,
                                double **counts, int nActions,
                                std::vector<int> &history_S, double lambda);
+        UCB1Policy()
+        {
+            char* env_c = getenv("LIBRLAGENT_C");
+            c = env_c == NULL ?     0.0 : atof(env_c);
+        }
 };
 
 #endif

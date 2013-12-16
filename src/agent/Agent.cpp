@@ -94,7 +94,7 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
 //  for (int a = 0; a < nActions; ++a)
 //      cerr << counts[S][a] << " ";
 //  cerr << endl;
-    if (reward == -100)
+    if (reward == -10000000)
     {
         cerr << "***    qMin: " << Qmin << " qMax: " << Qmax << endl;
         double localTime = 0;
