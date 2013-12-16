@@ -9,7 +9,7 @@ using namespace std;
 
 int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
                               int nActions, vector<int> &history_S,
-                              double lambda)
+                              double lambda, double Qmin, double Qmax)
 {
     int aMax;
     double uMax = -DBL_MAX;
@@ -67,7 +67,7 @@ double UCB1Policy::dfun(double p, double q)
 {
     return p*log(p/q)+(1-p)*log((1-p)/(1-q));
 }
-double UCB1Policy:ddfun(double p, double q)
+double UCB1Policy::ddfun(double p, double q)
 {
     return (1-p)/(1-q)-p/q;
 }
@@ -79,7 +79,7 @@ double UCB1Policy::newtonRapson(double Q, double t,double count)
     while(abs(q-qnew)>0.001)
     {
         q = qnew;
-        qnew = -(dfun(Q,q)-log(t)/count+qin*ddfun(Q,q))/(ddfun(q));
+        qnew = -(dfun(Q,q)-log(t)/count+q*ddfun(Q,q))/(ddfun(Q,q));
         if (q<Q)
             q = Q+0.001;
         if (q>1)

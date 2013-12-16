@@ -91,7 +91,7 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     // Choose A2 from S2 using policy derived from Q
     // UCB1
     int A2 = policy.sample_action(S2, t, qTable, counts, nActions, history_S,
-                                   lambda);
+                                   lambda, Qmin, Qmax);
     
     double delta = reward + gamma * qTable[S2][A2] - qTable[S][A];
     traces[S][A] += 1;
