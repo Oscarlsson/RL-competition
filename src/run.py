@@ -12,6 +12,9 @@ import numpy as np
 import pandas as pd
 
 def MakeAll():
+    lg.info("Cleaning dir")
+    os.system("make clean")
+    lg.info("make clean done.")
     lg.info("Running Makefile")
     os.system("make")
     lg.info("make done.")
