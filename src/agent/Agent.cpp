@@ -37,6 +37,8 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
         memset(qTable[s], maxReward, sizeof(double));
         memset(counts[s], 1,         sizeof(double));
     }
+    Qmin = minReward;
+    Qmax = maxReward;
 
     cerr << "Initializing agent with parameters:" << endl
               << "\tnStates : "  << this->nStates  << endl
@@ -101,6 +103,11 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
             qTable[s][a] += stepSize * delta * traces[s][a];
             counts[s][a] += traces[s][a]; 
             traces[s][a]  = gamma * lambda * traces[s][a];
+            
+            if (qTable[s][a]<Qmin)
+                Qmin = qTable[s][a];
+            if (qTable[s][a]>Qmax)
+                Qmax = qTable[s][a];
         }
     }
 

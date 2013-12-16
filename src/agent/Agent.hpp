@@ -17,6 +17,7 @@ class Agent
         const int nStates;
         const int nActions;
         const double minReward, maxReward;
+        double Qmin, Qmax; //constant?
         const double gamma;
         const double lambda;   // May not be const?
         const double stepSize; // May not be const?
