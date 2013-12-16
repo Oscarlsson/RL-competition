@@ -1,4 +1,4 @@
-#include "UCB1Policy.hpp"
+#include "UCBPolicy.hpp"
 
 #include <vector>
 #include <iostream>
@@ -13,7 +13,7 @@ double runif()
     return ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
 }
 
-int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
+int UCBPolicy::sample_action(int S, int t, double **qTable, double **counts,
         int nActions, vector<int> &history_S,
         double lambda, double Qmin, double Qmax)
 {
@@ -30,7 +30,7 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
         double o = tieBreakerScore(a, S, t, qTable, counts, nActions, history_S,
                 lambda);
         // double u = qTable[S][a] + 0.001 * sqrt(2 * log(localTime+1) / counts[S][a]);
-        double u = newtonRapson((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime, counts[S][a]);
+        double u = kl_ucb((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime, counts[S][a]);
 
         if (u > uMax)
         {
@@ -72,7 +72,7 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
     return aMax;
 }
 
-double UCB1Policy::dfun(double p, double q)
+double UCBPolicy::dfun(double p, double q)
 {
     if (p == 0)
         return (1-p)*log((1-p)/(1-q));
@@ -81,12 +81,12 @@ double UCB1Policy::dfun(double p, double q)
     else
         return p*log(p/q)+(1-p)*log((1-p)/(1-q));
 }
-double UCB1Policy::ddfun(double p, double q)
+double UCBPolicy::ddfun(double p, double q)
 {
     return (1.0-p)/(1.0-q)-p/q;
 }
 
-double UCB1Policy::newtonRapson(double Q, double t,double count)
+double UCBPolicy::kl_ucb(double Q, double t,double count)
 {
     if (Q == 1)
         Q = 0.999999;
@@ -114,7 +114,7 @@ double UCB1Policy::newtonRapson(double Q, double t,double count)
     return q;
 }
 
-double UCB1Policy::tieBreakerScore(int a, int S, int t, double **qTable,
+double UCBPolicy::tieBreakerScore(int a, int S, int t, double **qTable,
                                    double **counts, int nActions,
                                    vector<int> &history_S, double lambda)
 {

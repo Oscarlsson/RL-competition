@@ -1,16 +1,16 @@
-#ifndef UCBPOLICY1_H
-#define UCBPOLICY1_H
+#ifndef UCBPOLICY_H
+#define UCBPOLICY_H
 
 #include <vector>
 #include <stdlib.h>
 
-class UCB1Policy
+class UCBPolicy
 {
     protected:
     public:
         double c;
         bool tiebreaker;
-        double newtonRapson(double Q, double t,double count);
+        double kl_ucb(double Q, double t,double count);
         double dfun(double p, double q);
         double ddfun(double p, double q);
         int sample_action(int S, int t, double **qTable, double **counts,
@@ -19,7 +19,7 @@ class UCB1Policy
         double tieBreakerScore(int a, int S, int t, double **qTable,
                                double **counts, int nActions,
                                std::vector<int> &history_S, double lambda);
-        UCB1Policy()
+        UCBPolicy()
         {
             char* env_c = getenv("LIBRLAGENT_C");
             c = env_c == NULL ?     0.0 : atof(env_c);

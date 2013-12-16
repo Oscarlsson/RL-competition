@@ -1,5 +1,5 @@
 #include "Agent.hpp"
-#include "UCB1Policy.hpp"
+#include "UCBPolicy.hpp"
 
 #include <cmath>
 #include <cstring>

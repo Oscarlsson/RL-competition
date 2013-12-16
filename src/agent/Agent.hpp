@@ -1,5 +1,5 @@
 #include <vector>
-#include "UCB1Policy.hpp"
+#include "UCBPolicy.hpp"
 
 class Agent
 {
@@ -11,7 +11,7 @@ class Agent
         int t; // Time step
         int e; // Episode
         
-        UCB1Policy policy;
+        UCBPolicy policy;
 
     public:
         const int nStates;
