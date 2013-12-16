@@ -29,7 +29,7 @@ def run_all(args):
             for environment in environments:
                 for i in range(args.N):
                     lg.info("Running: " + environment + " for the " + str(i) +"th time")
-                    print("Running: " + environment + " for the " + str(i) +"th time with lambda" + str(lambdas) + "and stepsize" + str(stepsize))
+                    print("Running: " + environment + " for the " + str(i) +"th time with lambda " + str(lambdas) + " and stepsize " + str(stepsize))
 
                     run(environment, outputdir, agentname, args.output, experimentname, lambdas, stepsize)
 
