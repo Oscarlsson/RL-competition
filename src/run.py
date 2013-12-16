@@ -25,39 +25,16 @@ def run_all(args):
 
     for lambdas in lambdaarray:
         for stepsize in steparray:
-
             set_environment(lambdas, stepsize) 
-
             for environment in environments:
                 for i in range(args.N):
                     lg.info("Running: " + environment + " for the " + str(i) +"th time")
                     print("Running: " + environment + " for the " + str(i) +"th time with lambda" + str(lambdas) + "and stepsize" + str(stepsize))
+
                     run(environment, outputdir, agentname, args.output, experimentname, lambdas, stepsize)
+
     print "Output is found in " + outputdir
     print_finalresult(outputdir)
-
-def print_finalresult(outputdir):
-
-    experiment = outputdir.split("/")[-1].split("-")[-1]
-    # Assume Christos experiment for now
-    episodes = range(0,101)
-
-    results = [filename for filename in os.listdir(outputdir) if filename.startswith('result')]
-    for result in results:
-        csvfile = outputdir + "/" + result
-        csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=episodes)
-        meandata = csvdata.loc['mean']
-        dim = meandata.ndim
-        agent = csvfile.split("/")[-2]
-        printableresult = result.split("-")
-        for a in printableresult:
-            print a,
-        print ":", 
-        if dim == 1:
-            printdata = meandata.cumsum()
-        else:
-            printdata = meandata.mean().cumsum()
-        print printdata[meandata.index[-1]] #last elem
 
 def run(environment, outputdir, agentname, output, experimentname, lambdas, stepsize):
 
@@ -85,6 +62,34 @@ def run(environment, outputdir, agentname, output, experimentname, lambdas, step
                 print fin.read()
     devnull.close()
 
+def print_finalresult(outputdir):
+    print "\n"
+    print "--------------------"
+    print "FINAL OUTPUT"
+    print "--------------------"
+
+    experiment = outputdir.split("/")[-1].split("-")[-1]
+    # Assume Christos experiment for now
+    episodes = range(0,101)
+
+    results = [filename for filename in os.listdir(outputdir) if filename.startswith('result')]
+    for result in results:
+        csvfile = outputdir + "/" + result
+        csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=episodes)
+        meandata = csvdata.loc['mean']
+
+        for env in result.split("-"):
+            print env,
+        print ":", 
+
+        if meandata.ndim == 1:
+            printdata = meandata.cumsum()
+        else:
+            printdata = meandata.mean().cumsum()
+
+        print printdata[meandata.index[-1]] #last elem
+
+    print "--------------------"
 def fix_lambdas_steps(lambdavalues, stepsizevalues):
     if len(args.l) == 3:
         lambdaarray = np.arange(lambdavalues[0], lambdavalues[1], lambdavalues[2])
@@ -184,9 +189,9 @@ parser.add_argument('-D', metavar='dir',
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
-print_finalresult('../outputs/131215-22-18-42-LibRLAgent-ChristosExperiment')
-#log = get_outputdir() + get_logfile()
-#lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-#MakeAll()
-#run_all(args)
+#print_finalresult('../outputs/131215-22-18-42-LibRLAgent-ChristosExperiment')
+log = get_outputdir() + get_logfile()
+lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+MakeAll()
+run_all(args)
 # Close rl_glue if started
