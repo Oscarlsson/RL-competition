@@ -16,9 +16,6 @@ Agent *agent;
 
 observation_t *last_observation=0;
 
-int randInRange(int);
-const action_t *tempAct(const observation_t*);
-
 void agent_init(const char* task_spec)
 {
 	// Parse task specifications
@@ -39,8 +36,8 @@ void agent_init(const char* task_spec)
     char* env_lambda = getenv("LIBRLAGENT_LAMBDA");
     char* env_stepsize = getenv("LIBRLAGENT_STEPSIZE");
 
-    double lambda = env_lambda == NULL ?     0.60 : atof(env_lambda);
-    double stepsize = env_stepsize == NULL ? 0.20 : atof(env_stepsize);
+    double lambda = env_lambda == NULL ?     0.20 : atof(env_lambda);
+    double stepsize = env_stepsize == NULL ? 1.00 : atof(env_stepsize);
 
     // Assumes that all actions and states are numbered 0,1,2,3,...
     // I.e. agent breaks if negative indices exist or if indexing skips some int
@@ -50,15 +47,10 @@ void agent_init(const char* task_spec)
                 ts->int_observations[0].max - ts->int_observations[0].min + 1,
                 nActions,
                 ts->discount_factor, // Gamma
-                lambda,
-                stepsize,
-                ts->reward.min,
-                ts->reward.max
+                lambda, stepsize,
+                ts->reward.min, ts->reward.max
             );
     
-    // DEBUG:
-    // cerr << "Agent n states: " << agent->nStates << endl;
-
 	srand(time(0));
 	allocateRLStruct(&this_action,1,0,0);
 	last_observation=allocateRLStructPointer(0,0,0);
@@ -126,11 +118,4 @@ const char* agent_message(const char* inMessage)
 	if(strcmp(inMessage,"what is your name?")==0)
 		return "my name is skeleton_agent!";
 	return "I don't know how to respond to your message";
-}
-
-int randInRange(int max){
-	double r, x;
-	r = ((double)rand() / ((double)(RAND_MAX)+(double)(1)));
-   	x = (r * (max+1));
-	return (int)x;
 }
