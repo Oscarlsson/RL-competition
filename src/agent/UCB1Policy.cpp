@@ -33,7 +33,7 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
             oMax = o;
             found = true;
         }
-        else if (u == uMax && false)
+        else if (u == uMax && false) //Tiebraker om true, avstängd om false
         {
             if (o > oMax)
             {
