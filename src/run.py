@@ -204,9 +204,8 @@ parser.add_argument('-D', metavar='dir',
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
-#print_finalresult('../outputs/131216-09-41-57-LibRLAgent-ChristosExperiment')
 log = get_outputdir() + get_logfile()
 lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 MakeAll()
 run_all(args)
-# Close rl_glue if started
+# TODO: Close rl_glue if started
