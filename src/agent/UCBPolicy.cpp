@@ -14,8 +14,8 @@ double runif()
 }
 
 int UCBPolicy::sample_action(int S, int t, double **qTable, double **counts,
-        int nActions, vector<int> &history_S,
-        double lambda, double Qmin, double Qmax)
+        int nActions, vector<int> &history_S, double lambda, double Qmin,
+        double Qmax)
 {
     int aMax;
     double uMax = -DBL_MAX;
@@ -29,8 +29,8 @@ int UCBPolicy::sample_action(int S, int t, double **qTable, double **counts,
     {
         double o = tieBreakerScore(a, S, t, qTable, counts, nActions, history_S,
                 lambda);
-        // double u = qTable[S][a] + 0.001 * sqrt(2 * log(localTime+1) / counts[S][a]);
-        double u = kl_ucb((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime, counts[S][a]);
+        double u = qTable[S][a] + c * sqrt(2 * log(localTime+1) / counts[S][a]);
+        // double u = kl_ucb((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime, counts[S][a]);
 
         if (u > uMax)
         {
@@ -93,24 +93,16 @@ double UCBPolicy::kl_ucb(double Q, double t,double count)
     double q = (Q+1)/2;
     double qOld = 1;
     bool first = false;
-    bool debug = false;
-    if (debug) cerr << "*** Newton Raphson start : Q = " << Q << endl;
     while (first || abs(q-qOld) > 0.001)
     {
         first = false;
-        if (debug) cerr << "\tqOld = " << qOld << "\tq= " << q << endl;
         qOld = q;
-        if (debug) cerr << "\tdfun(Q,q) = " << dfun(Q,q) << "\tqqfun(Q,q) = " << ddfun(Q,q) << endl;
-        // assert(!isinf(dfun(Q,q));
-        assert(abs(dfun(Q,q)) > 0);
-        q = (-dfun(Q,q)+c*log(t)/count+q*ddfun(Q,q))/(ddfun(Q,q));
+        q = (-dfun(Q,q)+(log(t)+c*log(log(t)))/count+q*ddfun(Q,q))/(ddfun(Q,q));
         if (q<=Q)
             q = Q+0.001;
         if (q>=1)
             q = 0.999;
-        if (debug) cerr << "\tqOld = " << qOld << "\tq= " << q << endl;
     }
-    if (debug) cerr << "*** Newton Raphson end with q = " << q << endl;
     return q;
 }
 
@@ -134,4 +126,3 @@ double UCBPolicy::tieBreakerScore(int a, int S, int t, double **qTable,
     
     return score;
 }
-
