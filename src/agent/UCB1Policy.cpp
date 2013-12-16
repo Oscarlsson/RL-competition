@@ -4,12 +4,13 @@
 #include <iostream>
 #include <cfloat>
 #include <cmath>
+#include <cassert>
 
 using namespace std;
 
 int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
-                              int nActions, vector<int> &history_S,
-                              double lambda, double Qmin, double Qmax)
+        int nActions, vector<int> &history_S,
+        double lambda, double Qmin, double Qmax)
 {
     int aMax;
     double uMax = -DBL_MAX;
@@ -21,10 +22,11 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
     for (int a = 0; a < nActions; ++a)
     {
         double o = tieBreakerScore(a, S, t, qTable, counts, nActions, history_S,
-                                   lambda);
+                lambda);
         //double u = qTable[S][a] + sqrt(2 * log(localTime+1) / counts[S][a]);
-        double u = newtonRapson((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime, counts[S][a]);
-        
+        double u = newtonRapson((qTable[S][a]-Qmin)/(Qmax-Qmin), localTime,
+                counts[S][a]);
+
         if (u > uMax)
         {
             uMax = u;
@@ -65,26 +67,43 @@ int UCB1Policy::sample_action(int S, int t, double **qTable, double **counts,
 
 double UCB1Policy::dfun(double p, double q)
 {
-    return p*log(p/q)+(1-p)*log((1-p)/(1-q));
+    if (p == 0)
+        return (1-p)*log((1-p)/(1-q));
+    else if (p == 1)
+        return p*log(p/q);
+    else
+        return p*log(p/q)+(1-p)*log((1-p)/(1-q));
 }
 double UCB1Policy::ddfun(double p, double q)
 {
-    return (1-p)/(1-q)-p/q;
+    return (1.0-p)/(1.0-q)-p/q;
 }
 
 double UCB1Policy::newtonRapson(double Q, double t,double count)
 {
+    if (Q == 1)
+        Q = 0.999999;
     double q = (Q+1)/2;
-    double qnew = 1;
-    while(abs(q-qnew)>0.001)
+    double qOld = 1;
+    bool first = false;
+    bool debug = false;
+    if (debug) cerr << "*** Newton Raphson start : Q = " << Q << endl;
+    while (first || abs(q-qOld) > 0.001)
     {
-        q = qnew;
-        qnew = -(dfun(Q,q)-log(t)/count+q*ddfun(Q,q))/(ddfun(Q,q));
-        if (q<Q)
+        first = false;
+        if (debug) cerr << "\tqOld = " << qOld << "\tq= " << q << endl;
+        qOld = q;
+        if (debug) cerr << "\tdfun(Q,q) = " << dfun(Q,q) << "\tqqfun(Q,q) = " << ddfun(Q,q) << endl;
+        // assert(!isinf(dfun(Q,q));
+        assert(abs(dfun(Q,q)) > 0);
+        q = (-dfun(Q,q)+log(t)/count+q*ddfun(Q,q))/(ddfun(Q,q));
+        if (q<=Q)
             q = Q+0.001;
-        if (q>1)
+        if (q>=1)
             q = 0.999;
+        if (debug) cerr << "\tqOld = " << qOld << "\tq= " << q << endl;
     }
+    if (debug) cerr << "*** Newton Raphson end with q = " << q << endl;
     return q;
 }
 

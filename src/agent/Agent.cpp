@@ -34,8 +34,13 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
         qTable[s] = new double[nActions];
         traces[s] = new double[nActions];
         counts[s] = new double[nActions];
-        memset(qTable[s], maxReward, sizeof(double));
-        memset(counts[s], 1,         sizeof(double));
+       // memset(qTable[s], maxReward, sizeof(qTable[s])*nActions);
+       // memset(counts[s], 1.0,         sizeof(counts[s])*nActions);
+        for (int a = 0; a < nActions; ++a)
+        {
+            qTable[s][a] = maxReward;
+            counts[s][a] = 1;
+        }
     }
     Qmin = minReward;
     Qmax = maxReward;
@@ -84,6 +89,31 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
 
     history_S[t] = S;
     history_A[t] = A;
+
+//  cerr << " >> " ;
+//  for (int a = 0; a < nActions; ++a)
+//      cerr << counts[S][a] << " ";
+//  cerr << endl;
+    if (reward == -100)
+    {
+        cerr << "***    qMin: " << Qmin << " qMax: " << Qmax << endl;
+        double localTime = 0;
+        for (int a = 0; a < nActions; ++a)
+            localTime += counts[S][a];
+        for (int a = 0; a < nActions; ++a)
+            cerr << qTable[S][a] << " ";
+        cerr << endl << "\t";
+        for (int a = 0; a < nActions; ++a)
+        {
+            double u = policy.newtonRapson((qTable[S][a]-Qmin)/(Qmax-Qmin),
+                    localTime, counts[S][a]);
+            cerr << u << " (" << counts[S][a] << "), ";
+        }
+        cerr << endl;
+    }
+
+//  double lambda = this->lambda / sqrt(t+1);
+//  double stepSize = this->stepSize / sqrt(t+1);
 
 //  double lambda = this->lambda / sqrt(t+1);
 //  double stepSize = this->stepSize / sqrt(t+1);
