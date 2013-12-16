@@ -1,0 +1,112 @@
+../outputs/131216-10-39-12-LibRLAgent-ChristosExperiment/resultTictactoeEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+-50 # episode reward
+-30 # episode reward
+-10 # episode reward
+-61 # episode reward
+-50 # episode reward
+-50 # episode reward
+-50 # episode reward
+-21 # episode reward
+-150 # episode reward
+-10 # episode reward
+10 # episode reward
+-30 # episode reward
+-30 # episode reward
+-1 # episode reward
+-139 # episode reward
+-50 # episode reward
+-10 # episode reward
+-61 # episode reward
+-50 # episode reward
+-81 # episode reward
+-50 # episode reward
+-1 # episode reward
+10 # episode reward
+-21 # episode reward
+-50 # episode reward
+-61 # episode reward
+10 # episode reward
+-10 # episode reward
+-170 # episode reward
+10 # episode reward
+-21 # episode reward
+-41 # episode reward
+-50 # episode reward
+-50 # episode reward
+-170 # episode reward
+-50 # episode reward
+-10 # episode reward
+-30 # episode reward
+-10 # episode reward
+-70 # episode reward
+-50 # episode reward
+-30 # episode reward
+-10 # episode reward
+-50 # episode reward
+-30 # episode reward
+-239 # episode reward
+-50 # episode reward
+-30 # episode reward
+1 # episode reward
+-61 # episode reward
+-50 # episode reward
+10 # episode reward
+-30 # episode reward
+-50 # episode reward
+-201 # episode reward
+-299 # episode reward
+-50 # episode reward
+-41 # episode reward
+-59 # episode reward
+-10 # episode reward
+-30 # episode reward
+-81 # episode reward
+-121 # episode reward
+-150 # episode reward
+-50 # episode reward
+-10 # episode reward
+-61 # episode reward
+-190 # episode reward
+-1 # episode reward
+-41 # episode reward
+-70 # episode reward
+-259 # episode reward
+-239 # episode reward
+-101 # episode reward
+-99 # episode reward
+-21 # episode reward
+-270 # episode reward
+-239 # episode reward
+-30 # episode reward
+-10 # episode reward
+-130 # episode reward
+-219 # episode reward
+-119 # episode reward
+-21 # episode reward
+-1 # episode reward
+-1 # episode reward
+-170 # episode reward
+-130 # episode reward
+-101 # episode reward
+-90 # episode reward
+-210 # episode reward
+-170 # episode reward
+-41 # episode reward
+-70 # episode reward
+-220 # episode reward
+-50 # episode reward
+-70 # episode reward
+-141 # episode reward
+-170 # episode reward
+-10 # episode reward
+-7295 # average total reward over runs
+
+Program Complete.

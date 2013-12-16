@@ -1,0 +1,112 @@
+../outputs/131216-10-14-13-LibRLAgent-ChristosExperiment/resultChainEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+62 # episode reward
+3.8 # episode reward
+45.2 # episode reward
+4.8 # episode reward
+34.2 # episode reward
+2.8 # episode reward
+51.2 # episode reward
+53.2 # episode reward
+14.2 # episode reward
+6.2 # episode reward
+16.2 # episode reward
+15.4 # episode reward
+3.2 # episode reward
+29 # episode reward
+69.2 # episode reward
+6.8 # episode reward
+14.6 # episode reward
+8.6 # episode reward
+5.4 # episode reward
+3.4 # episode reward
+0.6 # episode reward
+14.6 # episode reward
+3.2 # episode reward
+43.8 # episode reward
+1.8 # episode reward
+2.2 # episode reward
+35.4 # episode reward
+20.2 # episode reward
+39.6 # episode reward
+31.2 # episode reward
+2.6 # episode reward
+20.8 # episode reward
+18.8 # episode reward
+33.4 # episode reward
+42.8 # episode reward
+77.4 # episode reward
+5 # episode reward
+10.8 # episode reward
+7.8 # episode reward
+24.8 # episode reward
+0 # episode reward
+54.6 # episode reward
+49.8 # episode reward
+0.4 # episode reward
+0.2 # episode reward
+0.2 # episode reward
+3 # episode reward
+44.4 # episode reward
+23.8 # episode reward
+7.4 # episode reward
+7.6 # episode reward
+11 # episode reward
+1.6 # episode reward
+18.4 # episode reward
+37.4 # episode reward
+56.2 # episode reward
+24.8 # episode reward
+2.2 # episode reward
+11 # episode reward
+2.2 # episode reward
+13.2 # episode reward
+1.2 # episode reward
+11 # episode reward
+48.2 # episode reward
+24.4 # episode reward
+27.2 # episode reward
+2.8 # episode reward
+14.6 # episode reward
+38.2 # episode reward
+31.2 # episode reward
+37.2 # episode reward
+51.2 # episode reward
+68.4 # episode reward
+15 # episode reward
+12.6 # episode reward
+27 # episode reward
+24.8 # episode reward
+116.8 # episode reward
+54.4 # episode reward
+14.4 # episode reward
+31.6 # episode reward
+97.8 # episode reward
+11.8 # episode reward
+100 # episode reward
+14.4 # episode reward
+12.6 # episode reward
+5.6 # episode reward
+27 # episode reward
+10.8 # episode reward
+11.4 # episode reward
+3.8 # episode reward
+12.2 # episode reward
+2.6 # episode reward
+6.6 # episode reward
+2 # episode reward
+1.2 # episode reward
+103.4 # episode reward
+5.4 # episode reward
+13.8 # episode reward
+1.2 # episode reward
+2351.4 # average total reward over runs
+
+Program Complete.
