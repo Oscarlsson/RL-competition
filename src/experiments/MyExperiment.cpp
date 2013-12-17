@@ -87,53 +87,6 @@ int main(int argc, char *argv[]) {
 	RL_init();
 	offline_demo();
     return 0;
-	//
-	//
-	//cout << endl << 
-    //   "Now we will save the agent's learned value function to a file...." << endl;
-
-	//RL_agent_message(agent_msg_save);
-
-	//cout << endl << 
-    //   "Calling RL_cleanup and RL_init to clear the agent's memory..." << endl; 
-
-	//RL_cleanup();
-	//RL_init();
-
-
-	//cout << "Evaluating the agent's default policy:" << endl
-    //   << "\t\tMean Return\tStandardDeviation" << endl
-    //   << "------------------------------------------------------" << endl; 
-	//single_evaluation();
-	//
-	//cout << endl << "Loading up the value function we saved earlier." << endl;
-	//RL_agent_message(agent_msg_load);
-
-	//cout << "Evaluating the agent after loading the value function:" << endl
-    //   << "\t\tMean Return\tStandardDeviation" << endl
-    //   << "------------------------------------------------------" << endl; 
-	//single_evaluation();
-
-	//cout << "Telling the environment to use fixed start state of 2,3." << endl; 
-	//RL_env_message("set-start-state 2 3");
-	//RL_start();
-	//cout << "Telling the environment to print the current state to the screen." << endl;
-	//RL_env_message("print-state");
-    //coout << "Evaluating the agent a few times from a fixed start state of 2,3:" << endl
-    //   << "\t\tMean Return\tStandardDeviation" << endl
-    //   << "-------------------------------------------" << endl; 
-	//single_evaluation();
-
-	//cout << "Evaluating the agent again with the random start state:" << endl
-    //   << "\t\tMean Return\tStandardDeviation" << endl
-    //   << "-----------------------------------------------------" << endl;
-    //RL_env_message("set-random-start-state");
-	//single_evaluation();
-
-	//RL_cleanup();
-	//printf("\nProgram Complete.\n");
-
-	//return 0;
 }
 
 
@@ -213,7 +166,6 @@ evaluation_point_t *evaluate_agent(){
 	int n=10;
 	evaluation_point_t *eval_point=0;
 	
-//	RL_agent_message("freeze learning");
 	for(i=0;i<n;i++){
 		/* We use a cutoff here in case the policy is bad
 		   and will never end an episode */
@@ -229,20 +181,8 @@ evaluation_point_t *evaluate_agent(){
 	eval_point->mean=mean;
 	eval_point->standard_dev=sqrt(variance);
 
-//	RL_agent_message("unfreeze learning");
 	return eval_point;
 }
-
-/**
-* Just do a single evaluate_agent and print it
-**/
-//void single_evaluation(){
-//	evaluation_point_t *this_score=0;
-//	this_score=evaluate_agent();
-//	print_score(0,this_score);
-//	free(this_score);
-//}
-
 
 void print_score(int afterEpisodes, evaluation_point_t *the_score) {
   char str[1024]; 

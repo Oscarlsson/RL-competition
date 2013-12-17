@@ -77,8 +77,15 @@ def print_finalresult(outputdir):
     s = s+"-------------------- \n"
 
     experiment = outputdir.split("/")[-1].split("-")[-1]
-    # Assume Christos experiment for now
-    episodes = range(0,101)
+    #
+    # Just for now: The three different experiments
+    # 
+    if experiment.endswith("100"):
+        episodes = range(0,101)
+    elif experiment.endswith("1000"):
+        episodes = range(0, 10001)
+    else:
+        episodes = range(0, 525,25)
 
     results = [filename for filename in os.listdir(outputdir) if filename.startswith('result')]
     for result in results:
@@ -185,7 +192,7 @@ def read_config(option):
 
 ### ARGUMENTPARSER AND CALLS TO START
 parser = argparse.ArgumentParser(description='This file will run an Agent on several environments and report the results to the directory ../outputs. Configuration is stored in ../etc/runpyconfig. ')
-parser.add_argument('--l', metavar='n',type=float, nargs="+", help="Lambda value to the LibRLAgent. Either give one value --l 2 or three -l min max step. Default is 0", default=[0])
+parser.add_argument('--l', metavar='n',type=float, nargs="+", help="Lambda value to the LibRLAgent. Either give one value --l 2 or three -l min max step. Default is 0", default=[0.2])
 parser.add_argument('--s', metavar='n', type=float, nargs="+", help="Step size to the LibRLAgent. Either give one value --s 0 or three -l min max step. Default is 1", default=[1])
 parser.add_argument('--c', metavar='n', type=float, help="Exploration factor to the LibRLAgent. c=0 gives the maximum action which is also default", default=0) 
 parser.add_argument('-t', help='Boolean value if LibRLAgent should use tiebraker or not. False default', action='store_true', default=False)
@@ -204,9 +211,8 @@ parser.add_argument('-D', metavar='dir',
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
-#print_finalresult('../outputs/131216-09-41-57-LibRLAgent-ChristosExperiment')
 log = get_outputdir() + get_logfile()
 lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 MakeAll()
 run_all(args)
-# Close rl_glue if started
+# TODO: Close rl_glue if started

@@ -7,5 +7,7 @@ environments/loop/LoopEnvironment
 environments/connectfour/ConnectfourEnvironment
 environments/tictactoe/TictactoeEnvironment
 agent/LibRLAgent
-MyExperiment
-ChristosExperiment
+experiments/ChristosExperiment
+experiments/Episod100
+experiments/Episod1000
+experiments/MyExperiment
