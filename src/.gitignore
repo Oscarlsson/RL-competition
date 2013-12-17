@@ -6,7 +6,6 @@ environments/contextbandit/ContextBanditEnvironment
 environments/loop/LoopEnvironment
 environments/connectfour/ConnectfourEnvironment
 environments/tictactoe/TictactoeEnvironment
-agent/LibRLAgent
 experiments/ChristosExperiment
 experiments/Episod100
 experiments/Episod1000
