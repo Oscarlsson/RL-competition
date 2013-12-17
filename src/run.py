@@ -77,8 +77,15 @@ def print_finalresult(outputdir):
     s = s+"-------------------- \n"
 
     experiment = outputdir.split("/")[-1].split("-")[-1]
-    # Assume Christos experiment for now
-    episodes = range(0,101)
+    #
+    # Just for now: The three different experiments
+    # 
+    if experiment.endswith("100"):
+        episodes = range(0,101)
+    elif experiment.endswith("1000"):
+        episodes = range(0, 10001)
+    else:
+        episodes = range(0, 525,25)
 
     results = [filename for filename in os.listdir(outputdir) if filename.startswith('result')]
     for result in results:

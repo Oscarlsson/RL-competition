@@ -2,13 +2,24 @@ LDFLAGS := $(LDFLAGS)  -lm -lrlutils -lrlexperiment -lrlgluenetdev
 CFLAGS := $(CFLAGS) -std=c++11 -Wall -pedantic -g -O3
 CC := g++
 
-all: MyExperiment ChristosExperiment
+all: MyExperiment Episod100 Episod1000
 
-ChristosExperiment: experiments/ChristosExperiment.o
-	$(CC) experiments/ChristosExperiment.o -lrlexperiment $(LDFLAGS) -o experiments/ChristosExperiment
 
-ChristosExperiment.o: experiments/ChristosExperiment.cc
-	$(CC)  $(CFLAGS) -c experiments/ChristosExperiment.cc -o experiments/ChristosExperiment.o 
+# 100 Episodes!!
+#
+Episod100: experiments/Episod100.o
+	$(CC) experiments/Episod100.o -lrlexperiment $(LDFLAGS) -o experiments/Episod100
+
+Episod100.o: experiments/Episod100.cc
+	$(CC)  $(CFLAGS) -c experiments/Episod100.cc -o experiments/Episod100.o 
+
+# 1000 episodes!
+#
+Episod1000: experiments/Episod1000.o
+	$(CC) experiments/Episod1000.o -lrlexperiment $(LDFLAGS) -o experiments/Episod1000
+
+Episod1000.o: experiments/Episod1000.cc
+	$(CC)  $(CFLAGS) -c experiments/Episod1000.cc -o experiments/Episod1000.o 
 
 MyExperiment: experiments/MyExperiment.o 
 	$(CXX)  experiments/MyExperiment.o $(LDFLAGS) -o experiments/MyExperiment
@@ -18,5 +29,6 @@ MyExperiment.o: experiments/MyExperiment.cpp
 
 clean:
 	rm -rf experiments/MyExperiment experiments/MyExperiment.exe *.o
-	rm -rf experiments/ChristosExperiment experiments/ChristosExperiment.exe
+	rm -rf experiments/Episod100 experiments/Episod100.exe
+	rm -rf experiments/Episod1000 experiments/Episod1000.exe
 
