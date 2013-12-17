@@ -9,6 +9,9 @@ Team: Oscar Carlsson, John Karlsson, Oskar Lindgren
 Keywords: Discrete state space, Implemented agent using Sarsa-lambda, KL-UCB, option to vary parameters
 
 
+This plot illustrates how our agent performs on average over 15 runs in a experiment with 1000 episodes. 
+![Plot] (https://raw.github.com/Oscarlsson/RL-competition/master/data/1000episodes_15runs.png "Our agent")
+
 Install
 =============
 
