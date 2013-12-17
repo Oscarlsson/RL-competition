@@ -19,7 +19,7 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
              double stepSize, double minReward, double maxReward)
 : nStates(nStates), nActions(nActions), gamma(gamma), lambda(lambda),
   stepSize(stepSize), t(0), e(0), minReward(minReward), maxReward(maxReward),
-    policy(nStates, nActions)
+    policy(nStates, nActions), cumulativeReward(0)
 {
     srand(time(0));
     qTable = new double*[nStates];
@@ -69,6 +69,8 @@ Agent::~Agent()
  */
 int Agent::step(int lastState, int lastAction, double reward, int thisState)
 {
+    cumulativeReward += reward;
+
     const int history_size = 5000;
     const int history_incr = 1000;
     static vector<int> history_S(history_size);
@@ -87,12 +89,6 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
 
     history_S[t] = S;
     history_A[t] = A;
-
-//  double lambda = this->lambda / sqrt(t+1);
-//  double stepSize = this->stepSize / sqrt(t+1);
-
-//  double lambda = this->lambda / sqrt(t+1);
-//  double stepSize = this->stepSize / sqrt(t+1);
 
     // Choose A2 from S2 using policy derived from Q
     // UCB1
@@ -118,6 +114,7 @@ int Agent::step(int lastState, int lastAction, double reward, int thisState)
     }
 
     ++t;
+    ++tSum;
     return A2;
 }
 

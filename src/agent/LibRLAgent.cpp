@@ -110,6 +110,19 @@ void agent_end(double reward)
 void agent_cleanup()
 {
     cout << "agent_cleanup() called" << endl;
+    cout << "nStates:"  << agent->nStates
+         << " nActions:" << agent->nActions
+         << " gamma:" << agent->gamma
+         << " lambda:" << agent->lambda
+         << " step:" << agent->stepSize
+         << " c:" << agent->policy.c
+         << " tie:" << agent->policy.tiebreaker
+         << endl;
+    cout << "Cumulative reward: " << agent->cumulativeReward
+         << " (" << agent->cumulativeReward / agent->e << " per episode for "
+         << agent->e << " episodes). "
+         << "Avg. time/episode: " << (double)agent->tSum / (double) agent->e
+         << endl;
 	clearRLStruct(&this_action);
 	clearRLStruct(&last_action);
 	freeRLStructPointer(last_observation);

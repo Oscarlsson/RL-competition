@@ -1,0 +1,12 @@
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=20003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:1 nActions:114 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 85655 (85.655 per episode for 1000 episodes). Avg. time/episode: 102.218
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=20003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:11 nActions:38 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 54605 (54.605 per episode for 1000 episodes). Avg. time/episode: 100.867

@@ -8,12 +8,13 @@ class Agent
         double **traces; // Z(s,a) = eligibility trace for (s,a)
         double **counts; // 
 
-        int t; // Time step
-        int e; // Episode
-        
-        UCBPolicy policy;
 
     public:
+        UCBPolicy policy;
+        int t; // Time step
+        int tSum; 
+        int e; // Episode
+        double cumulativeReward;
         const int nStates;
         const int nActions;
         const double minReward, maxReward;
