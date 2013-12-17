@@ -122,7 +122,7 @@ void agent_cleanup()
          << " (" << agent->cumulativeReward / agent->e << " per episode for "
          << agent->e << " episodes). "
          << "Avg. time/episode: " << (double)agent->tSum / (double) agent->e
-         << endl;
+         << endl << endl;
 	clearRLStruct(&this_action);
 	clearRLStruct(&last_action);
 	freeRLStructPointer(last_observation);
