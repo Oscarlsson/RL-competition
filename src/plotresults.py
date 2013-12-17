@@ -31,8 +31,6 @@ args = parser.parse_args()
 
 results = [filename for filename in os.listdir(args.D) if filename.startswith('result')]
 plt.figure()
-plt.xlabel('#Episodes')
-plt.ylabel('Average reward')
 print results
 
 if args.D.endswith("/"):
@@ -59,6 +57,8 @@ for result in results:
     plot(csvdata, agent)
 
 results= [ printable(result) for result in results]
+plt.xlabel('#Episodes')
+plt.ylabel('Cumulative reward')
 plt.legend(results, loc='best')
 plt.savefig(args.D+"/plot.png")
 plt.show()
