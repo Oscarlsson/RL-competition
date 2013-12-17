@@ -1,59 +1,105 @@
-\documentclass[jou,apacite]{apa6}
+% TEMPLATE for Usenix papers, specifically to meet requirements of
+%  USENIX '05
+% originally a template for producing IEEE-format articles using LaTeX.
+%   written by Matthew Ward, CS Department, Worcester Polytechnic Institute.
+% adapted by David Beazley for his excellent SWIG paper in Proceedings,
+%   Tcl 96
+% turned into a smartass generic template by De Clarke, with thanks to
+%   both the above pioneers
+% use at your own risk.  Complaints to /dev/null.
+% make it two column with no page numbering, default is 10 point
 
-\title{Example of an APA style for journal article}
-\shorttitle{APA style}
+% Munged by Fred Douglis <douglis@research.att.com> 10/97 to separate
+% the .sty file from the LaTeX source template, so that people can
+% more easily include the .sty file into an existing document.  Also
+% changed to more closely follow the style guidelines as represented
+% by the Word sample file. 
 
-\twoauthors{Author One}{Author Two}
-\twoaffiliations{Institute of Psychology}{Freud's Institute}
+% Note that since 2010, USENIX does not require endnotes. If you want
+% foot of page notes, don't include the endnotes package in the 
+% usepackage command, below.
 
-\abstract{This is an example of a journal article using the \texttt{apa6.cls} document class to typeset manuscripts according to 6th edition of the Americal Psychological Association (APA) manual}
 
-\rightheader{APA style}
-\leftheader{Author One}
 
+% Good read: https://www.usenix.org/legacy/events/samples/template.la
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix,epsfig,endnotes}
 \begin{document}
-\maketitle    
-                        
-\section{Sample section}
-Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. 
-Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. 
-Sample text. Sample text. Citation of Einstein paper~\cite{Einstein}. Citation of Freud book~\cite{Freud}.
 
+%don't want date printed
+\date{}
+
+%make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\title{ RL-Competition discrete space \\ \small a submission to the competition of .. }
+
+
+\author{
+{\rm John Karlsson}\\
+M.sc. MPCAS
+\and
+{\rm Oscar Carlsson}\\
+M.sc. MPALG
+\and
+{\rm Oskar Lindgren}\\
+P.hd. fysisk resusteori
+}
+
+\maketitle
+
+% Use the following at camera-ready time to suppress page numbers.
+% Comment it out when you first submit the paper for review.
+\thispagestyle{empty}
+
+
+\subsection*{Abstract}
+Agent using: Sarsa lambda, KL-USB, Tiebraker \\
+Experiments: Tictactoe MDP, Connectfour POMDP \\
+Results..
+
+\section{Introduction}
+Project as part of a course - link to homepage - discrete state space, rl-glue.. \\
+Our approach .. 
+
+%\endnote{Remember to use endnotes, not footnotes!} galore, plethora of promises.\\
+
+\section{Environments}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+\subsection{Tictactoe}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+\subsection{Connectfour}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+%
 
+\section{The Agent}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+
+\subsection{Sarsa lambda}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+\subsection{Tiebreaker}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-\subsection{Sample subsection}
-Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. 
-Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. 
-
+\subsection{KL-UCB}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\section{Results}
 
-\subsubsection{Sample subsubsection}
-Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. 
-Sample text. Sample text. Sample text. Sample text. Sample text. Sample text. 
+plots and stuff
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../data/100episodes_50runs.png}
+    \caption{Awesome Image}
+    \label{fig:awesome_image}
+\end{figure}
 
-
-Results are presented in Table~\ref{tab1}.
-\begin{table}[!htb]
-\caption{Sample table.}\label{tab1}
-\begin{tabular}{ccc}
-\hline\\[-1.5ex]
-AAA & BBB & CCC \\[0.5ex]
-\hline\\[-1.5ex]
-1.0 & 2.0 & 3.0\\[0.5ex]
-1.0 & 2.0 & 3.0\\[0.5ex]
-\hline
-\end{tabular}
-\end{table}
+{\footnotesize \bibliographystyle{acm}
+\bibliography{sample}}
 
 
-\bibliography{sample}
+\theendnotes
 
 \end{document}
+
+
+
+
+
+
+
