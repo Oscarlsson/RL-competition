@@ -10,7 +10,7 @@ Keywords: Discrete state space, Implemented agent using Sarsa-lambda, KL-UCB, op
 
 
 This plot illustrates how our agent performs on average over 15 runs in a experiment with 1000 episodes. 
-![Plot] (https://raw.github.com/Oscarlsson/RL-competition/master/data/1000episodes_15runs.png "Our agent")
+![Plot] (https://raw.github.com/Oscarlsson/RL-competition/master/data/100episodes_50runs.png "Our agent against several different environments")
 
 Install
 =============
