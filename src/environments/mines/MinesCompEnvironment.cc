@@ -230,7 +230,7 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
 	this_reward_observation.observation->intArray[0] = calculate_flat_state(the_world);
 	this_reward_observation.reward = calculate_reward(the_world);
 	this_reward_observation.terminal = check_terminal(the_world.agentRow,the_world.agentCol);
-
+    print_state();
 	return &this_reward_observation;
 }
 
