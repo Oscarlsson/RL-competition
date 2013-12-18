@@ -11,4 +11,4 @@ experiments/ChristosExperiment
 experiments/Episod100
 experiments/Episod1000
 experiments/MyExperiment
-agents/LibRLAgent
+agent/LibRLAgent
