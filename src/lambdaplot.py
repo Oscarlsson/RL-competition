@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
@@ -6,13 +8,11 @@ import sys
 csvfile = sys.argv[1] 
 
 data = pd.read_table(csvfile, sep=' ', header=None, index_col=[0,1])
-print data
 indexes = set([a for (a,b) in data.index])
-print indexes
-
+print data.loc['Bandit']
 for index in indexes:
     plotdata = data.loc[index]
-    plotdata[3].plot()
+    plotdata[3].plot(style='.')
 
 plt.xlabel("Lambda")
 plt.ylabel("Cumulative reward")
