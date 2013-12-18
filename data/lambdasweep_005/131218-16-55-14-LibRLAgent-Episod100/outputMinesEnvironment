@@ -1,0 +1,112 @@
+../outputs/131218-16-55-14-LibRLAgent-Episod100/resultMinesEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+-106 # episode reward
+-106 # episode reward
+-101 # episode reward
+-111 # episode reward
+-9 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+-3 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+5 # episode reward
+34 # average total reward over runs
+
+Program Complete.
