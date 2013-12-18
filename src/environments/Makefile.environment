@@ -2,7 +2,7 @@ LDFLAGS := $(LDFLAGS) -lm -lrlutils -lrlenvironment -lrlgluenetdev
 CFLAGS := $(CFLAGS) -std=c++11 -Wall -pedantic -g  #?
 CC := $(CXX)
 
-all: tictactoe bandits mines connectfour chain contextbandit loop
+all: tictactoe bandits mines connectfour chain contextbandit loop minescomp
 
 ## bandits
 bandits:     environments/bandits/BanditEnvironment.o 
@@ -15,6 +15,12 @@ mines:       environments/mines/MinesEnvironment.o
 	$(CC)    environments/mines/MinesEnvironment.o $(LDFLAGS) -o environments/mines/MinesEnvironment  
 environments/mines/MinesEnvironment.o:      environments/mines/MinesEnvironment.cc
 	$(CC)    $(CFLAGS) -c environments/mines/MinesEnvironment.cc -o environments/mines/MinesEnvironment.o
+
+## competition mines
+minescomp:       environments/mines/MinesCompEnvironment.o 
+	$(CC)    environments/mines/MinesCompEnvironment.o $(LDFLAGS) -o environments/mines/MinesCompEnvironment  
+environments/mines/MinesCompEnvironment.o:      environments/mines/MinesCompEnvironment.cc
+	$(CC)    $(CFLAGS) -c environments/mines/MinesCompEnvironment.cc -o environments/mines/MinesCompEnvironment.o
 
 ## tictactoe
 tictactoe: environments/tictactoe/TictactoeEnvironment.o 
