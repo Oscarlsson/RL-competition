@@ -1,5 +1,6 @@
 environments/bandits/BanditEnvironment
 environments/mines/MinesEnvironment
+environments/mines/MinesCompEnvironment
 environments/tictactoe/TictactoeEnvironment
 environments/chain/ChainEnvironment
 environments/contextbandit/ContextBanditEnvironment
