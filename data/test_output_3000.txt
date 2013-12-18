@@ -29,3 +29,162 @@ Cumulative reward: 13032 (65.16 per episode for 200 episodes). Avg. time/episode
 RL-Glue C Agent Codec Version 2.0, Build 576
 	Connecting to host=129.16.22.220 on port=30003...
 	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:1 nActions:4 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 15975 (79.875 per episode for 200 episodes). Avg. time/episode: 106.805
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:1 nActions:4 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 15667 (78.335 per episode for 200 episodes). Avg. time/episode: 104.535
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:1 nActions:4 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 15562 (77.81 per episode for 200 episodes). Avg. time/episode: 104.78
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:1 nActions:4 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 17056 (85.28 per episode for 200 episodes). Avg. time/episode: 115.735
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:1 nActions:4 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 16075 (80.375 per episode for 200 episodes). Avg. time/episode: 108.12
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:1 nActions:4 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 14035 (70.175 per episode for 200 episodes). Avg. time/episode: 93.56
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:3 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11379 (56.895 per episode for 200 episodes). Avg. time/episode: 100.965
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+Could not decode task spec, code: -1for task spec: run0
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
+agent_cleanup() called
+nStates:7 nActions:2 gamma:0.99 lambda:0.2 step:1 c:0 tie:0
+Cumulative reward: 11582 (57.91 per episode for 200 episodes). Avg. time/episode: 116.83
+
+RL-Glue C Agent Codec Version 2.0, Build 576
+	Connecting to host=129.16.22.220 on port=30003...
+	RL-Glue C Agent Codec :: Connected
