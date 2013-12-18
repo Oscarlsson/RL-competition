@@ -1,0 +1,112 @@
+../outputs/131218-19-09-13-LibRLAgent-Episod100/resultMinesEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+-102 # episode reward
+-102 # episode reward
+-117 # episode reward
+-70 # episode reward
+-7 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+1 # episode reward
+-1 # episode reward
+-3 # episode reward
+-3 # episode reward
+-5 # episode reward
+-7 # episode reward
+-5 # episode reward
+-3 # episode reward
+-5 # episode reward
+-5 # episode reward
+-5 # episode reward
+-3 # episode reward
+-1 # episode reward
+-1 # episode reward
+-3 # episode reward
+-5 # episode reward
+-7 # episode reward
+-7 # episode reward
+-3 # episode reward
+-1 # episode reward
+-1 # episode reward
+-1 # episode reward
+-1 # episode reward
+-3 # episode reward
+-5 # episode reward
+-5 # episode reward
+-5 # episode reward
+-7 # episode reward
+-5 # episode reward
+-3 # episode reward
+-5 # episode reward
+-5 # episode reward
+-5 # episode reward
+-3 # episode reward
+-1 # episode reward
+-1 # episode reward
+-3 # episode reward
+-5 # episode reward
+-5 # episode reward
+-7 # episode reward
+-7 # episode reward
+-5 # episode reward
+-3 # episode reward
+-3 # episode reward
+-5 # episode reward
+-5 # episode reward
+-5 # episode reward
+-5 # episode reward
+-5 # episode reward
+-3 # episode reward
+-1 # episode reward
+-1 # episode reward
+-1 # episode reward
+-1 # episode reward
+-1 # episode reward
+-3 # episode reward
+-3 # episode reward
+-3 # episode reward
+-5 # episode reward
+-3 # episode reward
+-1 # episode reward
+-1 # episode reward
+-1 # episode reward
+-1 # episode reward
+-3 # episode reward
+-5 # episode reward
+-7 # episode reward
+-7 # episode reward
+-7 # episode reward
+-7 # episode reward
+-5 # episode reward
+-7 # episode reward
+-7 # episode reward
+-7 # episode reward
+-7 # episode reward
+-3 # episode reward
+-5 # episode reward
+-677 # average total reward over runs
+
+Program Complete.
