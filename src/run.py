@@ -71,11 +71,6 @@ def run(environment, outputdir, agentname, output, experimentname, lambdas, step
     devnull.close()
 
 def print_finalresult(outputdir):
-    s = "\n"
-    s = s+ "-------------------- \n"
-    s = s+"FINAL OUTPUT \n"
-    s = s+"-------------------- \n"
-
     experiment = outputdir.split("/")[-1].split("-")[-1]
     #
     # Just for now: The three different experiments
@@ -87,14 +82,20 @@ def print_finalresult(outputdir):
     else:
         episodes = range(0, 525,25)
 
+    s = ""
     results = [filename for filename in os.listdir(outputdir) if filename.startswith('result')]
     for result in results:
         csvfile = outputdir + "/" + result
         csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=episodes)
         meandata = csvdata.loc['mean']
-
-        for env in result.split("-"):
-            s = s+env
+        
+        splitname = result.split("-")
+        name = splitname[0].rsplit("Environment")[0].split("result")[1]
+        lambdav = splitname[1]
+        stepv =  splitname[2]
+        s = s + name 
+        s = s + " " + lambdav
+        s = s + " " + stepv
         s = s+": "
 
         if meandata.ndim == 1:
@@ -104,7 +105,6 @@ def print_finalresult(outputdir):
 
         s = s+str(printdata[100]) #last elem CHRISTOS
         s = s + '\n'
-    s = s+"--------------"
     return s
 
 def fix_lambdas_steps(lambdavalues, stepsizevalues):
