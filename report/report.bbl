@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{RLCOMP}
+{\sc Einstein, A.}
+\newblock {Zur Elektrodynamik bewegter K{\"o}rper}. ({German}) [{On} the
+  electrodynamics of moving bodies].
+\newblock {\em Annalen der Physik 322}, 10 (1905), 891--921.
+
+\bibitem{DBLP:journals/jmlr/GarivierC11}
+{\sc Garivier, A., and Capp{\'e}, O.}
+\newblock The kl-ucb algorithm for bounded stochastic bandits and beyond.
+\newblock In {\em COLT\/} (2011), pp.~359--376.
+
+\bibitem{Sutton:1998:IRL:551283}
+{\sc Sutton, R.~S., and Barto, A.~G.}
+\newblock {\em Introduction to Reinforcement Learning}, 1st~ed.
+\newblock MIT Press, Cambridge, MA, USA, 1998.
+
+\bibitem{rl-glue}
+{\sc Tanner, B., and White, A.}
+\newblock {RL}-{G}lue : Language-independent software for
+  reinforcement-learning experiments.
+\newblock {\em Journal of Machine Learning Research 10\/} (September 2009),
+  2133--2136.
+
+\end{thebibliography}
