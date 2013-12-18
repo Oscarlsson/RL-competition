@@ -71,6 +71,7 @@ def run(environment, outputdir, agentname, output, experimentname, lambdas, step
     devnull.close()
 
 def print_finalresult(outputdir):
+
     experiment = outputdir.split("/")[-1].split("-")[-1]
     #
     # Just for now: The three different experiments
@@ -132,10 +133,12 @@ def fix_dirname(argument, agentname, experimentname):
     timestr = time.strftime("%y%m%d-%H-%M-%S")
     printableagentname = agentname.split("/")[-1]
     printableexpname = experimentname.split("/")[-1]
+
     if argument:
         outputdir = argument 
     else:
         outputdir = get_outputdir() + timestr + "-" + printableagentname + "-" + printableexpname
+
     print "Output directory is " + outputdir
     if not os.path.isdir(outputdir):
         print("Creating directory..")
