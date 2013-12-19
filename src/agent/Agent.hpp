@@ -26,6 +26,7 @@ class Agent
         Agent(int nStates, int nActions, double gamma, double lambda,
               double stepSize, double minReward, double maxReward);
         ~Agent();
+        void printValueFunctionForMines();
         int step(int lastState, int lastAction, double reward, int thisState);
         void start();
 };

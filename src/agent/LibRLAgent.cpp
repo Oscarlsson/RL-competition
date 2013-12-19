@@ -42,8 +42,8 @@ void agent_init(const char* task_spec)
     int nActions = ts->int_actions[0].max - ts->int_actions[0].min + 1;
     int nStates = ts->int_observations[0].max - ts->int_observations[0].min + 1;
     double lambda = env_lambda == NULL ?     0.20 : atof(env_lambda);
-    if (nStates > 5000)
-        lambda = 0;
+       if (nStates > 5000)
+          lambda = 0;
     double stepsize = env_stepsize == NULL ? 1.00 : atof(env_stepsize);
     agent = new Agent(
                 ts->int_observations[0].max - ts->int_observations[0].min + 1,
@@ -109,6 +109,7 @@ void agent_end(double reward)
 
 void agent_cleanup()
 {
+    // agent->printValueFunctionForMines();
     cout << "agent_cleanup() called" << endl;
     cout << "nStates:"  << agent->nStates
          << " nActions:" << agent->nActions
