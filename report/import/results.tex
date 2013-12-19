@@ -57,6 +57,6 @@ Work on this!
 
 We also noticed that Sarsa($\lambda$) in its original formulation will decide on the next action before it updates the Q matrix. In the specific case where penalties are incurred for illegal moves, and the agents are forced to try again, this causes the agent to perform every illegal move twice. We decided to stick with the original, suboptimal version, since checking policy twice at each time step is inelegant and we wanted to avoid overtraining.
 
-We tested our agent on very different environments, from simple board games to context bandit problems. We observe that even very general approaches to improving performance against a large class of environments might hurt the performance against other environments.
+We tested our agent o n
 
 All code is found at https://github.com/Oscarlsson/RL-competition
