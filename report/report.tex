@@ -51,64 +51,21 @@ rockoskar@chalmers.se
 
 
 \subsection*{Abstract}
-Agent using: Sarsa lambda, KL-USB, Tiebraker \\
-Experiments: Tictactoe MDP, Connectfour POMDP \\
-Results..
+\input import/abstract.tex
 
 \section{Introduction}
-This report details our submission to the Reinforcement Learning competition held in the course ``Decision making under uncertainty``~\cite{RLCOMP}. The competition was to implement a agent that would communicate with rl glue~\cite{rl-glue} and act in environments with discrete state spaces.
-
+\input import/intro.tex
 %\endnote{Remember to use endnotes, not footnotes!} galore, plethora of promises.\\
 
 \section{Environments}
-In addition to the implemented agent we've implemented two environments representing the board games ticktacktoe and connect four. The ticktacktoe environment is a fully observable Markov Decision Process (MDP) whilst connect four is a Partially observable MDP (POMDP).
-\paragraph{Tic-tac-toe}
-Number of states: 19683 \\
-Number of actions: 9\\
-Reward space : -10 to 10.\\
-\\
-The states are represented by a integer calculated as..\\
-\\
-Agent fills the board: 1\\
-Agent wins: 10\\
-Illegal move: -10\\
-AI wins: -1
-\paragraph{Connect four}
-Number of states: 2188 \\
-Number of actions: 7\\
-Reward space : -1 to 1\\
-\\
-The states are represented by a integer calculated as..\\
-\\
-Illegal move: -1\\
-The board is full:  0\\
-AI wins: 0\\
-Agent wins: 1
+\input import/environments.tex
+
 \section{The Agent}
-We use everything from~\cite{Sutton:1998:IRL:551283}
-\paragraph{Sarsa lambda}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-\paragraph{Tiebreaker}Indeed we did.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-\paragraph{KL-UCB}Wanna know more?~\cite{DBLP:journals/jmlr/GarivierC11}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+\input import/agent.tex
+
 \section{Results}
-All code is found at https://github.com/Oscarlsson/RL-competition
+\input import/results.tex
 
-Choosing $\lambda$
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{../data/lambdasweepplot.png}
-    \caption{Awesome Image}
-    \label{fig:awesome_image}
-\end{figure}
-
-
-Our agent in a 100 episode run against all environments with $\lambda = 0.2$ and $\alpha = 1$
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{../data/100episodes_50runs.png}
-    \caption{Awesome Image}
-    \label{fig:awesome_image}
-\end{figure}
 
 {\footnotesize \bibliographystyle{acm}
 \bibliography{sample}}
