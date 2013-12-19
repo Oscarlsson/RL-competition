@@ -29,6 +29,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 // env_ function prototypes types 
 #include <rlglue/Environment_common.h>	  
@@ -92,7 +93,8 @@ void updatePosition(world_description_t *aWorld, int theAction);
 
 /* Prints out the map to the screen */
 void print_state();
-
+void print_state_tooutput();
+ 
 
 /*
 	world_map is an array that describes the world.
@@ -187,6 +189,8 @@ void set_random_state(){
 const observation_t *env_start()
 { 
     srand(time(0));
+
+
 	if(fixed_start_state){
         int state_valid=set_agent_state(start_row,start_col);
         if(!state_valid){
@@ -195,8 +199,17 @@ const observation_t *env_start()
     }else{
         set_random_state();
     }
+
     
 	this_observation.intArray[0]=calculate_flat_state(the_world);
+
+    ofstream output("MinesStates.txt" , ios::app); 
+    output << "*************" << endl;
+    output << "*Mines start*" << endl;
+    output << "*************" << endl;
+    output.close();
+    print_state_tooutput();
+
   	return &this_observation;
 }
 
@@ -212,6 +225,17 @@ const reward_observation_terminal_t *env_step(const action_t *this_action)
 	this_reward_observation.observation->intArray[0] = calculate_flat_state(the_world);
 	this_reward_observation.reward = calculate_reward(the_world);
 	this_reward_observation.terminal = check_terminal(the_world.agentRow,the_world.agentCol);
+
+    ofstream output("MinesStates.txt" , ios::app); 
+	output << the_world.agentRow;
+    output << ",";
+    output << the_world.agentCol << endl;
+    output.close();
+
+    if(this_reward_observation.terminal == 1){
+        print_state_tooutput();
+    }
+
 
 	return &this_reward_observation;
 }
@@ -336,6 +360,39 @@ void updatePosition(world_description_t *aWorld, int theAction){
 	}
 }
 
+void print_state_tooutput(){
+	int row,col;
+  char line[1024];
+    ofstream output("MinesStates.txt" , ios::app); 
+	sprintf(line, "Agent is at: %d,%d",the_world.agentRow,the_world.agentCol);
+    output << line << endl; 
+	output << "Columns:0-10                10-17" << endl;
+	output << "Col    ";
+	for(col=0;col<18;col++){
+		output << (col%10) << " ";
+	}
+
+	for(row=0;row<6;row++){
+		output << endl << "Row: " << row << " ";
+		
+		for(col=0;col<18;col++){
+			if(the_world.agentRow==row && the_world.agentCol==col)
+				output << "A ";
+			else{
+				if(world_map[row][col]==WORLD_GOAL)
+					output << "G "; 
+				if(world_map[row][col]==WORLD_MINE)
+					output << "M ";
+				if(world_map[row][col]==WORLD_OBSTACLE)
+					output << "* ";
+				if(world_map[row][col]==WORLD_FREE)
+					output << "  ";
+			}
+		}
+	}
+	output << endl; 
+    output.close();
+}
 void print_state(){
 	int row,col;
   char line[1024];
