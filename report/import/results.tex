@@ -4,7 +4,8 @@ the highest valued action, and selecting an action with probability proportional
 to (rescaled) value. This method of breaking ties in the $Q$ matrix proved useful
 in board game environments  where the number of states were large. For the smaller
  environments, it didn't add any benefit and actually caused the agent to
-perform worse in some examples. The softer version of choosing proportional to
+perform worse in some examples. It replaced a simple "first best" choice, which turned out
+to actually be a better decision in some cases, hence we did not chose to use the maximiser in these environments.The softer version of choosing proportional to
 gain were less successful in all cases.
 
 %Since the tie breakers, or maximisers, will not come into play for small systems more than a few times, we only use them for environments with large state-action spaces. Among the test environments, this constitutes the board game environments.
@@ -21,20 +22,14 @@ maximiser enabled compared to runs without maximiser.
     \includegraphics[width=0.5\textwidth]{../data/tiebreakerplotconnectfourtictactoe.png}
     \caption{Comparing the use of maximiser on tic-tac-toe and connect four in a experiment with 100 episodes and reward averaged over 10 runs. }
     \label{fig:tiemaximiser}
-\end{figure}\\
-Enabling the maximiser replaced a simple "first best" choice, which turned out
-to actually be a better decision in some cases, hence we did chose to always use
-the maximiser.
-
+\end{figure}
 %When testing our agent on very different environments, from simple board games to context bandit problems. We observe that even very general approaches to improving performance against a large class of environments, might hurt the performance against other environments. We addressed large state space environments, where the state is altered gradually and good actions are good over a range of similar states, and introduced a tie breaker that tries to make informed decisions when faced with a lack of statistical data. This replaced a simple "first best" choice, which turned out to actually be a better decision in some cases. 
-
 \paragraph{UCB policies}
-
 We tested two versions of UCB policies in an attempt to shore up
 Sarsa($\lambda$)'s unsuitability for bandit problems. The idea was to consider
 all states as independent bandit problems, where the UCB policies would decide
 the balance between exploration vs exploitation. The simpler UCB1 does not
-consider any upper bound on the reward and will never be satisfied, this causes
+consider any upper bound on the reward and will never be satisfied and this causes
 it to perform exploration even when faced with certain victory options. The KL-UCB
 considers the case where the reward is bounded. Both however, assumes long time
 horizons, where exploration occurs gradually. When faced with the short
@@ -42,7 +37,7 @@ experiments in the competition, where the optimal approach should be to explore
 first, and exploit later, they fared worse than simply going for the best
 option. We believe the meagre success with exploration is also due to that many 
 of the environments have many large penalties and few rewards. Exploring anything 
-but the first found reward is notcost efficient. The fact that all states are considered a new
+but the first found reward is not cost efficient. The fact that all states are considered a new
 case where exploration should be performed only amplifies the cost of using UCB.
 
 \paragraph{Performance}
@@ -63,11 +58,10 @@ environments are good representations of the competition environments.
     \centering
     \includegraphics[width=0.5\textwidth]{../data/lambdasweepplot.png}
     \caption{How the cumulative reward changes with the different values of $\lambda$.}
-    \label{fig:awesome_image}
+    \label{fig:lambdasweep}
 \end{figure}
-Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs
-in a 100 episode experiment against all environments with parameters set to
-$\lambda = 0.2$ and $\alpha = 1$
+The performance of our agent is visualized in Figure~\ref{fig:cumreward}. It shows how the agents average performance over 50 runs
+in a 100 episode experiment against all seven competition environments with parameters its parameters $\lambda = 0.2$, $\alpha = 1$ maximiser off and no UCB.
 
 \begin{figure}[h!]
     \centering
@@ -75,10 +69,9 @@ $\lambda = 0.2$ and $\alpha = 1$
     \caption{Agents cumulative reward averaged over 50 runs in a experiment with 100 episodes}
     \label{fig:cumreward}
 \end{figure} 
-The yellow line indicates the performance on the mines environment and the
-learning phase of the agent is clear after around 10 episodes. Connect four, red
+The yellow curve represents the performance on the mines environment and at around 10 episodes it is clear that the agent has learned the environment. The performance on Connect four, represented as the red curve
 in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other
-environments hence it is closer to zero but still increasing.
+environments, which explains why it might look like the agent performs worse in this environment, but the agent does indeed learn this environment too.
 
 Fig~\ref{fig:mineslearning} shows how our agent gradually finds a shorter (but not the shortest) path to the goal in the mines environment. Red coloured paths are early in the experiment, green are later. In this case, from the 18th episode and onwards, the agent takes the same path every time.
 
@@ -91,4 +84,4 @@ Fig~\ref{fig:mineslearning} shows how our agent gradually finds a shorter (but n
 
 We also noticed that Sarsa($\lambda$) in its original formulation will decide on the next action before it updates the Q matrix. In the specific case where penalties are incurred for illegal moves, and the agents are forced to try again, this causes the agent to perform every illegal move twice. We decided to stick with the original, suboptimal version, since checking policy twice at each time step is inelegant and we wanted to avoid overtraining.
 
-All code is publicly available via ~\cite{githubrepo}.
+All code, plots and anything other related to this project is publicly available via ~\cite{githubrepo}.

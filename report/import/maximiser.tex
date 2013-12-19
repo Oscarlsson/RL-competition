@@ -21,10 +21,10 @@ lose.
 The easiest approach is to just go with the first or last action a in
 $\textit{arg max}_{a \in A} Q(S,a)$. Just from the example environments, there
 are cases where this is a good idea, and cases where this is a bad idea. In
-Tic-tac-toe, reverting to a specific order of tries, every time you end up in a
+Tic-tac-toe reverting to a specific order of tries, every time you end up in a
 new state, is bad in the sense that you will play more illegal moves. But it can
 also be good because due to how actions are enumerated, the first three of the
-nine actions will combine into a three in a row. This assuming that the AI
+nine actions could combine into a three in a row. This assuming that the AI
 doesn't play in that row before. Similarly, in the connect four environment,
 playing in the same column over and over again results in a win quite often, but
 if that column is filled, it will similarly cause a lot of illegal moves.
