@@ -1,9 +1,18 @@
-\paragraph{Maximiser}
-In some environments, the state-action space could be very large compared to the experiment length and a sufficient mapping of the worth of each state-action pair might become too costly to perform. Then it becomes increasingly important how new situations are approached. 
+\paragraph{Complementing the core mechanism}
+In some environments, the state-action space could be very large compared to the experiment length and a sufficient mapping of the worth of each state-action pair might become too costly to perform. Then it becomes increasingly important how new or poorly sampled situations are approached.
+
+We tested a number of different approaches to complement the standard SARSA lambda algorithm, both when it comes to exploration vs exploitation, and how to break ties. The key observation is that SARSA lambda is capable of 
+
+\subsection{UCB1 and KL-UCB}
+
+\subsection{Maximisers}
 
 In SARSA lambda, whenever we reach a new state $S$, there is no clear differentiation between different actions $\{A\}$, statistically, all are equally bad (if the outlook is pessimistic) or good (of we have an optimistic outlook), but no matter how we choose to break the tie in the $Q(S,A)$ matrix, there will be some environments where we will benefit, and some where we will loose.
 
-We tested a number of different approaches to complement the standard SARSA lambda algorithm, both when it comes to exploration vs exploitation, and 
+The naive approach is to just go with the first or last a $\textit{arg max}_{a\epsilon A} Q(S,a)$ value. Just from the example environments, there are cases where this is a good idea, and cases where this is a bad idea. In tic tac toe, playing in the upper left causes you to often 
+
+
+
 
 
 either the number of state, action pairs are just more than the experiment length, or the penalties incurred during exploration far outweighs the small gains in 
