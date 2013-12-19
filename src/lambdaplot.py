@@ -9,10 +9,10 @@ csvfile = sys.argv[1]
 
 data = pd.read_table(csvfile, sep=' ', header=None, index_col=[0,1])
 indexes = set([a for (a,b) in data.index])
-print data.loc['Bandit']
+
 for index in indexes:
     plotdata = data.loc[index]
-    plotdata[3].plot(style='.')
+    plotdata[3].sort_index().plot()
 
 plt.xlabel("Lambda")
 plt.ylabel("Cumulative reward")
