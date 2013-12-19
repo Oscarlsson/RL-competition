@@ -1,6 +1,8 @@
-In addition to the implemented agent we've implemented two environments representing the board games ticktacktoe and connect four. The ticktacktoe environment is a fully observable Markov Decision Process (MDP) whilst connect four is a Partially observable MDP (POMDP), both are played against an AI that chooses a random move among the set of legal ones available at the time. Illegal moves by the agent are punished and the agent gets to try again from the same board state.
+In addition to the implemented agent we've implemented two environments representing the board games tic-tac-toe and connect four. The ticktacktoe environment is a fully observable Markov Decision Process (MDP) whilst connect four is a Partially observable MDP (POMDP), both are played against an AI that chooses a random move among the set of legal ones available at the time. Illegal moves by the agent are punished and the agent gets to try again from the same board state.
 
-\begin{tabular}{ l tic tac toe | connect four }
+\begin{tabular}{ l l | l }
+& tic tac toe & connect four \\
+\hline
   \# of states 	& 19683 	& 2188 \\
   \# of actions  	& 9 		& 7 \\
   Agent wins 	& 10 		& 1 \\
@@ -10,7 +12,7 @@ In addition to the implemented agent we've implemented two environments represen
 
 \paragraph{Tic-tac-toe}
 
-The board state is considered a ternary representation of an integer number that defines the state. Each digit describes if a site at the board is empty (0), occupied by player (1) or by the AI, player (2). Playing at one of the 9 sites corresponds to different actions. The agent starts and wins by getting 3 in a row or when the board is filled.
+The board state is considered a ternary representation of an integer number that defines the state. Each digit describes if a site at the board is empty (0), occupied by player (1) or by the AI, player (2). Playing at one of the 9 sites (3x3 game board) corresponds to different actions. The agent starts and wins by getting 3 in a row or when the board is filled.
 
 \paragraph{Connect four}
 
