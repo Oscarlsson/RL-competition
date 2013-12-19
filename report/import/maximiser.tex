@@ -3,16 +3,16 @@ In some environments, the state-action space could be very large compared to the
 
 We tested a number of different approaches to complement the standard SARSA lambda algorithm, both when it comes to exploration vs exploitation, and how to break ties. The key observation is that SARSA lambda is capable of 
 
-\subsection{UCB1 and KL-UCB}
-
 \subsection{Maximisers}
 
 In SARSA lambda, whenever we reach a new state $S$, there is no clear differentiation between different actions $\{A\}$, statistically, all are equally bad (if the outlook is pessimistic) or good (of we have an optimistic outlook), but no matter how we choose to break the tie in the $Q(S,A)$ matrix, there will be some environments where we will benefit, and some where we will loose.
 
-The naive approach is to just go with the first or last a $\textit{arg max}_{a\epsilon A} Q(S,a)$ value. Just from the example environments, there are cases where this is a good idea, and cases where this is a bad idea. In tic tac toe, playing in the upper left causes you to often 
+The easiest approach is to just go with the first or last a $\textit{arg max}_{a\epsilon A} Q(S,a)$ value. Just from the example environments, there are cases where this is a good idea, and cases where this is a bad idea. In tic tac toe, reverting to a specific order of tries every time you end up in a new state is bad in the sense that you will play more illegal moves, but it can also be good because due to that how actions are enumerated, the first three test actions will combine into a three in a row, if the AI doesn't happen to play in that line before. Similarly, in the connect four environment, playing in the same column over and over again results in a win quite often, but if that column is filled, it will similarly cause a lot of illegal moves.
 
+Another method we tried was to assume that in many environments, a state is reminiscent of recently visited states. Even if we lack any information about which action would be beneficial in a specific state, we might have better sampling of the last states we visited, or the states before that. We define a  "worth" of an untried action as
 
+\begin{equation}
+	w(a) = \sum_{i\epsilon |H|} nActions^{-i} Q(s_{h_i},a) \sqrt{C(s_{h_i},a)}/\sum_H \sqrt{C(H,a)}
+\end{equation}
 
-
-
-either the number of state, action pairs are just more than the experiment length, or the penalties incurred during exploration far outweighs the small gains in 
+It places more worth on actions that were deemed good in recent history, giving more weight to well founded predictions. We tried both to always choose the highest worth action, and selecting an action with probability proportional to (rescaled) worth. This method of breaking ties in the Q matrix proved useful in board game environments  where the number of states were large, but for the other environments, it didn't add any benefit and actually caused the agent to perform worse in some examples. The softer version of choosing proportional to gain were less successful in all cases. A problem with sticking to the highest worth is that you tend to take one of few extreme paths: in the mines environment you have a harder time learning to circumventing an obstacle, since the algorithm causes you to go more in straight lines.

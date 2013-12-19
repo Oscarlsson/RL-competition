@@ -1,6 +1,12 @@
 All code is found at https://github.com/Oscarlsson/RL-competition
 
-Choosing $\lambda$
+Improvements using tiebreaker?!
+
+
+Running the agent with varying step sizes $\alpha$ we observed bad results on all values but $\alpha=1$.
+
+
+Sweep $\lambda$
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{../data/lambdasweepplot.png}
@@ -9,10 +15,13 @@ Choosing $\lambda$
 \end{figure}
 
 
-Our agent in a 100 episode run against all environments with $\lambda = 0.2$ and $\alpha = 1$
-\begin{figure}[h]
+Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs in a 100 episode experiment against all environments with parameters set to $\lambda = 0.2$ and $\alpha = 1$
+
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{../data/100episodes_50runs.png}
-    \caption{Awesome Image}
-    \label{fig:awesome_image}
+    \caption{Agents cumulative reward averaged over 50 runs}
+    \label{fig:cumreward}
 \end{figure}
+
+The yellow line indicates the performance on the mines environment and the learning phase of the agent is clear after around 10 episodes. Connect four, red in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other environments hence it is closer to zero but still increasing.
