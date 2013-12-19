@@ -2,11 +2,11 @@
 \paragraph{Sarsa($\lambda$)}
 The agent is based on the Sarsa($\lambda$) algorithm, which learns a set of
 action values $Q_t(s,a)$ by the use of eligibility
-traces~\cite{Sutton:1998:IRL:551283}. The eligibility trace is initialized to
-zero for every state-action pair, and for every transition all traces are
-decayed by a factor $\gamma\lambda$. In addition, the trace of the current
-state-action pair is incremented by $1$. The Q-table is then updated according
-to:
+traces~\cite{Sutton:1998:IRL:551283}. The eligibility trace $Z_t(s,a)$ is
+initialized to zero for every state-action pair, and for every transition all
+traces are decayed by a factor $\gamma\lambda$. In addition, the trace of the
+current state-action pair is incremented by $1$. The Q-table is then updated
+according to:
 \begin{equation}
         \forall s,a : Q_{t+1}(s,a) = Q_t(s,a) + \alpha\delta_t Z_t(s,a),
 \end{equation}
@@ -29,7 +29,7 @@ where $D_\mathrm{KL}(P\Vert{Q}) = p \log
 \frac{p}{q}+(1-p)\log\frac{1-p}{1-q}$.~\cite{DBLP:journals/jmlr/GarivierC11}
 
 To combine the UCB methods with Sarsa($\lambda$) we let
-$\overline{R_s(a)}=Q(s,a)$ and $n_s(a) = \sum_{i=1}^tZ_t(s,a)$. Further, we let
+$\overline{R_s(a)}=Q(s,a)$ and $n_s(a) = \sum_{i=1}^tZ_i(s,a)$. Further, we let
 $\tau = \sum_a{n_s(a)}$ denote a local time for the bandit problem in context
 $s$.
 
