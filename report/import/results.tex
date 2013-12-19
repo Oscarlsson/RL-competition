@@ -9,12 +9,16 @@ value is that you tend to take one of few extreme paths: in the mines
 environment you have a harder time learning to circumventing an obstacle, since
 the algorithm causes you to go more in straight lines.
 
-Improvements using tiebreaker?!
-Spelar bara roll när man har tie och i små system används den inte ofta. I slutet av runs har man inte ties. En tie är när två Q-värden är samma och vi måste välja en av dom.
-Tiebreaker i Connectfour och tic-tac-toe.
+We chose to only use the maximiser in the two environments with large state space, tic-tac-toe and connect four. The maximiser is used more often in environments with large state spaces since ties will occur more often. Fig~\ref{fig:tiemaximiser} shows the slight increase in cumulative reward with maximiser enabled compared to runs without maximiser.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../data/tiebreakerplotconnectfourtictactoe.png}
+    \caption{Comparing the use of maximiser on tic-tac-toe and connect four in a experiment with 100 episodes and reward averaged over 10 runs. }
+    \label{fig:tiemaximiser}
+\end{figure}\\
+Enabling the maximiser replaced a simple "first best" choice, which turned out to actually be a better decision in some cases, hence we did chose to always use the maximiser.
 
-
-When testing our agent on very different environments, from simple board games to context bandit problems. We observe that even very general approaches to improving performance against a large class of environments, might hurt the performance against other environments. We addressed large state space environments, where the state is altered gradually and good actions are good over a range of similar states, and introduced a tie breaker that tries to make informed decisions when faced with a lack of statistical data. This replaced a simple "first best" choice, which turned out to actually be a better decision in some cases. 
+%When testing our agent on very different environments, from simple board games to context bandit problems. We observe that even very general approaches to improving performance against a large class of environments, might hurt the performance against other environments. We addressed large state space environments, where the state is altered gradually and good actions are good over a range of similar states, and introduced a tie breaker that tries to make informed decisions when faced with a lack of statistical data. This replaced a simple "first best" choice, which turned out to actually be a better decision in some cases. 
 
 We tested two versions of UCB policies in an attempt to shore up Sarsa($\lambda$)s unsuitability for bandit problems. The idea was to consider all states as independent bandit problems, where the UCB policies would decide the balance between exploration vs exploitation. The simpler UCB1 does not consider any upper bound on the reward and will never be satisfied, this causes it to start exploration even when faced with certain victory options. The KL-UCB considers the case where the reward is bounded. Both however, assumes long time horizons, where exploration occurs gradually. When faced with the short experiments in the competition, where the optimal approach should be to explore first, and exploit later, they fared worse than simply going for the best option. This is also due to that many of the environments have many large penalties and few rewards. Exploring anything but the first found reward is not cost efficient. 
 
@@ -34,7 +38,7 @@ Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{../data/100episodes_50runs.png}
-    \caption{Agents cumulative reward averaged over 50 runs}
+    \caption{Agents cumulative reward averaged over 50 runs in a experiment with 100 episodes}
     \label{fig:cumreward}
 \end{figure}
 
