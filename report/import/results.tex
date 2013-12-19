@@ -1,8 +1,18 @@
-
-
-All code is found at https://github.com/Oscarlsson/RL-competition
+We tried both to always choose
+the highest valued action, and selecting an action with probability proportional
+to (rescaled) value. This method of breaking ties in the Q matrix proved useful
+in board game environments  where the number of states were large, but for the
+other environments, it didn't add any benefit and actually caused the agent to
+perform worse in some examples. The softer version of choosing proportional to
+gain were less successful in all cases. A problem with sticking to the highest
+value is that you tend to take one of few extreme paths: in the mines
+environment you have a harder time learning to circumventing an obstacle, since
+the algorithm causes you to go more in straight lines.
 
 Improvements using tiebreaker?!
+Spelar bara roll när man har tie och i små system används den inte ofta. I slutet av runs har man inte ties. En tie är när två Q-värden är samma och vi måste välja en av dom.
+Tiebreaker i Connectfour och tic-tac-toe.
+
 
 When testing our agent on very different environments, from simple board games to context bandit problems. We observe that even very general approaches to improving performance against a large class of environments, might hurt the performance against other environments. We addressed large state space environments, where the state is altered gradually and good actions are good over a range of similar states, and introduced a tie breaker that tries to make informed decisions when faced with a lack of statistical data. This replaced a simple "first best" choice, which turned out to actually be a better decision in some cases. 
 
@@ -41,3 +51,5 @@ Sweep $\lambda$
 The yellow line indicates the performance on the mines environment and the learning phase of the agent is clear after around 10 episodes. Connect four, red in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other environments hence it is closer to zero but still increasing.
 
 Training vs the test environments, under the assumption that they are good representation for what we faced in the competition.
+
+All code is found at https://github.com/Oscarlsson/RL-competition
