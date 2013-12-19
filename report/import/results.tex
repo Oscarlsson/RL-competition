@@ -1,11 +1,16 @@
+
+
 All code is found at https://github.com/Oscarlsson/RL-competition
 
 Improvements using tiebreaker?!
 
 When testing our agent on very different environments, from simple board games to context bandit problems. We observe that even very general approaches to improving performance against a large class of environments, might hurt the performance against other environments. We addressed large state space environments, where the state is altered gradually and good actions are good over a range of similar states, and introduced a tie breaker that tries to make informed decisions when faced with a lack of statistical data. This replaced a simple "first best" choice, which turned out to actually be a better decision in some cases. 
 
+We tested two versions of UCB as policies in an attempt to shore up Sarsa($\lambda$)s unsuitability for bandit problems. The idea was to consider all states as independent bandit problems, where the UCB policies would decide the balance between exploration vs exploitation. The simpler UCB1 does not consider any upper bound on the reward and will never be satisfied, this causes it to start exploration even when faced with certain victory options. The KL-UCB considers the case where the reward is bounded. Both however, assumes long time horizons, where exploration occurs gradually. When faced with the short experiments in the competition, where the optimal approach should be to explore first, and exploit in the end
+
 Running the agent with varying step sizes $\alpha$ we observed bad results on all values but $\alpha=1$. Similarly, for most $\lambda$ values...KOLLA HÄR!!
 
+We also noticed that Sarsa($\lambda$) in its original formulation will decide on the next action before it updates the Q matrix. In the specific case where penalties 
 
 Sweep $\lambda$
 \begin{figure}[h]
@@ -34,3 +39,5 @@ Sweep $\lambda$
 \end{figure}
 
 The yellow line indicates the performance on the mines environment and the learning phase of the agent is clear after around 10 episodes. Connect four, red in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other environments hence it is closer to zero but still increasing.
+
+Training vs the test environments, under the assumption that they are good representation for what we faced in the competition.
