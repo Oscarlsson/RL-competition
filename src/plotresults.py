@@ -46,12 +46,15 @@ plt.gca().set_color_cycle([colormap(i) for i in np.linspace(0, 0.9, num_plots)])
 
 for result in results:
     csvfile = args.D + "/" + result
+
     if experiment == 'MyExperiment':
         csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,525,25))
     elif experiment.endswith("100"):
         csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,101))
     elif experiment.endswith("1000"):
         csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,1001))
+    elif experiment == 'ChristosExperiment':
+        csvdata = pd.read_csv(csvfile, index_col=0, header=None, names=range(0,101))
 
     agent = csvfile.split("/")[-2]
     plot(csvdata, agent)
