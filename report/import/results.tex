@@ -61,7 +61,7 @@ environments are good representations of the competition environments.
     \label{fig:lambdasweep}
 \end{figure}
 The performance of our agent is visualized in Figure~\ref{fig:cumreward}. It shows how the agents average performance over 65 runs
-in a 100 episode experiment against all seven competition environments. Maximiser is off and no UCB. Tic tac toe benefit greatly from $\lambda= 0$, mines perform slightly better with $\lambda$ around 0.2. After the competition we noticed that the chain environment performed noticeably better for high $\lambda$. The other environments doesn't depend strong enough on $\lambda$ to warrant any specific value. Since we lacked sufficient chains data, we decided on $\lambda = 0.2$ for unknown environments.
+in a 100 episode experiment against all seven competition environments. Maximiser is off, no UCB and $Q$ is initialised to max reward, i.e. optimistic explorative. Tic tac toe benefit greatly from $\lambda= 0$, mines perform slightly better with $\lambda$ around 0.2. After the competition we noticed that the chain environment performed noticeably better for high $\lambda$. The other environments doesn't depend strong enough on $\lambda$ to warrant any specific value. Since we lacked sufficient chains data, we decided on $\lambda = 0.2$ for unknown environments.
 
 \begin{figure}[h!]
     \centering
