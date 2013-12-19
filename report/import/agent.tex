@@ -11,7 +11,7 @@ according to:
         \forall s,a : Q_{t+1}(s,a) = Q_t(s,a) + \alpha\delta_t Z_t(s,a),
 \end{equation}
 where $\delta_t$ is the temporal difference defined by $\delta_t = R_{t+1} +
-\gamma Q_t(S_{t+1},A_{t+1}) - Q_t(S_t,A_t)$. The Q-values are initialized to
+\gamma Q_t(s_{t+1},a_{t+1}) - Q_t(s_t,a_t)$. The Q-values are initialized to
 $R_{max}$ for all small state space environments ($\vert{S}\vert < 50$) and to
 $(R_{min}+R_{max})/2$ otherwise, since an optimistic initialization encourages
 exploration among the set of actions.
