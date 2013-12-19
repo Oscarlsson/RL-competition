@@ -28,7 +28,7 @@ defined by:
 where $D_\mathrm{KL}(P\Vert{Q}) = p \log
 \frac{p}{q}+(1-p)\log\frac{1-p}{1-q}$.~\cite{DBLP:journals/jmlr/GarivierC11}
 
-To combine the UCB methods with Sarsa($\lambda$) we let
+To combine the UCB methods with Sarsa($\lambda$) we let the average reward
 $\overline{R_s(a)}=Q(s,a)$, and $n_s(a)=\sum_{i=1}^tZ_i(s,a)$ be a measure of
 how often the state-action pair $(s,a)$ has been updated. Further, we let $\tau
 = \sum_a{n_s(a)}$ denote a local time for the bandit problem in context $s$.
