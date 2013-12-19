@@ -21,7 +21,7 @@ An Upper-Confidence Bound (UCB) policy maps a state $s$ to the action maximizing
 an upper bound. For Kullback-Leibler UCB, the bound for a given action $a$ is
 defined by:
 \begin{equation}
-    \max\big\{q \in \Theta : n_s(a)
+    \max_{q \in ]0,1[}\big\{n_s(a)
         D_{\mathrm{KL}}\left(\overline{R_s(a)}\Big\Vert{q}\right) \le \log(\tau) +
         c\log\log(\tau))\big\}
 \end{equation}
@@ -29,9 +29,9 @@ where $D_\mathrm{KL}(P\Vert{Q}) = p \log
 \frac{p}{q}+(1-p)\log\frac{1-p}{1-q}$.~\cite{DBLP:journals/jmlr/GarivierC11}
 
 To combine the UCB methods with Sarsa($\lambda$) we let
-$\overline{R_s(a)}=Q(s,a)$ and $n_s(a) = \sum_{i=1}^tZ_i(s,a)$. Further, we let
-$\tau = \sum_a{n_s(a)}$ denote a local time for the bandit problem in context
-$s$.
+$\overline{R_s(a)}=Q(s,a)$, and $n_s(a)=\sum_{i=1}^tZ_i(s,a)$ be a measure of
+how often the state-action pair $(s,a)$ has been updated. Further, we let $\tau
+= \sum_a{n_s(a)}$ denote a local time for the bandit problem in context $s$.
 
 \input import/maximiser.tex
 
