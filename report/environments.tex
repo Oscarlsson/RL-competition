@@ -1,29 +1,17 @@
-In addition to the implemented agent we've implemented two environments representing the board games ticktacktoe and connect four. The ticktacktoe environment is a fully observable Markov Decision Process (MDP) whilst connect four is a Partially observable MDP (POMDP), both are played against an AI that chooses a random move among the set of legal ones available at the time.
+In addition to the implemented agent we've implemented two environments representing the board games ticktacktoe and connect four. The ticktacktoe environment is a fully observable Markov Decision Process (MDP) whilst connect four is a Partially observable MDP (POMDP), both are played against an AI that chooses a random move among the set of legal ones available at the time. Illegal moves by the agent are punished and the agent gets to try again from the same board state.
 
+\begin{tabular}{ l tic tac toe | connect four }
+  \# of states 	& 19683 	& 2188 \\
+  \# of actions  	& 9 		& 7 \\
+  Agent wins 	& 10 		& 1 \\
+  Illegal move 	& -10 	& -1 \\
+  AI wins	 	& -1 		& 0 \\
+\end{tabular}
 
 \paragraph{Tic-tac-toe}
-Number of states: \~19683
-Number of actions: 9
-Reward space : -10 to 10.
 
-The $3\times3$ board state is represented by a trineary s
+The board state is considered a ternary representation of an integer number that defines the state. Each digit describes if a site at the board is empty (0), occupied by player (1) or by the AI, player (2). Playing at one of the 9 sites corresponds to different actions. The agent starts and wins by getting 3 in a row or when the board is filled.
 
-
-\\
-\\
-\\
-Agent fills the board: 1\\
-Agent wins: 10\\
-Illegal move: -10\\
-AI wins: -1
 \paragraph{Connect four}
-Number of states: 2188 \\
-Number of actions: 7\\
-Reward space : -1 to 1\\
-\\
-The states are represented by a integer calculated as..\\
-\\
-Illegal move: -1\\
-The board is full:  0\\
-AI wins: 0\\
-Agent wins: 1
+
+Connect four is played on a vertical board game, game pieces are dropped down from the top and fills up the board from the bottom. In this environment, the agent are only allowed to observe the board state from the top, playing a piece in one column will hide previous moves in that column from the agent. Similarly to tic tac toe, the agent receives an integer that represents a ternary digit sequence describing the topmost board piece in each (of seven) column. The starting player is randomised, and the game can end in a draw.
