@@ -1,0 +1,112 @@
+../outputs/131218-23-12-36-LibRLAgent-Episod100/resultBanditEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+9 # episode reward
+9 # episode reward
+7 # episode reward
+5 # episode reward
+14 # episode reward
+6 # episode reward
+45 # episode reward
+20 # episode reward
+10 # episode reward
+0 # episode reward
+38 # episode reward
+6 # episode reward
+27 # episode reward
+93 # episode reward
+14 # episode reward
+20 # episode reward
+32 # episode reward
+116 # episode reward
+39 # episode reward
+22 # episode reward
+14 # episode reward
+41 # episode reward
+19 # episode reward
+45 # episode reward
+15 # episode reward
+45 # episode reward
+63 # episode reward
+28 # episode reward
+20 # episode reward
+33 # episode reward
+16 # episode reward
+55 # episode reward
+0 # episode reward
+0 # episode reward
+43 # episode reward
+0 # episode reward
+159 # episode reward
+29 # episode reward
+133 # episode reward
+32 # episode reward
+18 # episode reward
+5 # episode reward
+8 # episode reward
+59 # episode reward
+42 # episode reward
+6 # episode reward
+19 # episode reward
+54 # episode reward
+11 # episode reward
+37 # episode reward
+51 # episode reward
+82 # episode reward
+21 # episode reward
+112 # episode reward
+60 # episode reward
+0 # episode reward
+68 # episode reward
+28 # episode reward
+48 # episode reward
+18 # episode reward
+59 # episode reward
+30 # episode reward
+133 # episode reward
+10 # episode reward
+9 # episode reward
+23 # episode reward
+56 # episode reward
+1 # episode reward
+1 # episode reward
+31 # episode reward
+68 # episode reward
+7 # episode reward
+16 # episode reward
+95 # episode reward
+72 # episode reward
+100 # episode reward
+23 # episode reward
+146 # episode reward
+88 # episode reward
+3 # episode reward
+26 # episode reward
+44 # episode reward
+10 # episode reward
+8 # episode reward
+8 # episode reward
+0 # episode reward
+15 # episode reward
+58 # episode reward
+0 # episode reward
+203 # episode reward
+33 # episode reward
+149 # episode reward
+62 # episode reward
+61 # episode reward
+3 # episode reward
+63 # episode reward
+62 # episode reward
+11 # episode reward
+149 # episode reward
+13 # episode reward
+4018 # average total reward over runs
+
+Program Complete.
