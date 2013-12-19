@@ -15,8 +15,8 @@ for index in indexes:
     # Normal plot
     #plotdata[3].sort_index().plot()
     # Normalized
-    plotdata = (plotdata[3]-plotdata[3].min())
-    (plotdata/plotdata.max()).sort_index().plot()
+    plotdata = (plotdata[3])#-plotdata[3].min())
+    (plotdata/plotdata.abs().max()).sort_index().plot()
 
 plt.xlabel("Lambda")
 plt.ylabel("Cumulative reward")
