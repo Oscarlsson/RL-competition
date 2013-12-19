@@ -49,7 +49,7 @@ diffuse the reward, step size $\alpha$ determines how quick the agent overwrites
 old information, how we initialise the Q matrix determines if the agent is
 optimistic or pessimistic when it comes to the degree of exploration. With the
 UCB policies, we had the option to adjust the tendency to explore with a scalar,
-we have different maximisers that attempts to exploit structure in the problems.
+we have different maximisers that attempt to exploit structure in the problems.
 Naturally we didn't have time to sweep all parameters for all environments, but
 we varied different parameters, keeping most constant and tried to find good
 parameter values for different types of problems. At initialisation, the agent
@@ -63,7 +63,9 @@ environments are good representations of the competition environments.
     \caption{How the cumulative reward changes with the different values of $\lambda$.}
     \label{fig:awesome_image}
 \end{figure}
-Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs in a 100 episode experiment against all environments with parameters set to $\lambda = 0.2$ and $\alpha = 1$
+Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs
+in a 100 episode experiment against all environments with parameters set to
+$\lambda = 0.2$ and $\alpha = 1$
 
 \begin{figure}[h!]
     \centering
@@ -71,7 +73,10 @@ Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs
     \caption{Agents cumulative reward averaged over 50 runs in a experiment with 100 episodes}
     \label{fig:cumreward}
 \end{figure} 
-The yellow line indicates the performance on the mines environment and the learning phase of the agent is clear after around 10 episodes. Connect four, red in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other environments hence it is closer to zero but still increasing.
+The yellow line indicates the performance on the mines environment and the
+learning phase of the agent is clear after around 10 episodes. Connect four, red
+in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other
+environments hence it is closer to zero but still increasing.
 
 Fig~\ref{fig:mineslearning} .. ``Example of how the agent learns a short path from start to goal (yellow). The agent traverse the world 100 times, early attempts are coloured red, later green. Hitting a mine (black) costs a penalty. Some noise is added to the paths to make it easier to distinguish them.``
 Work on this!
