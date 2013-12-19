@@ -7,7 +7,7 @@ action pairs are decayed by a factor $\gamma\lambda$, and the trace of the
 current state action pair is also increased by $1$. The Q-table is then updated
 according to:
 \begin{equation}
-        Q_{t+1}(s,a) = Q_t(s,a) + \alpha\delta_t Z_t(s,a) \forall s,a,
+        \forall s,a : Q_{t+1}(s,a) = Q_t(s,a) + \alpha\delta_t Z_t(s,a),
 \end{equation}
 where $\delta_t$ is the temporal difference defined by $\delta_t = R_{t+1} +
 \gamma Q_t(S_{t+1},A_{t+1}) - Q_t(S_t,A_t)$.
