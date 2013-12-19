@@ -39,14 +39,14 @@ sampling of the last states we visited, or the states before that. We define a v
     \sqrt{n_{s_i}(a)}\Big/\sum_{i=1}^{t} \sqrt{n_{s_i}(a)}
 \end{equation}
 
-It places more worth on actions that were deemed good in recent history, giving
-more weight to well founded predictions. We tried both to always choose the
-highest worth action, and selecting an action with probability proportional to
-(rescaled) worth. This method of breaking ties in the Q matrix proved useful in
-board game environments  where the number of states were large, but for the
+It assigns a higher value to actions that were deemed good in recent history,
+giving more weight to well founded predictions. We tried both to always choose
+the highest valued action, and selecting an action with probability proportional
+to (rescaled) value. This method of breaking ties in the Q matrix proved useful
+in board game environments  where the number of states were large, but for the
 other environments, it didn't add any benefit and actually caused the agent to
 perform worse in some examples. The softer version of choosing proportional to
 gain were less successful in all cases. A problem with sticking to the highest
-worth is that you tend to take one of few extreme paths: in the mines
+value is that you tend to take one of few extreme paths: in the mines
 environment you have a harder time learning to circumventing an obstacle, since
 the algorithm causes you to go more in straight lines.
