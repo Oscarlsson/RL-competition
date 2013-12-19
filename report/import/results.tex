@@ -33,9 +33,7 @@ The parameter space for our agent is very large, $\lambda$ decides how much we d
     \includegraphics[width=0.5\textwidth]{../data/lambdasweepplot.png}
     \caption{How the cumulative reward changes with the different values of $\lambda$.}
     \label{fig:awesome_image}
-\end{figure} \\
-
-
+\end{figure}
 Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs in a 100 episode experiment against all environments with parameters set to $\lambda = 0.2$ and $\alpha = 1$
 
 \begin{figure}[h!]
@@ -43,17 +41,18 @@ Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs
     \includegraphics[width=0.5\textwidth]{../data/100episodes_50runs.png}
     \caption{Agents cumulative reward averaged over 50 runs in a experiment with 100 episodes}
     \label{fig:cumreward}
-\end{figure} \\
-
+\end{figure} 
 The yellow line indicates the performance on the mines environment and the learning phase of the agent is clear after around 10 episodes. Connect four, red in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other environments hence it is closer to zero but still increasing.
 
+Fig~\ref{fig:mineslearning} .. ``Example of how the agent learns a short path from start to goal (yellow). The agent traverse the world 100 times, early attempts are coloured red, later green. Hitting a mine (black) costs a penalty. Some noise is added to the paths to make it easier to distinguish them.``
+Work on this!
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{../data/minPlot.png}
     \caption{Example of how the agent learns a short path from start to goal (yellow). The agent traverse the world 100 times, early attempts are coloured red, later green. Hitting a mine (black) costs a penalty. Some noise is added to the paths to make it easier to distinguish them.}
     \label{fig:mineslearning}
-\end{figure} \\
+\end{figure} 
 
 
 We also noticed that Sarsa($\lambda$) in its original formulation will decide on the next action before it updates the Q matrix. In the specific case where penalties are incurred for illegal moves, and the agents are forced to try again, this causes the agent to perform every illegal move twice. We decided to stick with the original, suboptimal version, since checking policy twice at each time step is inelegant and we wanted to avoid overtraining.
