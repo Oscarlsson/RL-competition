@@ -13,3 +13,4 @@ experiments/Episod200
 experiments/Episod1000
 experiments/MyExperiment
 agent/LibRLAgent
+MinesStates.txt
