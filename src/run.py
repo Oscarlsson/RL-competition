@@ -81,6 +81,8 @@ def print_finalresult(outputdir):
         episodes = range(0,101)
     elif experiment.endswith("1000"):
         episodes = range(0, 10001)
+    elif experiment.endswith("200"):
+        episodes = range(0, 201)
     else:
         episodes = range(0, 525,25)
 
