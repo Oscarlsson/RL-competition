@@ -4,14 +4,14 @@ experiment length and a sufficient mapping of the worth of each state-action
 pair might become too costly to perform. Then it becomes increasingly important
 how new or poorly sampled situations are approached.
 
-We tested a number of different approaches to complement the standard SARSA
-lambda algorithm, both when it comes to exploration vs exploitation, and how to
-break ties. The key observation is that Sarsa($\lambda$) is capable of quickly
-distributing the value function over correlated states.
+We tested a number of different approaches to complement the standard
+Sarsa($\lambda$) algorithm, both when it comes to exploration vs exploitation,
+and how to break ties. The key observation is that Sarsa($\lambda$) is capable
+of quickly distributing the value function over correlated states.
 
 \subsection{Maximisers}
 
-In SARSA lambda, whenever we reach a new state $S$, there is no clear
+In Sarsa($\lambda$), whenever we reach a new state $S$, there is no clear
 differentiation between different actions $\{A\}$, statistically, all are
 equally bad (if the outlook is pessimistic) or good (of we have an optimistic
 outlook), but no matter how we choose to break the tie in the $Q(S,A)$ matrix,
