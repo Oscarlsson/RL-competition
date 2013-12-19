@@ -2,7 +2,7 @@ LDFLAGS := $(LDFLAGS)  -lm -lrlutils -lrlexperiment -lrlgluenetdev
 CFLAGS := $(CFLAGS) -std=c++11 -Wall -pedantic -g -O3
 CC := g++
 
-all: MyExperiment Episod100 Episod1000
+all: MyExperiment Episod100 Episod1000 Episod200
 
 
 # 100 Episodes!!
@@ -12,6 +12,14 @@ Episod100: experiments/Episod100.o
 
 Episod100.o: experiments/Episod100.cc
 	$(CC)  $(CFLAGS) -c experiments/Episod100.cc -o experiments/Episod100.o 
+
+# 200 Episodes!!
+#
+Episod200: experiments/Episod200.o
+	$(CC) experiments/Episod200.o -lrlexperiment $(LDFLAGS) -o experiments/Episod200
+
+Episod200.o: experiments/Episod200.cc
+	$(CC)  $(CFLAGS) -c experiments/Episod200.cc -o experiments/Episod200.o 
 
 # 1000 episodes!
 #
