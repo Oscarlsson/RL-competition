@@ -191,14 +191,15 @@ const observation_t *env_start()
     srand(time(0));
 
 
-	if(fixed_start_state){
-        int state_valid=set_agent_state(start_row,start_col);
-        if(!state_valid){
-            set_random_state();
-        }
-    }else{
-        set_random_state();
-    }
+    set_agent_state(1,1);
+	// if(fixed_start_state){
+    //     int state_valid=set_agent_state(start_row,start_col);
+    //     if(!state_valid){
+    //         set_random_state();
+    //     }
+    // }else{
+    //     set_random_state();
+    // }
 
     
 	this_observation.intArray[0]=calculate_flat_state(the_world);
