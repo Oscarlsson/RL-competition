@@ -9,6 +9,7 @@ environments/connectfour/ConnectfourEnvironment
 environments/tictactoe/TictactoeEnvironment
 experiments/ChristosExperiment
 experiments/Episod100
+experiments/Episod200
 experiments/Episod1000
 experiments/MyExperiment
 agent/LibRLAgent
