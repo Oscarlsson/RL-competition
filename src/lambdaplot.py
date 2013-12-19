@@ -12,7 +12,11 @@ indexes = set([a for (a,b) in data.index])
 
 for index in indexes:
     plotdata = data.loc[index]
-    plotdata[3].sort_index().plot()
+    # Normal plot
+    #plotdata[3].sort_index().plot()
+    # Normalized
+    plotdata = (plotdata[3]-plotdata[3].min())
+    (plotdata/plotdata.max()).sort_index().plot()
 
 plt.xlabel("Lambda")
 plt.ylabel("Cumulative reward")
