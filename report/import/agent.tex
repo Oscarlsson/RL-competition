@@ -25,8 +25,9 @@ defined by:
         D_{\mathrm{KL}}\left(\overline{R_s(a)}\Big\Vert{q}\right) \le \log(\tau) +
         c\log\log(\tau))\big\}
 \end{equation}
-where $D_\mathrm{KL}(P\Vert{Q}) = p \log
-\frac{p}{q}+(1-p)\log\frac{1-p}{1-q}$.~\cite{DBLP:journals/jmlr/GarivierC11}
+where $D_\mathrm{KL}(P\Vert{Q}) = p \log \frac{p}{q}+(1-p)\log\frac{1-p}{1-q}$
+is the Kullback-Leibler divergence measure of $p$ and
+$q$.~\cite{DBLP:journals/jmlr/GarivierC11}
 
 To combine the UCB methods with Sarsa($\lambda$) we let the average reward
 $\overline{R_s(a)}=Q(s,a)$, and $n_s(a)=\sum_{i=1}^tZ_i(s,a)$ be a measure of
