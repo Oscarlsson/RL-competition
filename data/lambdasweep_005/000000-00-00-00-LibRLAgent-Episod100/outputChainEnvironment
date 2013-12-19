@@ -1,0 +1,672 @@
+../outputs/131218-14-50-45-LibRLAgent-Episod100/resultChainEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+32 # episode reward
+39 # episode reward
+12.8 # episode reward
+6 # episode reward
+35.8 # episode reward
+44.2 # episode reward
+45.2 # episode reward
+17.8 # episode reward
+33.8 # episode reward
+15.4 # episode reward
+13.6 # episode reward
+38.2 # episode reward
+56.4 # episode reward
+4.4 # episode reward
+17.2 # episode reward
+17 # episode reward
+29 # episode reward
+4 # episode reward
+27.2 # episode reward
+3.8 # episode reward
+8.4 # episode reward
+5.8 # episode reward
+44.6 # episode reward
+52.8 # episode reward
+11 # episode reward
+18.2 # episode reward
+8.8 # episode reward
+2.8 # episode reward
+52.4 # episode reward
+15.2 # episode reward
+63.2 # episode reward
+36.4 # episode reward
+54.2 # episode reward
+2.8 # episode reward
+65.2 # episode reward
+2 # episode reward
+4.2 # episode reward
+11 # episode reward
+5.4 # episode reward
+71.8 # episode reward
+22 # episode reward
+11.4 # episode reward
+26.2 # episode reward
+112 # episode reward
+41.6 # episode reward
+21.8 # episode reward
+28.6 # episode reward
+34.4 # episode reward
+4.4 # episode reward
+12.6 # episode reward
+4 # episode reward
+5 # episode reward
+2 # episode reward
+8.6 # episode reward
+78.4 # episode reward
+84.6 # episode reward
+12.2 # episode reward
+8.6 # episode reward
+12.2 # episode reward
+24.6 # episode reward
+14.4 # episode reward
+16.4 # episode reward
+58.6 # episode reward
+25 # episode reward
+27.2 # episode reward
+8.4 # episode reward
+74.2 # episode reward
+9.4 # episode reward
+28.8 # episode reward
+9.4 # episode reward
+11.6 # episode reward
+41.8 # episode reward
+15.8 # episode reward
+90.4 # episode reward
+9 # episode reward
+16.6 # episode reward
+20 # episode reward
+81.8 # episode reward
+8.6 # episode reward
+88.8 # episode reward
+4.6 # episode reward
+0 # episode reward
+104.6 # episode reward
+55.4 # episode reward
+21.8 # episode reward
+13.8 # episode reward
+5 # episode reward
+20.8 # episode reward
+6.2 # episode reward
+54.4 # episode reward
+71.4 # episode reward
+15.6 # episode reward
+28.4 # episode reward
+37.2 # episode reward
+2.2 # episode reward
+15.6 # episode reward
+19.2 # episode reward
+78.4 # episode reward
+19.4 # episode reward
+26.8 # episode reward
+2841.2 # average total reward over runs
+
+Program Complete.
+../outputs/131218-19-09-13-LibRLAgent-Episod100/resultChainEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+99 # episode reward
+1.4 # episode reward
+59.4 # episode reward
+1.2 # episode reward
+30.2 # episode reward
+36.6 # episode reward
+40.8 # episode reward
+68.8 # episode reward
+4.8 # episode reward
+7 # episode reward
+1.8 # episode reward
+4 # episode reward
+32.8 # episode reward
+41.4 # episode reward
+3.4 # episode reward
+6.8 # episode reward
+18.4 # episode reward
+17.4 # episode reward
+6.6 # episode reward
+6.8 # episode reward
+43 # episode reward
+15.8 # episode reward
+10.2 # episode reward
+37.2 # episode reward
+22.8 # episode reward
+1.4 # episode reward
+55 # episode reward
+11.2 # episode reward
+25 # episode reward
+46.2 # episode reward
+91.6 # episode reward
+21.8 # episode reward
+16.8 # episode reward
+4 # episode reward
+60.6 # episode reward
+4.6 # episode reward
+30.6 # episode reward
+28 # episode reward
+5 # episode reward
+52.8 # episode reward
+18.2 # episode reward
+24 # episode reward
+7.2 # episode reward
+3 # episode reward
+14.8 # episode reward
+53.4 # episode reward
+45 # episode reward
+3.4 # episode reward
+38.4 # episode reward
+26.8 # episode reward
+1.6 # episode reward
+102.6 # episode reward
+5.2 # episode reward
+67.2 # episode reward
+7.4 # episode reward
+2.6 # episode reward
+55.6 # episode reward
+11.4 # episode reward
+4 # episode reward
+42 # episode reward
+83.8 # episode reward
+77.4 # episode reward
+35.4 # episode reward
+46.2 # episode reward
+12.2 # episode reward
+50 # episode reward
+12 # episode reward
+6.4 # episode reward
+32.8 # episode reward
+61.4 # episode reward
+2.8 # episode reward
+11.6 # episode reward
+49.4 # episode reward
+8.6 # episode reward
+64 # episode reward
+12.4 # episode reward
+19.8 # episode reward
+76.8 # episode reward
+26 # episode reward
+11.6 # episode reward
+0.8 # episode reward
+22.4 # episode reward
+3.8 # episode reward
+2 # episode reward
+23.2 # episode reward
+9.2 # episode reward
+62.8 # episode reward
+20.8 # episode reward
+3.2 # episode reward
+4.2 # episode reward
+34.4 # episode reward
+13 # episode reward
+20.4 # episode reward
+65.6 # episode reward
+13.4 # episode reward
+45.4 # episode reward
+4.6 # episode reward
+4.4 # episode reward
+55.8 # episode reward
+2 # episode reward
+2718 # average total reward over runs
+
+Program Complete.
+../outputs/131218-13-24-08-LibRLAgent-Episod100/resultChainEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+25.8 # episode reward
+6 # episode reward
+33 # episode reward
+5.6 # episode reward
+75.2 # episode reward
+0.8 # episode reward
+35.2 # episode reward
+44.6 # episode reward
+22.2 # episode reward
+32 # episode reward
+14.2 # episode reward
+4.4 # episode reward
+15.8 # episode reward
+8.6 # episode reward
+22.4 # episode reward
+2.2 # episode reward
+20 # episode reward
+20.2 # episode reward
+9 # episode reward
+21.4 # episode reward
+6.2 # episode reward
+11.2 # episode reward
+27.6 # episode reward
+24.8 # episode reward
+16.2 # episode reward
+3.2 # episode reward
+53.6 # episode reward
+9.6 # episode reward
+28.6 # episode reward
+27.4 # episode reward
+54.2 # episode reward
+10 # episode reward
+0.2 # episode reward
+9.6 # episode reward
+68 # episode reward
+12.6 # episode reward
+94 # episode reward
+48.6 # episode reward
+46.8 # episode reward
+21.2 # episode reward
+6 # episode reward
+3.4 # episode reward
+21 # episode reward
+44.4 # episode reward
+32.6 # episode reward
+9 # episode reward
+8 # episode reward
+8.6 # episode reward
+7.4 # episode reward
+41.8 # episode reward
+4 # episode reward
+16.2 # episode reward
+9.4 # episode reward
+89.6 # episode reward
+8.6 # episode reward
+11 # episode reward
+4.4 # episode reward
+3.4 # episode reward
+27 # episode reward
+10.8 # episode reward
+16.2 # episode reward
+6.2 # episode reward
+41.8 # episode reward
+14.6 # episode reward
+1.2 # episode reward
+18 # episode reward
+15.8 # episode reward
+12.2 # episode reward
+19.8 # episode reward
+91.6 # episode reward
+38.8 # episode reward
+18.8 # episode reward
+3.6 # episode reward
+4.6 # episode reward
+7.4 # episode reward
+14.8 # episode reward
+17.6 # episode reward
+5.4 # episode reward
+14 # episode reward
+2.6 # episode reward
+5.8 # episode reward
+15.4 # episode reward
+35.2 # episode reward
+11.8 # episode reward
+7.8 # episode reward
+51.8 # episode reward
+19.6 # episode reward
+17.4 # episode reward
+14.2 # episode reward
+16.8 # episode reward
+36.6 # episode reward
+8.6 # episode reward
+18.4 # episode reward
+162 # episode reward
+18.2 # episode reward
+15.4 # episode reward
+50.4 # episode reward
+85 # episode reward
+39.4 # episode reward
+36.6 # episode reward
+2390.2 # average total reward over runs
+
+Program Complete.
+../outputs/131218-23-12-36-LibRLAgent-Episod100/resultChainEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+22.8 # episode reward
+80.2 # episode reward
+15.2 # episode reward
+5 # episode reward
+5.8 # episode reward
+10.6 # episode reward
+59 # episode reward
+2.6 # episode reward
+23.8 # episode reward
+8.6 # episode reward
+46.6 # episode reward
+25.8 # episode reward
+7.4 # episode reward
+8.8 # episode reward
+8.4 # episode reward
+5 # episode reward
+8 # episode reward
+19.2 # episode reward
+17.4 # episode reward
+1.4 # episode reward
+26.4 # episode reward
+19.4 # episode reward
+34.2 # episode reward
+11.2 # episode reward
+72.6 # episode reward
+10.6 # episode reward
+27.6 # episode reward
+17 # episode reward
+62.8 # episode reward
+6.8 # episode reward
+28 # episode reward
+47.6 # episode reward
+4.4 # episode reward
+13.6 # episode reward
+21.6 # episode reward
+12.2 # episode reward
+27.6 # episode reward
+15.4 # episode reward
+3.2 # episode reward
+30.8 # episode reward
+1.6 # episode reward
+13.6 # episode reward
+3.2 # episode reward
+74 # episode reward
+2.4 # episode reward
+3.4 # episode reward
+0.4 # episode reward
+19.6 # episode reward
+4.8 # episode reward
+3.8 # episode reward
+3.4 # episode reward
+46.4 # episode reward
+7.2 # episode reward
+81.8 # episode reward
+8.4 # episode reward
+6.2 # episode reward
+13.2 # episode reward
+47.2 # episode reward
+9.4 # episode reward
+5.6 # episode reward
+13 # episode reward
+0.4 # episode reward
+62.2 # episode reward
+29 # episode reward
+12.4 # episode reward
+5.2 # episode reward
+5.8 # episode reward
+38 # episode reward
+19.2 # episode reward
+2.4 # episode reward
+8 # episode reward
+17 # episode reward
+3.8 # episode reward
+97.4 # episode reward
+39.2 # episode reward
+10.4 # episode reward
+86.4 # episode reward
+66.8 # episode reward
+39 # episode reward
+4.6 # episode reward
+28.8 # episode reward
+24.4 # episode reward
+19.8 # episode reward
+11.6 # episode reward
+30.8 # episode reward
+3.6 # episode reward
+1.2 # episode reward
+76.4 # episode reward
+46.8 # episode reward
+16.2 # episode reward
+7 # episode reward
+12.6 # episode reward
+1.2 # episode reward
+18 # episode reward
+4.6 # episode reward
+17.2 # episode reward
+6.8 # episode reward
+7.4 # episode reward
+34.6 # episode reward
+78.2 # episode reward
+2237.6 # average total reward over runs
+
+Program Complete.
+../outputs/131218-12-54-33-LibRLAgent-Episod100/resultChainEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+139.8 # episode reward
+20.6 # episode reward
+38 # episode reward
+11.6 # episode reward
+79.6 # episode reward
+11.6 # episode reward
+11.6 # episode reward
+0 # episode reward
+84.4 # episode reward
+41.4 # episode reward
+27.2 # episode reward
+41.4 # episode reward
+29.2 # episode reward
+12.4 # episode reward
+3.6 # episode reward
+22 # episode reward
+51.6 # episode reward
+4.8 # episode reward
+1.8 # episode reward
+94.6 # episode reward
+8.2 # episode reward
+4.6 # episode reward
+153 # episode reward
+27.6 # episode reward
+30.2 # episode reward
+5.6 # episode reward
+21.2 # episode reward
+2 # episode reward
+4.4 # episode reward
+5.4 # episode reward
+10 # episode reward
+78.4 # episode reward
+20.6 # episode reward
+24 # episode reward
+22.4 # episode reward
+9.6 # episode reward
+41.4 # episode reward
+3.6 # episode reward
+9.6 # episode reward
+32.8 # episode reward
+7.6 # episode reward
+14 # episode reward
+32.4 # episode reward
+4.4 # episode reward
+28.4 # episode reward
+7 # episode reward
+96.4 # episode reward
+49.6 # episode reward
+28 # episode reward
+19.8 # episode reward
+47.6 # episode reward
+63.8 # episode reward
+40.4 # episode reward
+4.6 # episode reward
+18 # episode reward
+8 # episode reward
+35.8 # episode reward
+162.6 # episode reward
+37.6 # episode reward
+9.2 # episode reward
+7.4 # episode reward
+33 # episode reward
+102.8 # episode reward
+30.2 # episode reward
+1 # episode reward
+11.8 # episode reward
+5.2 # episode reward
+7.2 # episode reward
+50.8 # episode reward
+50.8 # episode reward
+11.2 # episode reward
+0.8 # episode reward
+20.2 # episode reward
+56.4 # episode reward
+9.4 # episode reward
+52.2 # episode reward
+1.2 # episode reward
+4.8 # episode reward
+2.2 # episode reward
+32 # episode reward
+3.2 # episode reward
+26 # episode reward
+35.8 # episode reward
+25.8 # episode reward
+10.6 # episode reward
+13.4 # episode reward
+0 # episode reward
+27.8 # episode reward
+16.6 # episode reward
+13.8 # episode reward
+8.8 # episode reward
+25.8 # episode reward
+10.6 # episode reward
+5.2 # episode reward
+103.4 # episode reward
+104 # episode reward
+28.2 # episode reward
+17.4 # episode reward
+1.4 # episode reward
+15.6 # episode reward
+2941 # average total reward over runs
+
+Program Complete.
+../outputs/131218-16-55-14-LibRLAgent-Episod100/resultChainEnvironment-0.9-1
+Starting online demo
+----------------------------
+
+
+Run 0
+RL-Glue C Experiment Codec Version 2.0, Build 576
+	Connecting to host=127.0.0.1 on port=4096...
+	RL-Glue C Experiment Codec :: Connected
+4.8 # episode reward
+26.2 # episode reward
+36 # episode reward
+15.2 # episode reward
+9.8 # episode reward
+5.8 # episode reward
+4.6 # episode reward
+35.8 # episode reward
+20.6 # episode reward
+33.6 # episode reward
+10.4 # episode reward
+2.8 # episode reward
+0.4 # episode reward
+6 # episode reward
+3 # episode reward
+3.2 # episode reward
+5.2 # episode reward
+80.2 # episode reward
+70.4 # episode reward
+28 # episode reward
+36.4 # episode reward
+10.2 # episode reward
+12 # episode reward
+32.8 # episode reward
+9.4 # episode reward
+25.6 # episode reward
+30.6 # episode reward
+109.2 # episode reward
+1.2 # episode reward
+17.6 # episode reward
+10.2 # episode reward
+19 # episode reward
+116 # episode reward
+22.2 # episode reward
+37.6 # episode reward
+17.2 # episode reward
+40.4 # episode reward
+14.8 # episode reward
+68.4 # episode reward
+9.8 # episode reward
+8.6 # episode reward
+0.4 # episode reward
+5.6 # episode reward
+11.6 # episode reward
+0.6 # episode reward
+6.6 # episode reward
+3.8 # episode reward
+9.4 # episode reward
+3.4 # episode reward
+2.2 # episode reward
+19 # episode reward
+8.6 # episode reward
+50.6 # episode reward
+16 # episode reward
+31.8 # episode reward
+29.8 # episode reward
+27 # episode reward
+88.6 # episode reward
+2.6 # episode reward
+4 # episode reward
+2.6 # episode reward
+56.2 # episode reward
+18.2 # episode reward
+45.6 # episode reward
+8.2 # episode reward
+6.4 # episode reward
+71 # episode reward
+7 # episode reward
+26.8 # episode reward
+36.2 # episode reward
+1.2 # episode reward
+55.2 # episode reward
+14.4 # episode reward
+23.2 # episode reward
+40 # episode reward
+67 # episode reward
+21.8 # episode reward
+54 # episode reward
+20.4 # episode reward
+100.8 # episode reward
+16.8 # episode reward
+12 # episode reward
+1.4 # episode reward
+1.2 # episode reward
+36.8 # episode reward
+32.4 # episode reward
+2.6 # episode reward
+40.2 # episode reward
+34.4 # episode reward
+14.4 # episode reward
+1.2 # episode reward
+4 # episode reward
+17.8 # episode reward
+8 # episode reward
+2.6 # episode reward
+12.8 # episode reward
+38.2 # episode reward
+20 # episode reward
+164.4 # episode reward
+43.8 # episode reward
+2554 # average total reward over runs
+
+Program Complete.

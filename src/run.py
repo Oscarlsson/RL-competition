@@ -43,6 +43,7 @@ def run_all(args):
     print finalresult
     finaloutput = open(outputdir + "/" + "finalOutput", 'w')
     finaloutput.write(finalresult)
+    finaloutput.close()
 
 def run(environment, outputdir, agentname, output, experimentname, lambdas, stepsize):
 
@@ -214,6 +215,15 @@ parser.add_argument('-D', metavar='dir',
 parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
 
 args = parser.parse_args()
+
+# Create FinalOutput. Should be separated
+#outputdir = '/home/oscar/Dev/RL-Comp2/data/lambdasweep_005/000000-00-00-00-LibRLAgent-Episod100'
+#fi = print_finalresult(outputdir)
+#finaloutput = open(outputdir + "/" + "finalOutput", 'w')
+#finaloutput.write(fi)
+#finaloutput.close()
+#print fi
+
 log = get_outputdir() + get_logfile()
 lg.basicConfig(filename=log, level=lg.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 MakeAll()
