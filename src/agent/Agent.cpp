@@ -54,6 +54,31 @@ Agent::Agent(int nStates, int nActions, double gamma, double lambda,
               << endl;
 }
 
+void Agent::printValueFunctionForMines()
+{
+    if (nStates == 108)
+    {
+        int numRows = 6;
+        int numCols = 18;
+        for (int r = 0; r < numRows; ++r)
+        {
+            for (int c = 0; c < numCols; ++c)
+            {
+                int state = c*numRows + r;
+                double maxValue = -DBL_MAX;
+                for (int a = 0; a < nActions; ++a)
+                {
+                    if (qTable[state][a] > maxValue)
+                    {
+                        maxValue = qTable[state][a];
+                    }
+                }
+                cerr << "{{" << r << "," << c << "}," << maxValue << "},";
+            }
+        }
+    }
+}
+
 Agent::~Agent()
 {
     std::cout << "~Agent()" << endl;
