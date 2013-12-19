@@ -1,24 +1,24 @@
 \paragraph{Complementing the core mechanism}
 In some environments, the state-action space could be very large compared to the
-experiment length and a sufficient mapping of the worth of each state-action
+experiment length and a sufficient mapping of the value of each state-action
 pair might become too costly to perform. Then it becomes increasingly important
 how new or poorly sampled situations are approached.
 
 The key observation is that Sarsa($\lambda$) is capable of quickly distributing
 the value function over correlated states. However, it relies on that the policy
-implements efficent heuristics for exploration. We tested a number of different
+implements efficient heuristics for exploration. We tested a number of different
 approaches to complement the standard Sarsa($\lambda$) algorithm, both when it
 comes to exploration vs exploitation, and how to break ties. 
 
 \subsection{Maximisers}
 In Sarsa($\lambda$), whenever we reach a new state $S$, there is no clear
 differentiation between different actions $\{A\}$, statistically, all are
-equally bad (if the outlook is pessimistic) or good (of we have an optimistic
+equally bad (if the outlook is pessimistic) or good (if we have an optimistic
 outlook), but no matter how we choose to break the tie in the $Q(S,A)$ matrix,
 there will be some environments where we will benefit, and some where we will
 lose.
 
-The easiest approach is to just go with the first or last a $\textit{arg
+The easiest approach is to just go with the first or last action a $\textit{arg
     max}_{a\epsilon A} Q(S,a)$ value. Just from the example environments, there
 are cases where this is a good idea, and cases where this is a bad idea. In tic
 tac toe, reverting to a specific order of tries every time you end up in a new
@@ -32,11 +32,10 @@ is filled, it will similarly cause a lot of illegal moves.
 Another method we tried was to assume that in many environments, a state is
 reminiscent of recently visited states. Even if we lack any information about
 which action would be beneficial in a specific state, we might have better
-sampling of the last states we visited, or the states before that. We define a
-"worth" of an untried action as
+sampling of the last states we visited, or the states before that. We define a value of an untried action as
 
 \begin{equation}
-	w(a) = \sum_{i\epsilon |H|} nActions^{-i} Q(s_{h_i},a) \sqrt{C(s_{h_i},a)}/\sum_H \sqrt{C(H,a)}
+	w(a) = \sum_{i \in |H|} nActions^{-i} Q(s_{h_i},a) \sqrt{C(s_{h_i},a)}/\sum_H \sqrt{C(H,a)}
 \end{equation}
 
 It places more worth on actions that were deemed good in recent history, giving
