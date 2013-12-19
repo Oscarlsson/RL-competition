@@ -200,7 +200,7 @@ def read_config(option):
 parser = argparse.ArgumentParser(description='This file will run an Agent on several environments and report the results to the directory ../outputs. Configuration is stored in ../etc/runpyconfig. ')
 parser.add_argument('--l', metavar='n',type=float, nargs="+", help="Lambda value to the LibRLAgent. Either give one value --l 2 or three -l min max step. Default is 0", default=[0.2])
 parser.add_argument('--s', metavar='n', type=float, nargs="+", help="Step size to the LibRLAgent. Either give one value --s 0 or three -l min max step. Default is 1", default=[1])
-parser.add_argument('--c', metavar='n', type=float, help="Exploration factor to the LibRLAgent. c=0 gives the maximum action which is also default", default=0) 
+parser.add_argument('--c', metavar='n', type=float,nargs="+", help="Exploration factor to the LibRLAgent. c=0 gives the maximum action which is also default", default=0) 
 parser.add_argument('-t', help='Boolean value if LibRLAgent should use tiebraker or not. False default', action='store_true', default=False)
 
 parser.add_argument('-A', metavar='agent',
