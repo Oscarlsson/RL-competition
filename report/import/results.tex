@@ -26,15 +26,14 @@ Enabling the maximiser replaced a simple "first best" choice, which turned out t
 
 We tested two versions of UCB policies in an attempt to shore up Sarsa($\lambda$)s unsuitability for bandit problems. The idea was to consider all states as independent bandit problems, where the UCB policies would decide the balance between exploration vs exploitation. The simpler UCB1 does not consider any upper bound on the reward and will never be satisfied, this causes it to start exploration even when faced with certain victory options. The KL-UCB considers the case where the reward is bounded. Both however, assumes long time horizons, where exploration occurs gradually. When faced with the short experiments in the competition, where the optimal approach should be to explore first, and exploit later, they fared worse than simply going for the best option. This is also due to that many of the environments have many large penalties and few rewards. Exploring anything but the first found reward is not cost efficient. 
 
-The parameter space for our agent is very large, $\lambda$ decides how much we diffuse the reward, step size $\alpha$ determines how quick the agent overwrites old information, how we initialise the Q matrix determines if the agent is optimistic or pessimistic when it comes to the degree of exploration. With the UCB policies, we had the option to adjust the tendency to explore with a scalar, we have different maximisers that attempts to exploit structure in the problems. Naturally we didn't have time to sweep all parameters for all environments, but we varied different parameters, keeping most constant and tried to find good parameter values for different types of problems. At initialisation, the agent uses known information of a problem to set the agent parameters, e.g. enables the tie breaker for large state spaces, under the assumption that the test environments are good representations of the competition environments.
+The parameter space for our agent is very large, $\lambda$ decides how much we diffuse the reward, step size $\alpha$ determines how quick the agent overwrites old information, how we initialise the Q matrix determines if the agent is optimistic or pessimistic when it comes to the degree of exploration. With the UCB policies, we had the option to adjust the tendency to explore with a scalar, we have different maximisers that attempts to exploit structure in the problems. Naturally we didn't have time to sweep all parameters for all environments, but we varied different parameters, keeping most constant and tried to find good parameter values for different types of problems. At initialisation, the agent uses known information of a problem to set the agent parameters, e.g. enables the maximiser for large state spaces, under the assumption that the test environments are good representations of the competition environments.
 
-Sweep $\lambda$
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{../data/lambdasweepplot.png}
-    \caption{Awesome Image}
+    \caption{How the cumulative reward changes with the different values of $\lambda$.}
     \label{fig:awesome_image}
-\end{figure}
+\end{figure} \\
 
 
 Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs in a 100 episode experiment against all environments with parameters set to $\lambda = 0.2$ and $\alpha = 1$
@@ -44,17 +43,18 @@ Figure~\ref{fig:cumreward} shows how the agents average performance over 50 runs
     \includegraphics[width=0.5\textwidth]{../data/100episodes_50runs.png}
     \caption{Agents cumulative reward averaged over 50 runs in a experiment with 100 episodes}
     \label{fig:cumreward}
-\end{figure}
+\end{figure} \\
 
-Sweep $\lambda$
+The yellow line indicates the performance on the mines environment and the learning phase of the agent is clear after around 10 episodes. Connect four, red in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other environments hence it is closer to zero but still increasing.
+
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{../data/minPlot.png}
     \caption{Example of how the agent learns a short path from start to goal (yellow). The agent traverse the world 100 times, early attempts are coloured red, later green. Hitting a mine (black) costs a penalty. Some noise is added to the paths to make it easier to distinguish them.}
-    \label{fig:awesome_image}
-\end{figure}
+    \label{fig:mineslearning}
+\end{figure} \\
 
-The yellow line indicates the performance on the mines environment and the learning phase of the agent is clear after around 10 episodes. Connect four, red in Fig~\ref{fig:cumreward}, has a much lower maximum reward than the other environments hence it is closer to zero but still increasing.
 
 We also noticed that Sarsa($\lambda$) in its original formulation will decide on the next action before it updates the Q matrix. In the specific case where penalties are incurred for illegal moves, and the agents are forced to try again, this causes the agent to perform every illegal move twice. We decided to stick with the original, suboptimal version, since checking policy twice at each time step is inelegant and we wanted to avoid overtraining.
 
