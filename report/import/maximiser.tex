@@ -35,7 +35,8 @@ which action would be beneficial in a specific state, we might have better
 sampling of the last states we visited, or the states before that. We define a value of an untried action as
 
 \begin{equation}
-	w(a) = \sum_{i \in |H|} nActions^{-i} Q(s_{h_i},a) \sqrt{C(s_{h_i},a)}/\sum_H \sqrt{C(H,a)}
+    v(a) = \sum_{i=1}^{t} \vert{A}\vert^{-i} n_{s_i}(a)
+    \sqrt{n_{s_i}(a)}\Big/\sum_{i=1}^{t} \sqrt{n_{s_i}(a)}
 \end{equation}
 
 It places more worth on actions that were deemed good in recent history, giving
