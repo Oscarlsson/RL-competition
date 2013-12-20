@@ -10,6 +10,7 @@ import sys
 import argparse
 import numpy as np
 import pandas as pd
+from argparse import RawTextHelpFormatter
 
 def MakeAll():
     lg.info("Cleaning dir")
@@ -197,7 +198,12 @@ def read_config(option):
 
 
 ### ARGUMENTPARSER AND CALLS TO START
-parser = argparse.ArgumentParser(description='This file will run an Agent on several environments and report the results to the directory ../outputs. Configuration is stored in ../etc/runpyconfig. ')
+parser = argparse.ArgumentParser(description='This file will start all necessary processes to run an rl-glue Agent against a set of environments. \n \
+        By default it will use the configuration found in ../etc/runpyconfig. \n \
+        The output is found in ../output/<date>-<agent>-<experiment>. Other scripts migh rely on this structure. \n \
+        Any parameter -[A,N,E,X,D] will override the configuration \n \n \
+        e.g ./run.py -N 20 -E environments/tictactoe/TictactoeEnvironment -l 0 1 0.1 \n \
+        will run the default agant on tic-tac-toe, 20 times and average the result into ../output/<date>-<agent>-<experiment>/finalOutput \n', formatter_class=RawTextHelpFormatter)
 parser.add_argument('--l', metavar='n',type=float, nargs="+", help="Lambda value to the LibRLAgent. Either give one value --l 2 or three -l min max step. Default is 0", default=[0.2])
 parser.add_argument('--s', metavar='n', type=float, nargs="+", help="Step size to the LibRLAgent. Either give one value --s 0 or three -l min max step. Default is 1", default=[1])
 parser.add_argument('--c', metavar='n', type=float,nargs="+", help="Exploration factor to the LibRLAgent. c=0 gives the maximum action which is also default", default=0) 
@@ -214,7 +220,7 @@ parser.add_argument('-X', metavar='experiment',
 parser.add_argument('-D', metavar='dir',
                    help='Path to an output directory. Prefereably ../outputs/', default=None, required=False)
 
-parser.add_argument('--output', help='Path to an executable environment.', action='store_true')
+parser.add_argument('--output', help='Display output after run', action='store_true')
 
 args = parser.parse_args()
 
