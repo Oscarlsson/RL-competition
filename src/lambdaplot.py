@@ -18,6 +18,7 @@ for index in indexes:
     plotdata = (plotdata[3])#-plotdata[3].min())
     (plotdata/plotdata.abs().max()).sort_index().plot()
 
+plt.xlabel("Change i reward for different values of lambda")
 plt.xlabel("Lambda")
 plt.ylabel("Cumulative reward")
 plt.legend(indexes, loc='best')
