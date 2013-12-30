@@ -6,6 +6,7 @@ homepage: http://www.cse.chalmers.se/~chrdimi/teaching/optimal_decisions/index.h
 
 Team: Oscar Carlsson, John Karlsson, Oskar Lindgren
 
+This project is explained in detail in the report found in ``report``
 Keywords: Discrete state space, Implemented agent using Sarsa-lambda, KL-UCB, option to vary parameters
 
 
@@ -17,20 +18,16 @@ Install
 
 * RL-glue 3.04
 
-see folder RL-GLUE and install.sh. 
+see ``RL-GLUE/install.sh`` and [rl-glue] (http://glue.rl-community.org/wiki/Main_Page "rl-glue") for more information
 
-* C++11
+* C++11 (Some environment)
+* matplotlib (Run.py and plotresults)
+* pandas 0.12 (Run.py and plotresults)
 
-needed for some of the environments
-
-* matplotlib
-* pandas 0.12
-
-used in run.py and matplotlib
 
 # Run the agent
 
-The interesting code is found in`src`
+The code containing the ``Agent Experiment Environments`` is found in`src`
 
 run using `cd src; ./run.py` to run the default setup defined in etc/runpyconfig
 Run `./run.py -h` for a list of available arguments
